@@ -194,7 +194,7 @@ void RegioningPlugin::handle_save_view() {
 	//ss << "Successfully saved view: " << view->get_id();
 	//console.log(ss.str(), "green");
 	//console.reset_sender();
-	String filename = view->get_filename().substr(0,view->get_filename().size()-3)+"rgn";
+	std::string filename = view->get_filename().substr(0,view->get_filename().size()-3)+"rgn";
 	ofstream out(filename);
 	out << this->q1->xCoords[0] << ", " << this->q1->yCoords[0] << "\r\n";
 	out << this->q1->xCoords[1] << ", " << this->q1->yCoords[1] << "\r\n";

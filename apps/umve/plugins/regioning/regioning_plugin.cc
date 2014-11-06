@@ -91,14 +91,12 @@ RegioningPlugin::RegioningPlugin(QWidget *parent) : MainWindowTab(parent), creat
   	  /* Create details notebook. */
   	  this->tab_widget = new QTabWidget();
     	this->tab_widget->setTabPosition(QTabWidget::East);
-	this->scroll_image2 = new ScrollImage();
    	 /* Create GL context. */
    	 this->gl_widget = new GLWidget();
    	 this->addin_manager = new AddinManager(this->gl_widget, this->tab_widget);
    	 //this->gl_widget->set_context(this->addin_manager);
     //QVBoxLayout* vbox2 = new QVBoxLayout();
     vbox->addWidget(toolbar);
-    vbox->addWidget(this->scroll_image2);
 
 
 	/*==============
@@ -154,10 +152,6 @@ RegioningPlugin::RegioningPlugin(QWidget *parent) : MainWindowTab(parent), creat
 	connect(this->scroll_image->get_image(), SIGNAL(mouse_moved(int, int, QMouseEvent *)), this, SLOT(on_image_moved(int, int, QMouseEvent *)));
 	connect(this->scroll_image->get_image(), SIGNAL(mouse_released(int, int, QMouseEvent *)), this, SLOT(on_image_released(int, int, QMouseEvent *)));
 
-
-	connect(this->scroll_image2->get_image(), SIGNAL(mouse_clicked(int, int, QMouseEvent *)), this, SLOT(on_image_clicked(int, int, QMouseEvent *)));
-	connect(this->scroll_image2->get_image(), SIGNAL(mouse_moved(int, int, QMouseEvent *)), this, SLOT(on_image_moved(int, int, QMouseEvent *)));
-	connect(this->scroll_image2->get_image(), SIGNAL(mouse_released(int, int, QMouseEvent *)), this, SLOT(on_image_released(int, int, QMouseEvent *)));
 
 	connect(this->action_zoom_in, SIGNAL(triggered()), this, SLOT(on_zoom_in()));
 	connect(this->action_zoom_out, SIGNAL(triggered()), this, SLOT(on_zoom_out()));
@@ -283,14 +277,7 @@ void RegioningPlugin::update_actions(void) {
 
 /* Takes a QImage and displays it in UMVE */
 void RegioningPlugin::display_image(QPixmap *pixmap) {
-	if (!odd) {
 	this->scroll_image->set_pixmap(*pixmap);
-	odd=true;
-	}
-	else {
-	this->scroll_image2->set_pixmap(*pixmap);
-	odd=false;
-	}
 	this->update_actions();
 }
 /* Takes a QImage and displays it in UMVE */
@@ -337,7 +324,6 @@ void RegioningPlugin::on_normal_size(void) {
 void RegioningPlugin::on_fit_to_window(void) {
 	bool fit = this->action_zoom_fit->isChecked();
 	this->scroll_image->set_auto_scale(fit);
-	this->scroll_image2->set_auto_scale(fit);
 	this->update_actions();
 }
 
