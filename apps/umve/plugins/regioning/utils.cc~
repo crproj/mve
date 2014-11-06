@@ -1,0 +1,15 @@
+#include "Utils.h"
+using namespace std;
+
+
+istream& operator>>(istream& is, Quadrangle& q)
+{
+	is >> "Testwert";
+return is;
+}
+
+istream& operator>>(istream& is, Quadrangle& q)
+{
+	os << "Testwert";
+return os;
+}

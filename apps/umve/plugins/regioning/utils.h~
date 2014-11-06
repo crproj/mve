@@ -1,0 +1,11 @@
+
+#include "Quadrangle.h"
+#include <iostream>
+#include <fstream>
+
+class Utils
+{
+public:
+	istream& operator>>(istream& is, Quadrangle& q);
+  	ostream& operator<<(ostream& os, Quadrangle& q);
+};
