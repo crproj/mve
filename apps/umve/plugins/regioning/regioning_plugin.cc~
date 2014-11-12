@@ -91,14 +91,12 @@ RegioningPlugin::RegioningPlugin(QWidget *parent) : MainWindowTab(parent), creat
   	  /* Create details notebook. */
   	  this->tab_widget = new QTabWidget();
     	this->tab_widget->setTabPosition(QTabWidget::East);
-	this->scroll_image2 = new ScrollImage();
    	 /* Create GL context. */
    	 this->gl_widget = new GLWidget();
    	 this->addin_manager = new AddinManager(this->gl_widget, this->tab_widget);
    	 //this->gl_widget->set_context(this->addin_manager);
     //QVBoxLayout* vbox2 = new QVBoxLayout();
     vbox->addWidget(toolbar);
-    vbox->addWidget(this->scroll_image2);
 
 
 	/*==============
@@ -155,10 +153,6 @@ RegioningPlugin::RegioningPlugin(QWidget *parent) : MainWindowTab(parent), creat
 	connect(this->scroll_image->get_image(), SIGNAL(mouse_released(int, int, QMouseEvent *)), this, SLOT(on_image_released(int, int, QMouseEvent *)));
 
 
-	connect(this->scroll_image2->get_image(), SIGNAL(mouse_clicked(int, int, QMouseEvent *)), this, SLOT(on_image_clicked(int, int, QMouseEvent *)));
-	connect(this->scroll_image2->get_image(), SIGNAL(mouse_moved(int, int, QMouseEvent *)), this, SLOT(on_image_moved(int, int, QMouseEvent *)));
-	connect(this->scroll_image2->get_image(), SIGNAL(mouse_released(int, int, QMouseEvent *)), this, SLOT(on_image_released(int, int, QMouseEvent *)));
-
 	connect(this->action_zoom_in, SIGNAL(triggered()), this, SLOT(on_zoom_in()));
 	connect(this->action_zoom_out, SIGNAL(triggered()), this, SLOT(on_zoom_out()));
 	connect(this->action_zoom_reset, SIGNAL(triggered()), this, SLOT(on_normal_size()));
@@ -185,21 +179,22 @@ void RegioningPlugin::handle_save_view() {
 		console.log("Could not save view because no view has been selected.", "red");
 		console.reset_sender();
 		return;
-	}*/
+	}
 
 	/* Save results */
-	//this->save_new_embeddings(view, result->sky_detection, result->segmentation);
-	//result->has_changed = false;
-	//std::stringstream ss;
-	//ss << "Successfully saved view: " << view->get_id();
-	//console.log(ss.str(), "green");
-	//console.reset_sender();
+
 	std::string filename = view->get_filename().substr(0,view->get_filename().size()-3)+"rgn";
 	ofstream out(filename);
-	out << this->q1->xCoords[0] << ", " << this->q1->yCoords[0] << "\r\n";
-	out << this->q1->xCoords[1] << ", " << this->q1->yCoords[1] << "\r\n";
-	out << this->q1->xCoords[2] << ", " << this->q1->yCoords[2] << "\r\n";
-	out << this->q1->xCoords[3] << ", " << this->q1->yCoords[3];
+	out << this->q1->getID() << "\r\n";
+	out << this->q1->xCoords[0] << "\r\n" << this->q1->yCoords[0] << "\r\n";
+	out << this->q1->xCoords[1] << "\r\n" << this->q1->yCoords[1] << "\r\n";
+	out << this->q1->xCoords[2] << "\r\n" << this->q1->yCoords[2] << "\r\n";
+	out << this->q1->xCoords[3] << "\r\n" << this->q1->yCoords[3] << "\r\n";
+	out << this->q2->getID() << "\r\n";
+	out << this->q2->xCoords[0] << "\r\n" << this->q2->yCoords[0] << "\r\n";
+	out << this->q2->xCoords[1] << "\r\n" << this->q2->yCoords[1] << "\r\n";
+	out << this->q2->xCoords[2] << "\r\n" << this->q2->yCoords[2] << "\r\n";
+	out << this->q2->xCoords[3] << "\r\n" << this->q2->yCoords[3];
 	out.close();
 }
 
@@ -213,11 +208,26 @@ void RegioningPlugin::on_image_clicked(int x, int y, QMouseEvent *event) {
 	if (left_click) {
 		if( !q1->isComplete() ){
 			q1->addPoint( x, y);
-			if (q1->isComplete())
-				this->spinbox_region_id->setValue(this->spinbox_region_id->value()+1);
+			q1->setID(this->spinbox_region_id->value());
+			if (q1->isComplete()) {
+			mve::ByteImage::Ptr overlay = this->current_view_pointer->get_image("undistorted");
+			QImage *q_img_overlay = new QImage(overlay->width(), overlay->height(), QImage::Format_RGB32);
+			QPixmap pixmap_overlay(QPixmap::fromImage(*q_img_overlay));
+			delete q_img_overlay;
+			transparent = QPixmap(pixmap_overlay.size());
+			transparent.fill(Qt::transparent);
+			drawPoly(q1, QColor(0,204,0,125));
+			this->spinbox_region_id->setValue(this->spinbox_region_id->value()+1);
+			}
 		}
 		else {
+		     if (!(q2->isComplete())) {
 			q2->addPoint(x,y);
+			q2->setID(this->spinbox_region_id->value());
+			if (q2->isComplete()) {
+			drawPoly(q2, QColor(0,0,204,125));
+			}
+		    }
 		}
 	}
 	if (right_click) {
@@ -225,6 +235,45 @@ void RegioningPlugin::on_image_clicked(int x, int y, QMouseEvent *event) {
 		//display_result();
 	}
 }
+
+
+void RegioningPlugin::drawPoly (Quadrangle* q, QColor qc) {
+			QPointF points[4] = {
+ 			    QPointF(q->xCoords[0], q->yCoords[0]),
+ 			    QPointF(q->xCoords[1], q->yCoords[1]),
+  			    QPointF(q->xCoords[2], q->yCoords[2]),
+  			    QPointF(q->xCoords[3], q->yCoords[3])
+ 			};
+			mve::ByteImage::Ptr base = this->current_view_pointer->get_image("undistorted");
+			mve::ByteImage::Ptr overlay = this->current_view_pointer->get_image("undistorted");
+			QImage *q_img_base = new QImage(base->width(), base->height(), QImage::Format_RGB32);
+			QImage *q_img_overlay = new QImage(overlay->width(), overlay->height(), QImage::Format_RGB32);
+		
+			this->mve2qt(base, q_img_base);
+			this->mve2qt(overlay, q_img_overlay);
+			QPixmap pixmap_base(QPixmap::fromImage(*q_img_base));
+			QPixmap pixmap_overlay(QPixmap::fromImage(*q_img_overlay));
+			delete q_img_base;
+			delete q_img_overlay;
+
+
+
+			/* Apply transparency */
+			//QPixmap transparent(pixmap_overlay.size());
+			//transparent.fill(Qt::transparent);
+			QPainter p(&transparent);
+			p.setCompositionMode(QPainter::CompositionMode_SourceOver);
+			p.setBrush(QBrush(qc));
+			p.setPen(qc);
+			p.drawPolygon(points, 4, Qt::WindingFill);
+			p.end();
+
+			/* Draw overlay on top of base image */
+			QPainter painter(&pixmap_base);
+			painter.drawPixmap(0, 0, transparent);
+			display_image(&pixmap_base);
+}
+
 
 void
 RegioningPlugin::create_actions (QToolBar* toolbar2)
@@ -283,14 +332,7 @@ void RegioningPlugin::update_actions(void) {
 
 /* Takes a QImage and displays it in UMVE */
 void RegioningPlugin::display_image(QPixmap *pixmap) {
-	if (!odd) {
 	this->scroll_image->set_pixmap(*pixmap);
-	odd=true;
-	}
-	else {
-	this->scroll_image2->set_pixmap(*pixmap);
-	odd=false;
-	}
 	this->update_actions();
 }
 /* Takes a QImage and displays it in UMVE */
@@ -304,6 +346,59 @@ void RegioningPlugin::display_image(mve::ByteImage::ConstPtr img) {
 	QImage *q_img = new QImage(img->width(), img->height(), QImage::Format_RGB32);
 	this->mve2qt(img, q_img);
 	this->display_image(q_img);
+
+	q1 = new Quadrangle(1);
+	q2 = new Quadrangle(2);
+	
+
+	ifstream myfile;
+	std::string filename = current_view_pointer->get_filename().substr(0,current_view_pointer->get_filename().size()-3)+"rgn";
+	myfile.open (filename, ios::in);
+	if (myfile.is_open()) {
+	char buf[50];
+	myfile.getline(buf, 50);
+	int id = atoi (buf);
+	q1->setID(id);
+	for (int i=0; i<4; i++) {
+	if (!myfile.eof())
+  	{
+    	    myfile.getline(buf, 50);
+	    int x = atoi (buf);
+	    myfile.getline(buf, 50);
+	    int y = atoi (buf);
+	    if (!(q1->isComplete())) {
+	    q1->addPoint(x,y);
+		if (q1->isComplete()) {
+			mve::ByteImage::Ptr overlay = this->current_view_pointer->get_image("undistorted");
+			QImage *q_img_overlay = new QImage(overlay->width(), overlay->height(), QImage::Format_RGB32);
+			QPixmap pixmap_overlay(QPixmap::fromImage(*q_img_overlay));
+			delete q_img_overlay;
+			transparent = QPixmap(pixmap_overlay.size());
+			transparent.fill(Qt::transparent);
+			drawPoly(q1, QColor(0,204,0,125));
+		}
+	    }
+	}}
+
+
+	myfile.getline(buf, 50);
+	id = atoi (buf);
+	q2->setID(id);
+	for (int i=0; i<4; i++) {
+	if (!myfile.eof())
+  	{
+    	    myfile.getline(buf, 50);
+	    int x = atoi (buf);
+	    myfile.getline(buf, 50);
+	    int y = atoi (buf);
+	    if (!(q2->isComplete())) {
+	    q2->addPoint(x,y);
+		if (q2->isComplete()) {
+			drawPoly(q2, QColor(0,0,204,125));
+		}
+	    }
+	}}
+	}
 	delete q_img;
 }
 
@@ -313,6 +408,9 @@ void RegioningPlugin::receive_view_pointer(mve::View::Ptr view_pointer) {
 		this->current_view_pointer = view_pointer;
 		this->current_image_pointer = view_pointer->get_byte_image("undistorted");
 	}
+
+
+
 	this->transform_view_pointer(view_pointer);
 }
 
@@ -337,7 +435,6 @@ void RegioningPlugin::on_normal_size(void) {
 void RegioningPlugin::on_fit_to_window(void) {
 	bool fit = this->action_zoom_fit->isChecked();
 	this->scroll_image->set_auto_scale(fit);
-	this->scroll_image2->set_auto_scale(fit);
 	this->update_actions();
 }
 

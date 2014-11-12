@@ -47,6 +47,9 @@ class RegioningPlugin : public MainWindowTab {
 	Quadrangle *q1;
 	Quadrangle *q2;
 
+
+	QPixmap transparent;
+
 	bool odd;
 	
 	ScrollImage *scroll_image;
@@ -67,6 +70,9 @@ class RegioningPlugin : public MainWindowTab {
 	mve::ByteImage::Ptr current_image_pointer;
 	mve::View::Ptr current_view_pointer;
 	mve::FloatImage::Ptr depth_map_pointer;
+
+
+	void drawPoly(Quadrangle* q, QColor qc);
 
     private slots:
 	void handle_save_view();

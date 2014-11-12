@@ -44,8 +44,11 @@ class RegioningPlugin : public MainWindowTab {
 	QAction *action_zoom_reset;
 	QAction *action_zoom_fit;
 	    QAction* action_show_details;
-	Quadrangle *q1;
-	Quadrangle *q2;
+	Quadrangle *q1[];
+	Quadrangle *q2[];
+
+
+	QPixmap transparent;
 
 	bool odd;
 	
@@ -68,7 +71,11 @@ class RegioningPlugin : public MainWindowTab {
 	mve::View::Ptr current_view_pointer;
 	mve::FloatImage::Ptr depth_map_pointer;
 
+
+	void drawPoly(Quadrangle* q, QColor qc);
+
     private slots:
+	void handle_save_view();
 	void receive_view_pointer(mve::View::Ptr);
 	void on_zoom_in(void);
 	void on_zoom_out(void);

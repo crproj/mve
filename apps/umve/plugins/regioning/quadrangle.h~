@@ -8,13 +8,13 @@ private:
   unsigned int maxNumberVerts;
   unsigned int numberVerts;
   unsigned int id;
-  vector<int> xCoords;
-  vector<int> yCoords;
+
   
 public:
   Quadrangle(int id);
   bool isInside( int x, int y );
   void addPoint( int x, int y);
+  void setID(int id);
   bool isComplete();
   int getSize();
   vector<int> xCoords;

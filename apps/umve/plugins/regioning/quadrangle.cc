@@ -48,7 +48,15 @@ Quadrangle::Quadrangle(int id)
 
   int Quadrangle::getSize() {
   return xCoords.size();
-  }		
+  }	
+
+  void Quadrangle::setID(int id) {
+    this->id = id;
+  }
+
+  int Quadrangle::getID() {
+    return this->id;
+  }
 
   
 

@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'regioning_plugin.h'
 **
-** Created: Thu Nov 6 12:43:25 2014
+** Created: Wed Nov 12 14:50:13 2014
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.1)
 **
 ** WARNING! All changes made in this file will be lost!

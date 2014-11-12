@@ -2,6 +2,7 @@
 #include <string>
 #include <stdlib.h>
 #include "quadrangle.h"
+using namespace std;
 
 
 Quadrangle::Quadrangle(int id)
@@ -47,7 +48,16 @@ Quadrangle::Quadrangle(int id)
 
   int Quadrangle::getSize() {
   return xCoords.size();
+  }	
+
+  void Quadrangle::setID(int id) {
+    this.id = id;
   }
+
+  int Quadrangle::getID() {
+    return this.id;
+  }
+
   
 
 
