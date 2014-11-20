@@ -43,6 +43,10 @@ Matching::compute (ViewportList const& viewports,
         std::size_t view_2_id = i - view_1_id * (view_1_id - 1) / 2;
         FeatureSet const& view_1 = viewports[view_1_id].features;
         FeatureSet const& view_2 = viewports[view_2_id].features;
+
+//TODO Hier eingreifen
+
+
         if (view_1.positions.empty() || view_2.positions.empty())
             continue;
 
