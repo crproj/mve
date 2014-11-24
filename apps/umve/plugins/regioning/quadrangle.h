@@ -12,6 +12,7 @@ private:
   
 public:
   Quadrangle(int id);
+  Quadrangle();
   bool isInside( int x, int y );
   void addPoint( int x, int y);
   void setID(int id);

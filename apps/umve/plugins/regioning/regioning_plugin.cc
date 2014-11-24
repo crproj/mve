@@ -185,16 +185,20 @@ void RegioningPlugin::handle_save_view() {
 
 	std::string filename = view->get_filename().substr(0,view->get_filename().size()-3)+"rgn";
 	ofstream out(filename);
+if (this->q1->isComplete()) {
 	out << this->q1->getID() << "\r\n";
 	out << this->q1->xCoords[0] << "\r\n" << this->q1->yCoords[0] << "\r\n";
 	out << this->q1->xCoords[1] << "\r\n" << this->q1->yCoords[1] << "\r\n";
 	out << this->q1->xCoords[2] << "\r\n" << this->q1->yCoords[2] << "\r\n";
 	out << this->q1->xCoords[3] << "\r\n" << this->q1->yCoords[3] << "\r\n";
+}
+if (this->q2->isComplete()) {
 	out << this->q2->getID() << "\r\n";
 	out << this->q2->xCoords[0] << "\r\n" << this->q2->yCoords[0] << "\r\n";
 	out << this->q2->xCoords[1] << "\r\n" << this->q2->yCoords[1] << "\r\n";
 	out << this->q2->xCoords[2] << "\r\n" << this->q2->yCoords[2] << "\r\n";
 	out << this->q2->xCoords[3] << "\r\n" << this->q2->yCoords[3];
+}
 	out.close();
 }
 

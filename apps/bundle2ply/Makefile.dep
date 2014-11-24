@@ -1,0 +1,6 @@
+bundle2ply.o: bundle2ply.cc ../../libs/mve/bundle.h \
+ ../../libs/util/ref_ptr.h ../../libs/util/defines.h \
+ ../../libs/util/atomic.h ../../libs/mve/camera.h \
+ ../../libs/mve/defines.h ../../libs/mve/mesh.h ../../libs/math/vector.h \
+ ../../libs/math/defines.h ../../libs/math/algo.h \
+ ../../libs/mve/bundle_io.h ../../libs/mve/mesh_io.h

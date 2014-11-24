@@ -13,6 +13,14 @@ Quadrangle::Quadrangle(int id)
 }
 
 
+Quadrangle::Quadrangle()
+{
+	maxNumberVerts = 4;
+	numberVerts = 0;
+        this->id=-1;
+}
+
+
   bool Quadrangle::isInside( int x, int y)
   {
     // Check weather the quadrangle has four corners.

@@ -51,11 +51,11 @@ Quadrangle::Quadrangle(int id)
   }	
 
   void Quadrangle::setID(int id) {
-    this.id = id;
+    this->id = id;
   }
 
   int Quadrangle::getID() {
-    return this.id;
+    return this->id;
   }
 
   
