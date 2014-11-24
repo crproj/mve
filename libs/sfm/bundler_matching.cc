@@ -9,6 +9,8 @@
 #include "sfm/ransac.h"
 #include "sfm/bundler_matching.h"
 
+
+
 SFM_NAMESPACE_BEGIN
 SFM_BUNDLER_NAMESPACE_BEGIN
 
@@ -35,18 +37,131 @@ Matching::compute (ViewportList const& viewports,
                 this->progress->num_done += 1;
 
             float percent = (num_done * 1000 / num_pairs) / 10.0f;
-            std::cout << "\rMatching pair " << num_done << " of "
-                << num_pairs << " (" << percent << "%)..." << std::flush;
+            std::cout << "\rMatching pair PPPP" << num_done << " of "
+                << num_pairs << " (" << percent << "%)..." << std::endl;
         }
-
+  
         std::size_t view_1_id = (std::size_t)(0.5 + std::sqrt(0.25 + 2.0 * i));
         std::size_t view_2_id = i - view_1_id * (view_1_id - 1) / 2;
-        FeatureSet const& view_1 = viewports[view_1_id].features;
-        FeatureSet const& view_2 = viewports[view_2_id].features;
+//XXX const& vor view_x
+        FeatureSet view_1 = viewports[view_1_id].features;
+        FeatureSet view_2 = viewports[view_2_id].features;
 
 //TODO Hier eingreifen
 
+stringstream ss;
+ss << view_1_id;
+string str = ss.str();
 
+if (str.size() < 2)
+str = "0"+str;
+
+
+
+	ifstream myfile;
+	std::string filename = "/gcc/home/pschardt/afe_turm-20140131/views/view_00"+str+"rgn";
+
+	std::cout << "DATEINAME: " << filename << std::endl;
+
+	char *file = (char*)filename.c_str();
+	myfile.open (file, ios::in);
+	if (myfile.is_open()) {
+	char buf[50];
+	myfile.getline(buf, 50);
+	int id = atoi (buf);
+	Quadrangle q1 = Quadrangle(id);
+	for (int i=0; i<4; i++) {
+	if (!myfile.eof())
+  	{
+    	    myfile.getline(buf, 50);
+	    int x = atoi (buf);
+	    myfile.getline(buf, 50);
+	    int y = atoi (buf);
+	    if (!(q1.isComplete())) {
+	    q1.addPoint(x,y);
+		if (q1.isComplete()) {
+			view_1.setQuad(1, q1);
+		}
+	    }
+	}}
+
+
+	myfile.getline(buf, 50);
+	id = atoi (buf);
+	Quadrangle q2 = Quadrangle(id);
+	for (int i=0; i<4; i++) {
+	if (!myfile.eof())
+  	{
+    	    myfile.getline(buf, 50);
+	    int x = atoi (buf);
+	    myfile.getline(buf, 50);
+	    int y = atoi (buf);
+	    if (!(q2.isComplete())) {
+	    q2.addPoint(x,y);
+		if (q2.isComplete()) {
+			view_1.setQuad(2, q2);
+		}
+	    }
+	}}
+	}
+
+
+ss << view_2_id;
+str = ss.str();
+
+if (str.size() < 2)
+str = "0"+str;
+
+
+
+	filename = "/gcc/home/pschardt/afe_turm-20140131/views/view_00"+str+"rgn";
+
+	char *file2 = (char*)filename.c_str();
+	myfile.open (file2, ios::in);
+	if (myfile.is_open()) {
+	char buf[50];
+	myfile.getline(buf, 50);
+	int id = atoi (buf);
+	Quadrangle q1 = Quadrangle(id);
+	for (int i=0; i<4; i++) {
+	if (!myfile.eof())
+  	{
+    	    myfile.getline(buf, 50);
+	    int x = atoi (buf);
+	    myfile.getline(buf, 50);
+	    int y = atoi (buf);
+	    if (!(q1.isComplete())) {
+	    q1.addPoint(x,y);
+		if (q1.isComplete()) {
+			view_2.setQuad(1, q1);
+		}
+	    }
+	}}
+
+
+	myfile.getline(buf, 50);
+	id = atoi (buf);
+	Quadrangle q2 = Quadrangle(id);
+	for (int i=0; i<4; i++) {
+	if (!myfile.eof())
+  	{
+    	    myfile.getline(buf, 50);
+	    int x = atoi (buf);
+	    myfile.getline(buf, 50);
+	    int y = atoi (buf);
+	    if (!(q2.isComplete())) {
+	    q2.addPoint(x,y);
+		if (q2.isComplete()) {
+			view_2.setQuad(2, q2);
+		}
+	    }
+	}}
+	}
+
+
+
+
+//TODO ENDE
         if (view_1.positions.empty() || view_2.positions.empty())
             continue;
 
@@ -90,6 +205,37 @@ Matching::two_view_matching (FeatureSet const& view_1,
     FeatureSet const& view_2, CorrespondenceIndices* matches,
     std::stringstream& message)
 {
+
+//XXX
+
+FeatureSet view_1_backup = view_1;
+FeatureSet view_2_backup = view_2;
+
+if (view_1_backup.getQuad(1).getID()==view_2_backup.getQuad(1).getID()) {
+for (std::size_t i = 0; i < view_1.positions.size(); ++i) {
+   if (!view_1_backup.q1.isInside(view_1_backup.positions[i][0], view_1_backup.positions[i][1]))
+   view_1_backup.positions.erase(view_1_backup.positions.begin()+i);
+   if (!view_2_backup.q1.isInside(view_2_backup.positions[i][0], view_2_backup.positions[i][1]))
+   view_2_backup.positions.erase(view_2_backup.positions.begin()+i);
+}}
+
+
+if (view_1_backup.q2.getID()==view_2_backup.q2.getID()) {
+for (std::size_t i = 0; i < view_1_backup.positions.size(); ++i) {
+   if (!view_1_backup.q2.isInside(view_1_backup.positions[i][0], view_1_backup.positions[i][1]))
+   view_1_backup.positions.erase(view_1_backup.positions.begin()+i);
+   if (!view_2_backup.q2.isInside(view_2_backup.positions[i][0], view_2_backup.positions[i][1]))
+   view_2_backup.positions.erase(view_2_backup.positions.begin()+i);
+}}
+
+const_cast<const FeatureSet*> (&view_1_backup);
+const_cast<const FeatureSet*> (&view_2_backup);
+
+
+//XXX
+
+
+
     /* Low-res matching if number of features is large. */
     if (this->opts.use_lowres_matching
         && view_1.positions.size() * view_2.positions.size() > 1000000)
@@ -105,9 +251,13 @@ Matching::two_view_matching (FeatureSet const& view_1,
         }
     }
 
+
+
+
+
     /* Perform two-view descriptor matching. */
     sfm::Matching::Result matching_result;
-    view_1.match(view_2, &matching_result);
+    view_1_backup.match(view_2_backup, &matching_result);
     int num_matches = sfm::Matching::count_consistent_matches(matching_result);
 
     /* Require at least 8 matches. Check threshold. */
@@ -118,6 +268,10 @@ Matching::two_view_matching (FeatureSet const& view_1,
             << min_matches_thres << ".";
         return;
     }
+
+
+
+
 
     /* Build correspondences from feature matching result. */
     sfm::Correspondences unfiltered_matches;
@@ -130,10 +284,10 @@ Matching::two_view_matching (FeatureSet const& view_1,
                 continue;
 
             sfm::Correspondence match;
-            match.p1[0] = view_1.positions[i][0];
-            match.p1[1] = view_1.positions[i][1];
-            match.p2[0] = view_2.positions[m12[i]][0];
-            match.p2[1] = view_2.positions[m12[i]][1];
+            match.p1[0] = view_1_backup.positions[i][0];
+            match.p1[1] = view_1_backup.positions[i][1];
+            match.p2[0] = view_2_backup.positions[m12[i]][0];
+            match.p2[1] = view_2_backup.positions[m12[i]][1];
             unfiltered_matches.push_back(match);
             unfiltered_indices.push_back(std::make_pair(i, m12[i]));
         }

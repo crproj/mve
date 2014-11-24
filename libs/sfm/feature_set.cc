@@ -170,6 +170,27 @@ FeatureSet::match_lowres (FeatureSet const& other, int num_features) const
     return 0;
 }
 
+
+//QuadrangleMethods
+void FeatureSet::setQuad (int i, Quadrangle q) {
+if (i==1) {
+this->q1 = q;
+}
+if (i==2) {
+this->q2 = q;
+}
+}
+
+
+Quadrangle FeatureSet::getQuad (int i) {
+if (i==1)
+return q1;
+else
+return q2;
+}
+
+
+
 void
 FeatureSet::match (FeatureSet const& other, Matching::Result* result) const
 {

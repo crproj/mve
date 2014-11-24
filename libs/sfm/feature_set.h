@@ -14,6 +14,8 @@
 #include "sfm/surf.h"
 #include "sfm/matching.h"
 #include "sfm/defines.h"
+#include "util/quadrangle.h"
+
 
 /* Whether to use floating point or 8-bit descriptors for matching. */
 #define DISCRETIZE_DESCRIPTORS 1
@@ -68,6 +70,9 @@ public:
     /** Clear descriptor data. */
     void clear_descriptors (void);
 
+    void setQuad (int i, Quadrangle q);
+    Quadrangle getQuad(int i);
+
 public:
     /** Image dimension used for feature computation. */
     int width, height;
@@ -75,15 +80,19 @@ public:
     std::vector<math::Vec2f> positions;
     /** Per-feature image color. */
     std::vector<math::Vec3uc> colors;
+    Quadrangle q1;
+    Quadrangle q2;
 
 private:
     void compute_sift (mve::ByteImage::ConstPtr image);
     void compute_surf (mve::ByteImage::ConstPtr image);
 
+
 private:
     Options opts;
     int num_sift_descriptors;
     int num_surf_descriptors;
+
 #if DISCRETIZE_DESCRIPTORS
     util::AlignedMemory<unsigned short, 16> sift_descr;
     util::AlignedMemory<signed short, 16> surf_descr;

@@ -9,7 +9,8 @@ bundler_common.o: bundler_common.cc ../../libs/util/exception.h \
  ../../libs/util/string.h ../../libs/sfm/sift.h ../../libs/sfm/defines.h \
  ../../libs/sfm/surf.h ../../libs/sfm/defines.h \
  ../../libs/sfm/feature_set.h ../../libs/sfm/matching.h \
- ../../libs/sfm/nearest_neighbor.h ../../libs/sfm/correspondence.h
+ ../../libs/sfm/nearest_neighbor.h ../../libs/util/quadrangle.h \
+ ../../libs/sfm/correspondence.h
 bundler_features.o: bundler_features.cc ../../libs/util/timer.h \
  ../../libs/util/defines.h ../../libs/mve/image_exif.h \
  ../../libs/mve/defines.h ../../libs/mve/image_tools.h \
@@ -23,10 +24,10 @@ bundler_features.o: bundler_features.cc ../../libs/util/timer.h \
  ../../libs/sfm/sift.h ../../libs/sfm/defines.h ../../libs/sfm/surf.h \
  ../../libs/sfm/defines.h ../../libs/sfm/feature_set.h \
  ../../libs/sfm/matching.h ../../libs/sfm/nearest_neighbor.h \
- ../../libs/sfm/correspondence.h ../../libs/sfm/extract_focal_length.h \
- ../../libs/sfm/bundler_features.h ../../libs/mve/scene.h \
- ../../libs/mve/view.h ../../libs/mve/camera.h ../../libs/mve/bundle.h \
- ../../libs/mve/mesh.h
+ ../../libs/util/quadrangle.h ../../libs/sfm/correspondence.h \
+ ../../libs/sfm/extract_focal_length.h ../../libs/sfm/bundler_features.h \
+ ../../libs/mve/scene.h ../../libs/mve/view.h ../../libs/mve/camera.h \
+ ../../libs/mve/bundle.h ../../libs/mve/mesh.h
 bundler_incremental.o: bundler_incremental.cc \
  ../../libs/math/matrix_tools.h ../../libs/math/defines.h \
  ../../libs/math/matrix.h ../../libs/math/algo.h ../../libs/math/vector.h \
@@ -45,7 +46,7 @@ bundler_incremental.o: bundler_incremental.cc \
  ../../libs/mve/image_base.h ../../libs/util/string.h \
  ../../libs/sfm/sift.h ../../libs/sfm/surf.h ../../libs/sfm/defines.h \
  ../../libs/sfm/feature_set.h ../../libs/sfm/matching.h \
- ../../libs/sfm/nearest_neighbor.h
+ ../../libs/sfm/nearest_neighbor.h ../../libs/util/quadrangle.h
 bundler_init_pair.o: bundler_init_pair.cc \
  ../../libs/sfm/ransac_homography.h ../../libs/sfm/homography.h \
  ../../libs/math/matrix.h ../../libs/math/defines.h \
@@ -60,7 +61,7 @@ bundler_init_pair.o: bundler_init_pair.cc \
  ../../libs/mve/image_base.h ../../libs/util/string.h \
  ../../libs/sfm/sift.h ../../libs/sfm/surf.h ../../libs/sfm/defines.h \
  ../../libs/sfm/feature_set.h ../../libs/sfm/matching.h \
- ../../libs/sfm/nearest_neighbor.h
+ ../../libs/sfm/nearest_neighbor.h ../../libs/util/quadrangle.h
 bundler_matching.o: bundler_matching.cc ../../libs/util/exception.h \
  ../../libs/util/defines.h ../../libs/util/timer.h ../../libs/sfm/sift.h \
  ../../libs/math/vector.h ../../libs/math/defines.h \
@@ -75,7 +76,7 @@ bundler_matching.o: bundler_matching.cc ../../libs/util/exception.h \
  ../../libs/sfm/fundamental.h ../../libs/sfm/pose.h \
  ../../libs/sfm/bundler_common.h ../../libs/util/aligned_memory.h \
  ../../libs/sfm/surf.h ../../libs/sfm/defines.h \
- ../../libs/sfm/feature_set.h
+ ../../libs/sfm/feature_set.h ../../libs/util/quadrangle.h
 bundler_tracks.o: bundler_tracks.cc ../../libs/mve/image_tools.h \
  ../../libs/util/exception.h ../../libs/util/defines.h \
  ../../libs/math/accum.h ../../libs/math/functions.h \
@@ -93,7 +94,7 @@ bundler_tracks.o: bundler_tracks.cc ../../libs/mve/image_tools.h \
  ../../libs/sfm/fundamental.h ../../libs/sfm/pose.h \
  ../../libs/sfm/bundler_common.h ../../libs/util/aligned_memory.h \
  ../../libs/sfm/sift.h ../../libs/sfm/surf.h ../../libs/sfm/defines.h \
- ../../libs/sfm/feature_set.h
+ ../../libs/sfm/feature_set.h ../../libs/util/quadrangle.h
 camera_database.o: camera_database.cc camera_database.h \
  ../../libs/sfm/defines.h
 correspondence.o: correspondence.cc ../../libs/sfm/correspondence.h \
@@ -112,7 +113,8 @@ feature_set.o: feature_set.cc ../../libs/sfm/feature_set.h \
  ../../libs/math/matrix.h ../../libs/mve/defines.h \
  ../../libs/mve/image_base.h ../../libs/util/string.h \
  ../../libs/sfm/defines.h ../../libs/sfm/surf.h ../../libs/sfm/defines.h \
- ../../libs/sfm/matching.h ../../libs/sfm/nearest_neighbor.h
+ ../../libs/sfm/matching.h ../../libs/sfm/nearest_neighbor.h \
+ ../../libs/util/quadrangle.h
 fundamental.o: fundamental.cc ../../libs/math/matrix_tools.h \
  ../../libs/math/defines.h ../../libs/math/matrix.h \
  ../../libs/math/algo.h ../../libs/math/vector.h \

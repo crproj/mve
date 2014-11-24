@@ -154,6 +154,7 @@ Matching::twoway_match (Matching::Options const& options,
         set_1, set_1_size, &matches->matches_2_1);
 }
 
+
 SFM_NAMESPACE_END
 
 #endif  /* SFM_MATCHING_HEADER */

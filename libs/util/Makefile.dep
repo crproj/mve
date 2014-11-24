@@ -5,4 +5,5 @@ arguments.o: arguments.cc ../../libs/util/string.h \
 file_system.o: file_system.cc ../../libs/util/exception.h \
  ../../libs/util/defines.h ../../libs/util/system.h \
  ../../libs/util/file_system.h
+quadrangle.o: quadrangle.cc quadrangle.h
 system.o: system.cc ../../libs/util/system.h ../../libs/util/defines.h
