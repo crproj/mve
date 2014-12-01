@@ -4,6 +4,8 @@
 #include "sfm/bundler_common.h"
 #include "sfm/extract_focal_length.h"
 #include "sfm/bundler_features.h"
+#include <iostream>
+#include <fstream>
 
 SFM_NAMESPACE_BEGIN
 SFM_BUNDLER_NAMESPACE_BEGIN
@@ -60,6 +62,64 @@ Features::compute (mve::Scene::Ptr scene, ViewportList* viewports)
 
         /* Compute features for view. */
         Viewport* viewport = &viewports->at(i);
+
+//XXX
+stringstream ss;
+ss << view->get_id();
+string str = ss.str();
+
+if (str.size() < 2)
+str = "0"+str;
+
+
+
+	ifstream myfile;
+	std::string filename = "/gcc/home/pschardt/achteckturm-test/views/view_00"+str+".rgn";
+
+	char *file = (char*)filename.c_str();
+	myfile.open (file, ios::in);
+	if (myfile.is_open()) {
+	char buf[50];
+	myfile.getline(buf, 50);
+	int id = atoi (buf);
+	Quadrangle q1 = Quadrangle(id);
+	for (int i=0; i<4; i++) {
+	if (!myfile.eof())
+  	{
+    	    myfile.getline(buf, 50);
+	    float x = atof (buf);
+	    myfile.getline(buf, 50);
+	    float y = atof (buf);
+	    if (!(q1.isComplete())) {
+	    q1.addPoint(x,y);
+		if (q1.isComplete()) {
+			viewport->features.setQuad(1, q1);
+		}
+	    }
+	}}
+
+
+	myfile.getline(buf, 50);
+	id = atoi (buf);
+	Quadrangle q2 = Quadrangle(id);
+	for (int i=0; i<4; i++) {
+	if (!myfile.eof())
+  	{
+    	    myfile.getline(buf, 50);
+	    float x = atof (buf);
+	    myfile.getline(buf, 50);
+	    float y = atof (buf);
+	    if (!(q2.isComplete())) {
+	    q2.addPoint(x,y);
+		if (q2.isComplete()) {
+			viewport->features.setQuad(2, q2);
+		}
+	    }
+	}}
+	}
+
+
+//XXX
         viewport->features.set_options(this->opts.feature_options);
         viewport->features.compute_features(image);
         viewport->width = image->width();

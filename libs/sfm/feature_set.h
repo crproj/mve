@@ -83,12 +83,12 @@ public:
     Quadrangle q1;
     Quadrangle q2;
 
-private:
+public:
     void compute_sift (mve::ByteImage::ConstPtr image);
     void compute_surf (mve::ByteImage::ConstPtr image);
 
 
-private:
+public:
     Options opts;
     int num_sift_descriptors;
     int num_surf_descriptors;

@@ -78,6 +78,19 @@ FeatureSet::compute_sift (mve::ByteImage::ConstPtr image)
         descr = sift.get_descriptors();
     }
 
+int s = descr.size();
+
+    if ((q1.isComplete())&&(q2.isComplete())) {
+    for (int i = 0; i < descr.size(); i++) {
+       if ((!q1.isInside(descr[i].x, descr[i].y,this->width, this->height))&&(!q2.isInside(descr[i].x, descr[i].y,this->width, this->height)))
+          {descr.erase(descr.begin()+i);
+		//std::cout << "FEATURE GELOESCHT" << std::endl;
+		}
+    }
+    }
+
+std::cout << "Vohrer " << s << " Nachher " << descr.size() << std::endl;
+
     /* Sort features by scale for low-res matching. */
     std::sort(descr.begin(), descr.end(), compare_scale<sfm::Sift::Descriptor>);
 
@@ -113,6 +126,16 @@ FeatureSet::compute_surf (mve::ByteImage::ConstPtr image)
         surf.process();
         descr = surf.get_descriptors();
     }
+
+
+
+    if ((q1.isComplete())&&(q2.isComplete())) {
+    for (int i = 0; i < descr.size(); i++) {
+       if ((!q1.isInside(descr[i].x, descr[i].y,this->width, this->height))&&(!q2.isInside(descr[i].x, descr[i].y,this->width, this->height)))
+          descr.erase(descr.begin()+i);
+    }
+    }
+
 
     /* Sort features by scale for low-res matching. */
     std::sort(descr.begin(), descr.end(), compare_scale<sfm::Surf::Descriptor>);

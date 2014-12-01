@@ -14,7 +14,7 @@
 #include "sfm/surf.h"
 #include "sfm/matching.h"
 #include "sfm/defines.h"
-#include "../apps/umve/plugins/regioning/quadrangle.h"
+#include "util/quadrangle.h"
 
 
 /* Whether to use floating point or 8-bit descriptors for matching. */
@@ -88,7 +88,7 @@ private:
     void compute_surf (mve::ByteImage::ConstPtr image);
 
 
-private:
+public:
     Options opts;
     int num_sift_descriptors;
     int num_surf_descriptors;

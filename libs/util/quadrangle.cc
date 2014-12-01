@@ -21,7 +21,7 @@ Quadrangle::Quadrangle()
 }
 
 
-  bool Quadrangle::isInside( int x, int y)
+  bool Quadrangle::isInside( float x, float y, float width, float height)
   {
     // Check weather the quadrangle has four corners.
     /*if( isComplete() )
@@ -37,20 +37,20 @@ Quadrangle::Quadrangle()
     }
     return false;*/
 
-	if (((xCoords[1] - xCoords[0]) * (y - yCoords[0]) - (x - xCoords[0]) * (yCoords[1] - yCoords[0])) <= 0) {
-	if (((xCoords[2] - xCoords[1]) * (y - yCoords[1]) - (x - xCoords[1]) * (yCoords[2] - yCoords[1])) <= 0) {
-	if (((xCoords[3] - xCoords[2]) * (y - yCoords[2]) - (x - xCoords[2]) * (yCoords[3] - yCoords[2])) <= 0) {
-	if (((xCoords[0] - xCoords[3]) * (y - yCoords[3]) - (x - xCoords[3]) * (yCoords[0] - yCoords[3])) <= 0) {
+	if (((xCoords[1]*width - xCoords[0]*width) * (y - yCoords[0]*height) - (x - xCoords[0]*width) * (yCoords[1]*height - yCoords[0]*height)) <= 0) {
+	if (((xCoords[2]*width - xCoords[1]*width) * (y - yCoords[1]*height) - (x - xCoords[1]*width) * (yCoords[2]*height - yCoords[1]*height)) <= 0) {
+	if (((xCoords[3]*width - xCoords[2]*width) * (y - yCoords[2]*height) - (x - xCoords[2]*width) * (yCoords[3]*height - yCoords[2]*height)) <= 0) {
+	if (((xCoords[0]*width - xCoords[3]*width) * (y - yCoords[3]*height) - (x - xCoords[3]*width) * (yCoords[0]*height - yCoords[3]*height)) <= 0) {
 	return true;
 }
 }
 }
 }
 
-	if (((xCoords[1] - xCoords[0]) * (y - yCoords[0]) - (x - xCoords[0]) * (yCoords[1] - yCoords[0])) >= 0) {
-	if (((xCoords[2] - xCoords[1]) * (y - yCoords[1]) - (x - xCoords[1]) * (yCoords[2] - yCoords[1])) >= 0) {
-	if (((xCoords[3] - xCoords[2]) * (y - yCoords[2]) - (x - xCoords[2]) * (yCoords[3] - yCoords[2])) >= 0) {
-	if (((xCoords[0] - xCoords[3]) * (y - yCoords[3]) - (x - xCoords[3]) * (yCoords[0] - yCoords[3])) >= 0) {
+	if (((xCoords[1]*width - xCoords[0]*width) * (y - yCoords[0]*height) - (x - xCoords[0]*width) * (yCoords[1]*height - yCoords[0]*height)) >= 0) {
+	if (((xCoords[2]*width - xCoords[1]*width) * (y - yCoords[1]*height) - (x - xCoords[1]*width) * (yCoords[2]*height - yCoords[1]*height)) >= 0) {
+	if (((xCoords[3]*width - xCoords[2]*width) * (y - yCoords[2]*height) - (x - xCoords[2]*width) * (yCoords[3]*height - yCoords[2]*height)) >= 0) {
+	if (((xCoords[0]*width - xCoords[3]*width) * (y - yCoords[3]*height) - (x - xCoords[3]*width) * (yCoords[0]*height - yCoords[3]*height)) >= 0) {
 	return true;
 }
 }
@@ -62,7 +62,7 @@ return false;
 
   }
   
-  void Quadrangle::addPoint( int x, int y)
+  void Quadrangle::addPoint( float x, float y)
   {
     if(!isComplete() )
     {

@@ -83,9 +83,9 @@ str = "0"+str;
 	if (!myfile.eof())
   	{
     	    myfile.getline(buf, 50);
-	    int x = atoi (buf);
+	    float x = atof (buf);
 	    myfile.getline(buf, 50);
-	    int y = atoi (buf);
+	    float y = atof (buf);
 	    if (!(q1.isComplete())) {
 	    q1.addPoint(x,y);
 		if (q1.isComplete()) {
@@ -102,9 +102,9 @@ str = "0"+str;
 	if (!myfile.eof())
   	{
     	    myfile.getline(buf, 50);
-	    int x = atoi (buf);
+	    float x = atof (buf);
 	    myfile.getline(buf, 50);
-	    int y = atoi (buf);
+	    float y = atof (buf);
 	    if (!(q2.isComplete())) {
 	    q2.addPoint(x,y);
 		if (q2.isComplete()) {
@@ -141,9 +141,9 @@ myfile.close();
 	if (!myfile.eof())
   	{
     	    myfile.getline(buf, 50);
-	    int x = atoi (buf);
+	    float x = atof (buf);
 	    myfile.getline(buf, 50);
-	    int y = atoi (buf);
+	    float y = atof (buf);
 	    if (!(q1.isComplete())) {
 	    q1.addPoint(x,y);
 		if (q1.isComplete()) {
@@ -160,9 +160,9 @@ myfile.close();
 	if (!myfile.eof())
   	{
     	    myfile.getline(buf, 50);
-	    int x = atoi (buf);
+	    float x = atof (buf);
 	    myfile.getline(buf, 50);
-	    int y = atoi (buf);
+	    float y = atof (buf);
 	    if (!(q2.isComplete())) {
 	    q2.addPoint(x,y);
 		if (q2.isComplete()) {
@@ -174,20 +174,30 @@ myfile.close();
 
 //XXX
 
-std::cout << "VIEW 1 " << view_1_backup.getQuad(1).getID() << "VIEW 2 " << view_2_backup.getQuad(1).getID() << std::endl;
+//std::cout << "VIEW 1 " << view_1_backup.getQuad(1).getID() << "VIEW 2 " << view_2_backup.getQuad(1).getID() << std::endl;
 
 if (view_1_backup.getQuad(1).getID()==view_2_backup.getQuad(1).getID()) {
-//std::cout << "IN IF" << std::endl;
+//std::cout << "IN IF " << viewports[view_1_id].width << ", " << viewports[view_1_id].height << "Qkoord" << view_1_backup.q1.xCoords[1] << std::endl;
 for (std::size_t i = 0; i < view_1.positions.size(); ++i) {
    //std::cout << "IF Position: " << view_1_backup.positions[i][0] << " " << view_1_backup.positions[i][1] << std::endl;
-   if ((!view_1_backup.q1.isInside(view_1_backup.positions[i][0], view_1_backup.positions[i][1]))&&(!view_1_backup.q2.isInside(view_1_backup.positions[i][0], view_1_backup.positions[i][1])))
-{  //std::cout << "FEATURE AUS 1 GELOESCHT" << std::endl;
+   if ((!view_1_backup.q1.isInside(view_1_backup.positions[i][0], view_1_backup.positions[i][1],viewports[view_1_id].width, viewports[view_1_id].height))
+&&(!view_1_backup.q2.isInside(view_1_backup.positions[i][0], view_1_backup.positions[i][1], viewports[view_1_id].width, viewports[view_1_id].height)))
+{  //std::cout << view_1_backup.positions[i][0] << ", " << view_1_backup.positions[i][1] << "wird geloescht" << std::endl;
    view_1_backup.positions.erase(view_1_backup.positions.begin()+i);
-}   if ((!view_2_backup.q1.isInside(view_2_backup.positions[i][0], view_2_backup.positions[i][1]))&&(!view_2_backup.q2.isInside(view_2_backup.positions[i][0], view_2_backup.positions[i][1])))
+}   if ((!view_2_backup.q1.isInside(view_2_backup.positions[i][0], view_2_backup.positions[i][1], viewports[view_2_id].width, viewports[view_2_id].height))
+&&(!view_2_backup.q2.isInside(view_2_backup.positions[i][0], view_2_backup.positions[i][1], viewports[view_2_id].width, viewports[view_2_id].height)))
 {   //std::cout << "FEATURE AUS 2 GELOESCHT" << std::endl;
     view_2_backup.positions.erase(view_2_backup.positions.begin()+i);}
 }}
 
+std::cout << "DAVOR" << std::endl;
+
+view_1_backup.compute_sift(viewports[view_1_id].image);
+view_1_backup.compute_surf(viewports[view_1_id].image);
+view_2_backup.compute_sift(viewports[view_2_id].image);
+view_2_backup.compute_surf(viewports[view_2_id].image);
+
+std::cout << "DAHINTEr" << std::endl;
 
 /*if (view_1_backup.q2.getID()==view_2_backup.q2.getID()) {
 for (std::size_t i = 0; i < view_1_backup.positions.size(); ++i) {
@@ -200,25 +210,30 @@ for (std::size_t i = 0; i < view_1_backup.positions.size(); ++i) {
 const_cast<const FeatureSet*> (&view_1_backup);
 const_cast<const FeatureSet*> (&view_2_backup);
 
-std::cout << "View 1 size " << view_1.positions.size() << std::endl;
+/*std::cout << "View 1 size " << view_1.positions.size() << std::endl;
 std::cout << "View 1 Backup size " << view_1_backup.positions.size() << std::endl;
+std::cout << "View 2 size " << view_2.positions.size() << std::endl;
+std::cout << "View 2 Backup size " << view_2_backup.positions.size() << std::endl;*/
 
 /*
 Quadrangle qtest = Quadrangle();
-qtest.addPoint(0,0);
-qtest.addPoint(0,10);
-qtest.addPoint(10,10);
-qtest.addPoint(10,0);
+qtest.addPoint(0.25,0.25);
+qtest.addPoint(0.5,0.25);
+qtest.addPoint(0.5,0.5);
+qtest.addPoint(0.25,0.5);
 
-std::cout << "Ist 0,0 drin: " << qtest.isInside(0,0) << std::endl;
-std::cout << "Ist 5,5 drin: " << qtest.isInside(5,5) << std::endl;
-std::cout << "Ist 10,10 drin: " << qtest.isInside(10,10) << std::endl;
-std::cout << "Ist 15,5 drin: " << qtest.isInside(15,5) << std::endl;
-std::cout << "Ist 5,15 drin: " << qtest.isInside(5,15) << std::endl;
-std::cout << "Ist 15,15 drin: " << qtest.isInside(15,15) << std::endl;*/
+std::cout << "Ist 0,0 drin: " << qtest.isInside(0,0,20,20) << std::endl;
+std::cout << "Ist 5,5 drin: " << qtest.isInside(5,5,20,20) << std::endl;
+std::cout << "Ist 8,8 drin: " << qtest.isInside(8,8,20,20) << std::endl;
+std::cout << "Ist 10,10 drin: " << qtest.isInside(10,10,20,20) << std::endl;
+std::cout << "Ist 15,5 drin: " << qtest.isInside(15,5,20,20) << std::endl;
+std::cout << "Ist 5,15 drin: " << qtest.isInside(5,15,20,20) << std::endl;
+std::cout << "Ist 15,15 drin: " << qtest.isInside(15,15,20,20) << std::endl;*/
 
 //XXX
 
+//std::cout << "view1 " << view_1.sift_descr.begin() << std::endl;
+//std::cout << "copy1 " << view_1_backup.sift_descr.begin() << std::endl;
 
 //TODO ENDE
         if (view_1_backup.positions.empty() || view_2_backup.positions.empty())
