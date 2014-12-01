@@ -208,10 +208,13 @@ void RegioningPlugin::on_image_clicked(int x, int y, QMouseEvent *event) {
 	/* Which buttons have been pressed? */
 	bool left_click = event->buttons() & Qt::LeftButton;
 	bool right_click = event->buttons() & Qt::RightButton;
-	std::cout << x << ", " << y << std::endl;
+	float xf, yf;
+	xf = ((float) x) / current_view_pointer->get_image("undistorted")->width();
+	yf = ((float) y) / current_view_pointer->get_image("undistorted")->height();
+	std::cout << xf << ", " << yf << std::endl;
 	if (left_click) {
 		if( !q1->isComplete() ){
-			q1->addPoint( x, y);
+			q1->addPoint( xf, yf);
 			q1->setID(this->spinbox_region_id->value());
 			if (q1->isComplete()) {
 			mve::ByteImage::Ptr overlay = this->current_view_pointer->get_image("undistorted");
@@ -226,7 +229,7 @@ void RegioningPlugin::on_image_clicked(int x, int y, QMouseEvent *event) {
 		}
 		else {
 		     if (!(q2->isComplete())) {
-			q2->addPoint(x,y);
+			q2->addPoint(xf,yf);
 			q2->setID(this->spinbox_region_id->value());
 			if (q2->isComplete()) {
 			drawPoly(q2, QColor(0,0,204,125));
@@ -242,17 +245,20 @@ void RegioningPlugin::on_image_clicked(int x, int y, QMouseEvent *event) {
 
 
 void RegioningPlugin::drawPoly (Quadrangle* q, QColor qc) {
-			QPointF points[4] = {
- 			    QPointF(q->xCoords[0], q->yCoords[0]),
- 			    QPointF(q->xCoords[1], q->yCoords[1]),
-  			    QPointF(q->xCoords[2], q->yCoords[2]),
-  			    QPointF(q->xCoords[3], q->yCoords[3])
- 			};
+
 			mve::ByteImage::Ptr base = this->current_view_pointer->get_image("undistorted");
 			mve::ByteImage::Ptr overlay = this->current_view_pointer->get_image("undistorted");
 			QImage *q_img_base = new QImage(base->width(), base->height(), QImage::Format_RGB32);
 			QImage *q_img_overlay = new QImage(overlay->width(), overlay->height(), QImage::Format_RGB32);
 		
+			QPointF points[4] = {
+ 			    QPointF(q->xCoords[0]*overlay->width(), q->yCoords[0]*overlay->height()),
+ 			    QPointF(q->xCoords[1]*overlay->width(), q->yCoords[1]*overlay->height()),
+  			    QPointF(q->xCoords[2]*overlay->width(), q->yCoords[2]*overlay->height()),
+  			    QPointF(q->xCoords[3]*overlay->width(), q->yCoords[3]*overlay->height())
+ 			};
+
+
 			this->mve2qt(base, q_img_base);
 			this->mve2qt(overlay, q_img_overlay);
 			QPixmap pixmap_base(QPixmap::fromImage(*q_img_base));
@@ -367,9 +373,9 @@ void RegioningPlugin::display_image(mve::ByteImage::ConstPtr img) {
 	if (!myfile.eof())
   	{
     	    myfile.getline(buf, 50);
-	    int x = atoi (buf);
+	    float x = atof (buf);
 	    myfile.getline(buf, 50);
-	    int y = atoi (buf);
+	    float y = atof (buf);
 	    if (!(q1->isComplete())) {
 	    q1->addPoint(x,y);
 		if (q1->isComplete()) {
@@ -392,9 +398,9 @@ void RegioningPlugin::display_image(mve::ByteImage::ConstPtr img) {
 	if (!myfile.eof())
   	{
     	    myfile.getline(buf, 50);
-	    int x = atoi (buf);
+	    float x = atof (buf);
 	    myfile.getline(buf, 50);
-	    int y = atoi (buf);
+	    float y = atof (buf);
 	    if (!(q2->isComplete())) {
 	    q2->addPoint(x,y);
 		if (q2->isComplete()) {
