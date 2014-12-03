@@ -36,11 +36,11 @@ Quadrangle::Quadrangle()
       return c;
     }
     return false;*/
-
 	if (((xCoords[1]*width - xCoords[0]*width) * (y - yCoords[0]*height) - (x - xCoords[0]*width) * (yCoords[1]*height - yCoords[0]*height)) <= 0) {
 	if (((xCoords[2]*width - xCoords[1]*width) * (y - yCoords[1]*height) - (x - xCoords[1]*width) * (yCoords[2]*height - yCoords[1]*height)) <= 0) {
 	if (((xCoords[3]*width - xCoords[2]*width) * (y - yCoords[2]*height) - (x - xCoords[2]*width) * (yCoords[3]*height - yCoords[2]*height)) <= 0) {
 	if (((xCoords[0]*width - xCoords[3]*width) * (y - yCoords[3]*height) - (x - xCoords[3]*width) * (yCoords[0]*height - yCoords[3]*height)) <= 0) {
+//std::cout << x << ","<< y << " liegt in " << xCoords[0]*width << "," << yCoords[0]*height << " " << xCoords[1]*width << "," << yCoords[1]*height << " " << xCoords[2]*width << "," << yCoords[2]*height << " " << xCoords[3]*width << "," << yCoords[3]*height << std::endl; 
 	return true;
 }
 }
@@ -51,12 +51,13 @@ Quadrangle::Quadrangle()
 	if (((xCoords[2]*width - xCoords[1]*width) * (y - yCoords[1]*height) - (x - xCoords[1]*width) * (yCoords[2]*height - yCoords[1]*height)) >= 0) {
 	if (((xCoords[3]*width - xCoords[2]*width) * (y - yCoords[2]*height) - (x - xCoords[2]*width) * (yCoords[3]*height - yCoords[2]*height)) >= 0) {
 	if (((xCoords[0]*width - xCoords[3]*width) * (y - yCoords[3]*height) - (x - xCoords[3]*width) * (yCoords[0]*height - yCoords[3]*height)) >= 0) {
+//std::cout << x << ","<< y << " liegt in " << xCoords[0]*width << "," << yCoords[0]*height << " " << xCoords[1]*width << "," << yCoords[1]*height << " " << xCoords[2]*width << "," << yCoords[2]*height << " " << xCoords[3]*width << "," << yCoords[3]*height << std::endl; 
 	return true;
 }
 }
 }
 }
-
+//std::cout << x << ","<< y << " liegt NICHT in " << xCoords[0]*width << "," << yCoords[0]*height << " " << xCoords[1]*width << "," << yCoords[1]*height << " " << xCoords[2]*width << "," << yCoords[2]*height << " " << xCoords[3]*width << "," << yCoords[3]*height << std::endl; 
 return false;
 
 

@@ -83,6 +83,7 @@ str = "0"+str;
 	myfile.getline(buf, 50);
 	int id = atoi (buf);
 	Quadrangle q1 = Quadrangle(id);
+#pragma omp critical
 	for (int i=0; i<4; i++) {
 	if (!myfile.eof())
   	{
@@ -102,6 +103,7 @@ str = "0"+str;
 	myfile.getline(buf, 50);
 	id = atoi (buf);
 	Quadrangle q2 = Quadrangle(id);
+#pragma omp critical
 	for (int i=0; i<4; i++) {
 	if (!myfile.eof())
   	{

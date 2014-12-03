@@ -1,5 +1,4 @@
 #include <iostream>
-#include <fstream>
 #include <vector>
 
 #include "sfm/ransac_homography.h"
@@ -47,159 +46,40 @@ InitialPair::compute (ViewportList const& viewports,
     for (std::size_t i = 0; i < pairs.size(); ++i)
     {
         TwoViewMatching const& tvm = matching[pairs[i]];
-        FeatureSet const& view1 = viewports[tvm.view_1_id].features;
-        FeatureSet const& view2 = viewports[tvm.view_2_id].features;
+        FeatureSet view1 = viewports[tvm.view_1_id].features;
+        FeatureSet view2 = viewports[tvm.view_2_id].features;
 
-
-//XXX
-
-
+std::cout << view1.positions.size() << std::endl;
 
 FeatureSet view_1_backup = view1;
 FeatureSet view_2_backup = view2;
 
-
-
-stringstream ss;
-ss << tvm.view_1_id;
-string str = ss.str();
-
-if (str.size() < 2)
-str = "0"+str;
-
-
-
-	ifstream myfile;
-	std::string filename = "/gcc/home/pschardt/achteckturm-test/views/view_00"+str+".rgn";
-
-	char *file = (char*)filename.c_str();
-	myfile.open (file, ios::in);
-	if (myfile.is_open()) {
-	char buf[50];
-	myfile.getline(buf, 50);
-	int id = atoi (buf);
-	Quadrangle q1 = Quadrangle(id);
-	for (int i=0; i<4; i++) {
-	if (!myfile.eof())
-  	{
-    	    myfile.getline(buf, 50);
-	    float x = atof (buf);
-	    myfile.getline(buf, 50);
-	    float y = atof (buf);
-	    if (!(q1.isComplete())) {
-	    q1.addPoint(x,y);
-		if (q1.isComplete()) {
-			view_1_backup.setQuad(1, q1);
-		}
-	    }
-	}}
-
-
-	myfile.getline(buf, 50);
-	id = atoi (buf);
-	Quadrangle q2 = Quadrangle(id);
-	for (int i=0; i<4; i++) {
-	if (!myfile.eof())
-  	{
-    	    myfile.getline(buf, 50);
-	    float x = atof (buf);
-	    myfile.getline(buf, 50);
-	    float y = atof (buf);
-	    if (!(q2.isComplete())) {
-	    q2.addPoint(x,y);
-		if (q2.isComplete()) {
-			view_1_backup.setQuad(2, q2);
-		}
-	    }
-	}}
-	}
-
-
-stringstream ss2;
-ss2 << tvm.view_2_id;
-str = ss2.str();
-
-if (str.size() < 2)
-str = "0"+str;
-
-myfile.close();
-
-	filename = "/gcc/home/pschardt/achteckturm-test/views/view_00"+str+".rgn";
-
-
-
-	char *file2 = (char*)filename.c_str();
-	myfile.open (file2, ios::in);
-	if (myfile.is_open()) {
-
-	char buf[50];
-	myfile.getline(buf, 50);
-	int id = atoi (buf);
-
-	Quadrangle q1 = Quadrangle(id);
-	for (int i=0; i<4; i++) {
-	if (!myfile.eof())
-  	{
-    	    myfile.getline(buf, 50);
-	    float x = atof (buf);
-	    myfile.getline(buf, 50);
-	    float y = atof (buf);
-	    if (!(q1.isComplete())) {
-	    q1.addPoint(x,y);
-		if (q1.isComplete()) {
-			view_2_backup.setQuad(1, q1);
-		}
-	    }
-	}}
-
-
-	myfile.getline(buf, 50);
-	id = atoi (buf);
-	Quadrangle q2 = Quadrangle(id);
-	for (int i=0; i<4; i++) {
-	if (!myfile.eof())
-  	{
-    	    myfile.getline(buf, 50);
-	    float x = atof (buf);
-	    myfile.getline(buf, 50);
-	    float y = atof (buf);
-	    if (!(q2.isComplete())) {
-	    q2.addPoint(x,y);
-		if (q2.isComplete()) {
-			view_2_backup.setQuad(2, q2);
-		}
-	    }
-	}}
-	}
-
+//TODO Hier eingreifen
 //XXX
 
 //std::cout << "VIEW 1 " << view_1_backup.getQuad(1).getID() << "VIEW 2 " << view_2_backup.getQuad(1).getID() << std::endl;
-
 if (view_1_backup.getQuad(1).getID()==view_2_backup.getQuad(1).getID()) {
 //std::cout << "IN IF " << viewports[view_1_id].width << ", " << viewports[view_1_id].height << "Qkoord" << view_1_backup.q1.xCoords[1] << std::endl;
+#pragma omp critical
 for (std::size_t i = 0; i < view_1_backup.positions.size(); ++i) {
    //std::cout << "IF Position: " << view_1_backup.positions[i][0] << " " << view_1_backup.positions[i][1] << std::endl;
-   if ((!view_1_backup.q1.isInside(view_1_backup.positions[i][0], view_1_backup.positions[i][1],viewports[tvm.view_1_id].width, viewports[tvm.view_1_id].height))
-&&(!view_1_backup.q2.isInside(view_1_backup.positions[i][0], view_1_backup.positions[i][1], viewports[tvm.view_1_id].width, viewports[tvm.view_1_id].height)))
+   if ((!view_1_backup.q1.isInside(view_1_backup.positions[i][0], view_1_backup.positions[i][1],view_1_backup.width, view_1_backup.height))
+&&(!view_1_backup.q2.isInside(view_1_backup.positions[i][0], view_1_backup.positions[i][1], view_1_backup.width, view_1_backup.height)))
 {  //std::cout << view_1_backup.positions[i][0] << ", " << view_1_backup.positions[i][1] << "wird geloescht" << std::endl;
    view_1_backup.positions.erase(view_1_backup.positions.begin()+i);
-}   if ((!view_2_backup.q1.isInside(view_2_backup.positions[i][0], view_2_backup.positions[i][1], viewports[tvm.view_2_id].width, viewports[tvm.view_2_id].height))
-&&(!view_2_backup.q2.isInside(view_2_backup.positions[i][0], view_2_backup.positions[i][1], viewports[tvm.view_2_id].width, viewports[tvm.view_2_id].height)))
+}}
+
+#pragma omp critical
+for (std::size_t i = 0; i < view_2_backup.positions.size(); ++i) {
+    if ((!view_2_backup.q1.isInside(view_2_backup.positions[i][0], view_2_backup.positions[i][1], view_2_backup.width, view_2_backup.height))
+&&(!view_2_backup.q2.isInside(view_2_backup.positions[i][0], view_2_backup.positions[i][1], view_2_backup.width, view_2_backup.height)))
 {   //std::cout << "FEATURE AUS 2 GELOESCHT" << std::endl;
     view_2_backup.positions.erase(view_2_backup.positions.begin()+i);}
 }}
 
+
 const_cast<const FeatureSet*> (&view_1_backup);
 const_cast<const FeatureSet*> (&view_2_backup);
-
-
-
-
-
-///XXX
-
-
 
         /* Prepare correspondences for RANSAC. */
         correspondences.resize(tvm.matches.size());
@@ -217,9 +97,9 @@ const_cast<const FeatureSet*> (&view_2_backup);
         homography_ransac.estimate(correspondences, &ransac_result);
 
         /* Compute homography inliers percentage. */
-        float const num_matches = tvm.matches.size();
-        float const num_inliers = ransac_result.inliers.size();
-        float const percentage = num_inliers / num_matches;
+        float num_matches = tvm.matches.size();
+        float num_inliers = ransac_result.inliers.size();
+        float percentage = num_inliers / num_matches;
 
         if (this->opts.verbose_output)
         {
