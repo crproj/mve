@@ -87,7 +87,7 @@ return false;
     this->id = id;
   }
 
-  int Quadrangle::getID() {
+  int Quadrangle::getID() const {
     return this->id;
   }
 

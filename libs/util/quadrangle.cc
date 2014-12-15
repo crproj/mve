@@ -24,8 +24,9 @@ Quadrangle::Quadrangle()
   bool Quadrangle::isInside( float x, float y, float width, float height)
   {
     // Check weather the quadrangle has four corners.
-    /*if( isComplete() )
-    {
+    if( !isComplete() )
+	return false;
+    /*{
       unsigned int i, j; 
       bool c = false;
       for(i = 0, j = maxNumberVerts-1; i < maxNumberVerts; j = i++ )

@@ -7,6 +7,8 @@
 #include <iostream>
 #include <fstream>
 
+#include <unistd.h>
+
 SFM_NAMESPACE_BEGIN
 SFM_BUNDLER_NAMESPACE_BEGIN
 
@@ -75,7 +77,12 @@ path = path.substr(0, path.size()-4);
 
 	char *file = (char*)filename.c_str();
 	myfile.open (file, ios::in);
-	if (myfile.is_open()) {
+	 if (access(file, F_OK) != 0) {
+	    std::cout << ".reg file does not exist" <<std::flush;
+			Quadrangle q1 = Quadrangle();
+			viewport->features.setQuad(1, q1);
+			viewport->features.setQuad(2, q1);
+	}else{
 	char buf[50];
 	myfile.getline(buf, 50);
 	int id = atoi (buf);

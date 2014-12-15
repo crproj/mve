@@ -87,7 +87,6 @@ FeatureSet::compute_sift (mve::ByteImage::ConstPtr image)
     }
 
 
-
 #pragma omp critical
     for (int i = descr.size()-1; i >= 0; i--) {
 	descr[i].reg = -1;
@@ -322,16 +321,27 @@ const_cast<const FeatureSet*> (&other);
 	sfm::Matching::Result sift2;
 	sfm::Matching::Result sift3;
 
+
+	//for (int i = 0; i < sift_regs.size(); i++) {
+
+	if (sift_regs.empty())
+	sfm::Matching::twoway_match(this->opts.sift_matching_opts,
+            this->sift_descr.begin(), this->num_sift_descriptors,													//
+            other.sift_descr.begin(), other.num_sift_descriptors,													//
+            &sift_result);
+	else
 	sfm::Matching::twoway_match(this->opts.sift_matching_opts,
             this->sift_descr.begin(), this->sift_regs[0],													//
             other.sift_descr.begin(), other.sift_regs[0],													//
             &sift_result);
 
+	if (sift_regs.size() > 1)
 	sfm::Matching::twoway_match(this->opts.sift_matching_opts,
             this->sift_descr.begin()+(this->opts.sift_matching_opts.descriptor_length * this->sift_regs[0]), this->sift_regs[1] - this->sift_regs[0],		//
             other.sift_descr.begin()+(other.opts.sift_matching_opts.descriptor_length * other.sift_regs[0]), other.sift_regs[1] - other.sift_regs[0],		//
             &sift2);
 
+	if (sift_regs.size() > 2)
 	sfm::Matching::twoway_match(this->opts.sift_matching_opts,
             this->sift_descr.begin()+(this->opts.sift_matching_opts.descriptor_length * this->sift_regs[1]), this->num_sift_descriptors - this->sift_regs[1],
             other.sift_descr.begin()+(other.opts.sift_matching_opts.descriptor_length * other.sift_regs[1]), other.num_sift_descriptors - other.sift_regs[1],
@@ -345,7 +355,7 @@ const_cast<const FeatureSet*> (&other);
 
 	int res12 = sift_result.matches_1_2.size();
 	int res21 = sift_result.matches_2_1.size();
-
+	if (sift_regs.size() > 1) {
 	#pragma omp critical
 	for (int i = 0; i < sift2.matches_1_2.size(); i++) {
 		sift_result.matches_1_2.push_back(sift2.matches_1_2[i] + res21);
@@ -353,7 +363,8 @@ const_cast<const FeatureSet*> (&other);
 	#pragma omp critical
 	for (int i = 0; i < sift2.matches_2_1.size(); i++) {
 		sift_result.matches_2_1.push_back(sift2.matches_2_1[i]+ res12);
-	}
+	}}
+	if (sift_regs.size() > 2) {
 	#pragma omp critical
 	for (int i = 0; i < sift3.matches_1_2.size(); i++) {
 		sift_result.matches_1_2.push_back(sift3.matches_1_2[i]+ res21 + sift2.matches_2_1.size());
@@ -361,7 +372,7 @@ const_cast<const FeatureSet*> (&other);
 	#pragma omp critical
 	for (int i = 0; i < sift3.matches_2_1.size(); i++) {
 		sift_result.matches_2_1.push_back(sift3.matches_2_1[i]+ res12 + sift2.matches_1_2.size());
-	}
+	}}
 
 //std::cout << "Sift2: " << sfm::Matching::count_consistent_matches(sift2) << std::endl;
 //std::cout << "Sift3: " << sfm::Matching::count_consistent_matches(sift3) << std::endl;
@@ -386,16 +397,23 @@ const_cast<const FeatureSet*> (&other);
 	sfm::Matching::Result surf2;
 	sfm::Matching::Result surf3;
 
+	if (surf_regs.empty())
+	sfm::Matching::twoway_match(this->opts.surf_matching_opts,
+            this->surf_descr.begin(), this->num_surf_descriptors,
+            other.surf_descr.begin(), other.num_surf_descriptors,
+            &surf_result);
+	else
 	sfm::Matching::twoway_match(this->opts.surf_matching_opts,
             this->surf_descr.begin(), this->surf_regs[0],
             other.surf_descr.begin(), other.surf_regs[0],
             &surf_result);
 
+	if (surf_regs.size() > 1)
 	sfm::Matching::twoway_match(this->opts.surf_matching_opts,
             this->surf_descr.begin()+(this->opts.surf_matching_opts.descriptor_length * this->surf_regs[0]), this->surf_regs[1] - this->surf_regs[0],
             other.surf_descr.begin()+(other.opts.surf_matching_opts.descriptor_length * other.surf_regs[0]), other.surf_regs[1] - other.surf_regs[0],
             &surf2);
-
+	if (surf_regs.size() > 2)
 	sfm::Matching::twoway_match(this->opts.surf_matching_opts,
             this->surf_descr.begin()+(this->opts.surf_matching_opts.descriptor_length * this->surf_regs[1]), this->num_surf_descriptors - this->surf_regs[1],
             other.surf_descr.begin()+(other.opts.surf_matching_opts.descriptor_length * other.surf_regs[1]), other.num_surf_descriptors - other.surf_regs[1],
@@ -404,6 +422,7 @@ const_cast<const FeatureSet*> (&other);
 	int res12 = surf_result.matches_1_2.size();
 	int res21 = surf_result.matches_2_1.size();
 
+	if (surf_regs.size() > 1) {
 	#pragma omp critical
 	for (int i = 0; i < surf2.matches_1_2.size(); i++) {
 		surf_result.matches_1_2.push_back(surf2.matches_1_2[i] + res21);
@@ -411,7 +430,8 @@ const_cast<const FeatureSet*> (&other);
 	#pragma omp critical
 	for (int i = 0; i < surf2.matches_2_1.size(); i++) {
 		surf_result.matches_2_1.push_back(surf2.matches_2_1[i]+ res12);
-	}
+	}}
+	if (surf_regs.size() > 1) {
 	#pragma omp critical
 	for (int i = 0; i < surf3.matches_1_2.size(); i++) {
 		surf_result.matches_1_2.push_back(surf3.matches_1_2[i]+ res21 + surf2.matches_2_1.size());
@@ -419,7 +439,7 @@ const_cast<const FeatureSet*> (&other);
 	#pragma omp critical
 	for (int i = 0; i < surf3.matches_2_1.size(); i++) {
 		surf_result.matches_2_1.push_back(surf3.matches_2_1[i]+ res12 + surf2.matches_1_2.size());
-	}
+	}}
 
         sfm::Matching::remove_inconsistent_matches(&surf_result);
     }
