@@ -69,6 +69,8 @@ public:
         float sample; ///< Scale space sample index within octave in [0, 3]
         float x; ///< Detected keypoint X coordinate
         float y; ///< Detected keypoint Y coordinate
+	/** Region ID of the image keypoint */
+	int reg;
     };
 
     /**
@@ -88,6 +90,8 @@ public:
         float orientation;
         /** The descriptor data, elements are signed in [-1.0, 1.0]. */
         math::Vector<float, 64> data;
+	/** Region ID of the image keypoint */
+	int reg;
     };
 
 public:

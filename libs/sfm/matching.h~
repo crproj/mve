@@ -13,8 +13,6 @@
 #include "sfm/defines.h"
 #include "sfm/nearest_neighbor.h"
 
-#include "../apps/umve/plugins/regioning/quadrangle.h"
-
 SFM_NAMESPACE_BEGIN
 
 class Matching

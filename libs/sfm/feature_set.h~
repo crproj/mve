@@ -58,6 +58,7 @@ public:
     void compute_features (mve::ByteImage::Ptr image);
 
     /** Matches all feature types yielding a single matching result. */
+    //&const other
     void match (FeatureSet const& other, Matching::Result* result) const;
 
     /**
@@ -83,9 +84,11 @@ public:
     Quadrangle q1;
     Quadrangle q2;
 
-private:
+public:
     void compute_sift (mve::ByteImage::ConstPtr image);
     void compute_surf (mve::ByteImage::ConstPtr image);
+    void compute_surf_q (Quadrangle q);
+    void compute_sift_q (Quadrangle q);
 
 
 public:

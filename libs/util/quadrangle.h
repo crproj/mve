@@ -7,7 +7,7 @@ class Quadrangle {
 private:
   unsigned int maxNumberVerts;
   unsigned int numberVerts;
-  unsigned int id;
+  int id;
 
   
 public:
@@ -18,7 +18,7 @@ public:
   void setID(int id);
   bool isComplete();
   int getSize();
-  int getID();
+  int getID() const;
   vector<float> xCoords;
   vector<float> yCoords;
 };

@@ -48,7 +48,7 @@ Matching::compute (ViewportList const& viewports,
         std::size_t view_1_id = (std::size_t)(0.5 + std::sqrt(0.25 + 2.0 * i));
         std::size_t view_2_id = i - view_1_id * (view_1_id - 1) / 2;
 //XXX const& vor view_x
-/       FeatureSet view_1 = viewports[view_1_id].features;
+        FeatureSet view_1 = viewports[view_1_id].features;
         FeatureSet view_2 = viewports[view_2_id].features;
 
 

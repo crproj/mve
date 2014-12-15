@@ -13,12 +13,12 @@ private:
 public:
   Quadrangle(int id);
   Quadrangle();
-  bool isInside( float x, float y );
+  bool isInside( float x, float y, float width, float height );
   void addPoint( float x, float y);
   void setID(int id);
   bool isComplete();
   int getSize();
-  int getID();
+  int getID() const;
   vector<float> xCoords;
   vector<float> yCoords;
 };

@@ -123,6 +123,8 @@ public:
         float x;
         /** Keypoint y-coordinate. Initially integer, later sub-pixel. */
         float y;
+	/** Region ID of the image keypoint */
+	int reg;
     };
 
     /**
@@ -142,6 +144,10 @@ public:
         float orientation;
         /** The descriptor data, elements are unsigned in [0.0, 1.0]. */
         math::Vector<float, 128> data;
+	/** Region ID of the image keypoint */
+	int reg;
+	
+
     };
 
 public:

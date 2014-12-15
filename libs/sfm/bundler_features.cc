@@ -64,17 +64,14 @@ Features::compute (mve::Scene::Ptr scene, ViewportList* viewports)
         Viewport* viewport = &viewports->at(i);
 
 //XXX
-stringstream ss;
-ss << view->get_id();
-string str = ss.str();
 
-if (str.size() < 2)
-str = "0"+str;
-
-
+std::string path = scene->get_views()[view->get_id()]->get_filename();
+path = path.substr(0, path.size()-4);
 
 	ifstream myfile;
-	std::string filename = "/gcc/home/pschardt/achteckturm-test/views/view_00"+str+".rgn";
+	std::string filename = path + ".rgn";
+
+//std::cout << "DATEINAME: " << filename << std::endl;
 
 	char *file = (char*)filename.c_str();
 	myfile.open (file, ios::in);

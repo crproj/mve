@@ -38,7 +38,7 @@ Matching::compute (ViewportList const& viewports,
 
             float percent = (num_done * 1000 / num_pairs) / 10.0f;
             std::cout << "\rMatching pair " << num_done << " of "
-                << num_pairs << " (" << percent << "%)..." << std::endl;
+                << num_pairs << " (" << percent << "%)..." << std::flush;
         }
   
 

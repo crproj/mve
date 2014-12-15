@@ -58,6 +58,7 @@ public:
     void compute_features (mve::ByteImage::Ptr image);
 
     /** Matches all feature types yielding a single matching result. */
+    //&const other
     void match (FeatureSet const& other, Matching::Result* result) const;
 
     /**
@@ -82,10 +83,14 @@ public:
     std::vector<math::Vec3uc> colors;
     Quadrangle q1;
     Quadrangle q2;
+    std::vector<int> sift_regs;
+    std::vector<int> surf_regs;
 
 public:
     void compute_sift (mve::ByteImage::ConstPtr image);
     void compute_surf (mve::ByteImage::ConstPtr image);
+    void compute_surf_q (Quadrangle q);
+    void compute_sift_q (Quadrangle q);
 
 
 public:

@@ -52,6 +52,7 @@ public:
      */
     void compute (mve::Scene::Ptr scene, ViewportList* viewports);
 
+
 private:
     void estimate_focal_length (mve::View::Ptr view, Viewport* viewport) const;
     void fallback_focal_length (mve::View::Ptr view, Viewport* viewport) const;
