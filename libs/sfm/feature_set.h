@@ -83,8 +83,8 @@ public:
     std::vector<math::Vec3uc> colors;
     Quadrangle q1;
     Quadrangle q2;
-    std::vector<int> sift_regs;
-    std::vector<int> surf_regs;
+    std::vector<std::vector<int> > sift_regs;
+    std::vector<std::vector<int> > surf_regs;
 
 public:
     void compute_sift (mve::ByteImage::ConstPtr image);
