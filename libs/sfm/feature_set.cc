@@ -412,29 +412,23 @@ const_cast<const FeatureSet*> (&other);
 	//int res12 = sift_result.matches_1_2.size();
 	//int res21 = sift_result.matches_2_1.size();
 	if (sift_regs.size() > 0) {
-	#pragma omp critical
 	for (unsigned int i = 0; i < siftvec[0].matches_1_2.size(); i++) {
 		sift_result.matches_1_2.push_back(siftvec[0].matches_1_2[i]);
 	}
-	#pragma omp critical
 	for (unsigned int i = 0; i < siftvec[0].matches_2_1.size(); i++) {
 		sift_result.matches_2_1.push_back(siftvec[0].matches_2_1[i]);
 	}}
 	if (sift_regs.size() > 1) {
-	#pragma omp critical
 	for (unsigned int i = 0; i < siftvec[1].matches_1_2.size(); i++) {
 		sift_result.matches_1_2.push_back(siftvec[1].matches_1_2[i] + siftvec[0].matches_2_1.size());
 	}
-	#pragma omp critical
 	for (unsigned int i = 0; i < siftvec[1].matches_2_1.size(); i++) {
 		sift_result.matches_2_1.push_back(siftvec[1].matches_2_1[i] + siftvec[0].matches_1_2.size());
 	}}
 	if (sift_regs.size() > 2) {
-	#pragma omp critical
 	for (unsigned int i = 0; i < siftvec[2].matches_1_2.size(); i++) {
 		sift_result.matches_1_2.push_back(siftvec[2].matches_1_2[i] + siftvec[0].matches_2_1.size() + siftvec[1].matches_2_1.size());
 	}
-	#pragma omp critical
 	for (unsigned int i = 0; i < siftvec[2].matches_2_1.size(); i++) {
 		sift_result.matches_2_1.push_back(siftvec[2].matches_2_1[i] + siftvec[0].matches_1_2.size() + siftvec[1].matches_1_2.size());
 	}}
@@ -533,29 +527,23 @@ const_cast<const FeatureSet*> (&other);
 
 
 	if (surf_regs.size() > 0) {
-	#pragma omp critical
 	for (unsigned int i = 0; i < surfvec[0].matches_1_2.size(); i++) {
 		surf_result.matches_1_2.push_back(surfvec[0].matches_1_2[i]);
 	}
-	#pragma omp critical
 	for (unsigned int i = 0; i < surfvec[0].matches_2_1.size(); i++) {
 		surf_result.matches_2_1.push_back(surfvec[0].matches_2_1[i]);
 	}}
 	if (surf_regs.size() > 1) {
-	#pragma omp critical
 	for (unsigned int i = 0; i < surfvec[1].matches_1_2.size(); i++) {
 		surf_result.matches_1_2.push_back(surfvec[1].matches_1_2[i] + surfvec[0].matches_2_1.size());
 	}
-	#pragma omp critical
 	for (unsigned int i = 0; i < surfvec[1].matches_2_1.size(); i++) {
 		surf_result.matches_2_1.push_back(surfvec[1].matches_2_1[i] + surfvec[0].matches_1_2.size());
 	}}
 	if (surf_regs.size() > 2) {
-	#pragma omp critical
 	for (unsigned int i = 0; i < surfvec[2].matches_1_2.size(); i++) {
 		surf_result.matches_1_2.push_back(surfvec[2].matches_1_2[i] + surfvec[0].matches_2_1.size() + surfvec[1].matches_2_1.size());
 	}
-	#pragma omp critical
 	for (unsigned int i = 0; i < surfvec[2].matches_2_1.size(); i++) {
 		surf_result.matches_2_1.push_back(surfvec[2].matches_2_1[i] + surfvec[0].matches_1_2.size() + surfvec[1].matches_1_2.size());
 	}}

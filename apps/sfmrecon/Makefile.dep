@@ -14,10 +14,11 @@ sfmrecon.o: sfmrecon.cc ../../libs/util/system.h \
  ../../libs/sfm/nearest_neighbor.h ../../libs/sfm/defines.h \
  ../../libs/sfm/feature_set.h ../../libs/util/aligned_memory.h \
  ../../libs/sfm/sift.h ../../libs/sfm/surf.h ../../libs/sfm/defines.h \
- ../../libs/sfm/matching.h ../../libs/sfm/bundler_common.h \
- ../../libs/sfm/correspondence.h ../../libs/sfm/bundler_features.h \
- ../../libs/sfm/bundler_matching.h ../../libs/sfm/ransac_fundamental.h \
- ../../libs/sfm/fundamental.h ../../libs/sfm/pose.h \
- ../../libs/sfm/bundler_tracks.h ../../libs/sfm/bundler_init_pair.h \
- ../../libs/sfm/ransac_homography.h ../../libs/sfm/homography.h \
- ../../libs/sfm/bundler_incremental.h ../../libs/sfm/ransac_pose_p3p.h
+ ../../libs/sfm/matching.h ../../libs/util/quadrangle.h \
+ ../../libs/sfm/bundler_common.h ../../libs/sfm/correspondence.h \
+ ../../libs/sfm/bundler_features.h ../../libs/sfm/bundler_matching.h \
+ ../../libs/sfm/ransac_fundamental.h ../../libs/sfm/fundamental.h \
+ ../../libs/sfm/pose.h ../../libs/sfm/bundler_tracks.h \
+ ../../libs/sfm/bundler_init_pair.h ../../libs/sfm/ransac_homography.h \
+ ../../libs/sfm/homography.h ../../libs/sfm/bundler_incremental.h \
+ ../../libs/sfm/ransac_pose_p3p.h

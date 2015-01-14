@@ -209,21 +209,28 @@ void RegioningPlugin::on_image_clicked(int x, int y, QMouseEvent *event) {
 	bool left_click = event->buttons() & Qt::LeftButton;
 	bool right_click = event->buttons() & Qt::RightButton;
 	float xf, yf;
-	xf = ((float) x) / current_view_pointer->get_image("undistorted")->width();
-	yf = ((float) y) / current_view_pointer->get_image("undistorted")->height();
+	xf = ((float) x) / current_view_pointer->get_image("original")->width();
+	yf = ((float) y) / current_view_pointer->get_image("original")->height();
 	std::cout << xf << ", " << yf << std::endl;
 	if (left_click) {
 		if( !q1->isComplete() ){
 			q1->addPoint( xf, yf);
 			q1->setID(this->spinbox_region_id->value());
 			if (q1->isComplete()) {
-			mve::ByteImage::Ptr overlay = this->current_view_pointer->get_image("undistorted");
+			mve::ByteImage::Ptr overlay = this->current_view_pointer->get_image("original");
 			QImage *q_img_overlay = new QImage(overlay->width(), overlay->height(), QImage::Format_RGB32);
 			QPixmap pixmap_overlay(QPixmap::fromImage(*q_img_overlay));
 			delete q_img_overlay;
 			transparent = QPixmap(pixmap_overlay.size());
 			transparent.fill(Qt::transparent);
-			drawPoly(q1, QColor(0,204,0,125));
+			if (q1->getID() == 0)
+				drawPoly(q1, QColor(0,204,0,125));
+			if (q1->getID() == 1)
+				drawPoly(q1, QColor(0,0,204,125));
+			if (q1->getID() == 2)
+				drawPoly(q1, QColor(204,0,0,125));
+			if (q1->getID() == 3)
+				drawPoly(q1, QColor(102,0,102,125));
 			this->spinbox_region_id->setValue(this->spinbox_region_id->value()+1);
 			}
 		}
@@ -232,7 +239,14 @@ void RegioningPlugin::on_image_clicked(int x, int y, QMouseEvent *event) {
 			q2->addPoint(xf,yf);
 			q2->setID(this->spinbox_region_id->value());
 			if (q2->isComplete()) {
-			drawPoly(q2, QColor(0,0,204,125));
+			if (q2->getID() == 0)
+				drawPoly(q2, QColor(0,204,0,125));
+			if (q2->getID() == 1)
+				drawPoly(q2, QColor(0,0,204,125));
+			if (q2->getID() == 2)
+				drawPoly(q2, QColor(204,0,0,125));
+			if (q2->getID() == 3)
+				drawPoly(q2, QColor(102,0,102,125));
 			}
 		    }
 		}
@@ -246,8 +260,8 @@ void RegioningPlugin::on_image_clicked(int x, int y, QMouseEvent *event) {
 
 void RegioningPlugin::drawPoly (Quadrangle* q, QColor qc) {
 
-			mve::ByteImage::Ptr base = this->current_view_pointer->get_image("undistorted");
-			mve::ByteImage::Ptr overlay = this->current_view_pointer->get_image("undistorted");
+			mve::ByteImage::Ptr base = this->current_view_pointer->get_image("original");
+			mve::ByteImage::Ptr overlay = this->current_view_pointer->get_image("original");
 			QImage *q_img_base = new QImage(base->width(), base->height(), QImage::Format_RGB32);
 			QImage *q_img_overlay = new QImage(overlay->width(), overlay->height(), QImage::Format_RGB32);
 		
@@ -373,19 +387,26 @@ void RegioningPlugin::display_image(mve::ByteImage::ConstPtr img) {
 	if (!myfile.eof())
   	{
     	    myfile.getline(buf, 50);
-	    int x = atoi (buf);
+	    float x = atof(buf);
 	    myfile.getline(buf, 50);
-	    int y = atoi (buf);
+	    float y = atof(buf);
 	    if (!(q1->isComplete())) {
 	    q1->addPoint(x,y);
 		if (q1->isComplete()) {
-			mve::ByteImage::Ptr overlay = this->current_view_pointer->get_image("undistorted");
+			mve::ByteImage::Ptr overlay = this->current_view_pointer->get_image("original");
 			QImage *q_img_overlay = new QImage(overlay->width(), overlay->height(), QImage::Format_RGB32);
 			QPixmap pixmap_overlay(QPixmap::fromImage(*q_img_overlay));
 			delete q_img_overlay;
 			transparent = QPixmap(pixmap_overlay.size());
 			transparent.fill(Qt::transparent);
-			drawPoly(q1, QColor(0,204,0,125));
+			if (q1->getID() == 0)
+				drawPoly(q1, QColor(0,204,0,125));
+			if (q1->getID() == 1)
+				drawPoly(q1, QColor(0,0,204,125));
+			if (q1->getID() == 2)
+				drawPoly(q1, QColor(204,0,0,125));
+			if (q1->getID() == 3)
+				drawPoly(q1, QColor(102,102,0,125));
 		}
 	    }
 	}}
@@ -398,13 +419,20 @@ void RegioningPlugin::display_image(mve::ByteImage::ConstPtr img) {
 	if (!myfile.eof())
   	{
     	    myfile.getline(buf, 50);
-	    int x = atoi (buf);
+	    float x = atof (buf);
 	    myfile.getline(buf, 50);
-	    int y = atoi (buf);
+	    float y = atof (buf);
 	    if (!(q2->isComplete())) {
 	    q2->addPoint(x,y);
 		if (q2->isComplete()) {
-			drawPoly(q2, QColor(0,0,204,125));
+			if (q2->getID() == 0)
+				drawPoly(q2, QColor(0,204,0,125));
+			if (q2->getID() == 1)
+				drawPoly(q2, QColor(0,0,204,125));
+			if (q2->getID() == 2)
+				drawPoly(q2, QColor(204,0,0,125));
+			if (q2->getID() == 3)
+				drawPoly(q2, QColor(102,102,0,125));
 		}
 	    }
 	}}
@@ -416,7 +444,7 @@ void RegioningPlugin::display_image(mve::ByteImage::ConstPtr img) {
 void RegioningPlugin::receive_view_pointer(mve::View::Ptr view_pointer) {
 	if (view_pointer != NULL) {
 		this->current_view_pointer = view_pointer;
-		this->current_image_pointer = view_pointer->get_byte_image("undistorted");
+		this->current_image_pointer = view_pointer->get_byte_image("original");
 	}
 
 
@@ -427,7 +455,7 @@ void RegioningPlugin::receive_view_pointer(mve::View::Ptr view_pointer) {
 /* This function will handle a view pointer and make it usable for Qt */
 void RegioningPlugin::transform_view_pointer(mve::View::Ptr view_pointer) {
 	if (view_pointer != NULL) {
-		mve::ByteImage::Ptr img = view_pointer->get_byte_image("undistorted");
+		mve::ByteImage::Ptr img = view_pointer->get_byte_image("original");
 		this->current_image_pointer = img;
 		this->display_best();
 	}

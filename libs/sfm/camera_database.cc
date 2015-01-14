@@ -100,6 +100,7 @@ CameraDatabase::CameraDatabase (void)
     this->add("Canon", "Canon EOS REBEL T4i", 22.3f, 14.9f, 5184, 3456);
     this->add("Canon", "Canon EOS 6D", 36.0f, 24.0f, 5472, 3648);
     this->add("Canon", "Canon EOS 700D", 22.3f, 14.9f, 5184, 3456);
+    this->add("Canon", "EOS 700D", 22.3f, 14.9f, 5184, 3456);
     this->add("Canon", "Canon EOS REBEL T5i", 22.3f, 14.9f, 5184, 3456);
     this->add("Canon", "Canon EOS 70D", 22.5f, 15.0f, 5472, 3648);
     this->add("Canon", "Canon EOS 7D", 22.3f, 14.9f, 5184, 3456);
