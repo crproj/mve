@@ -336,12 +336,21 @@ FeatureSet::match (FeatureSet const& other, Matching::Result* result) const
 
 
 	std::vector<sfm::Matching::Result> siftvec;
+	siftvec.clear();
 	sfm::Matching::Result sift1;
 	sfm::Matching::Result sift2;
 	sfm::Matching::Result sift3;
+	sift1.matches_1_2.clear();
+	sift1.matches_2_1.clear();
+	sift2.matches_1_2.clear();
+	sift2.matches_2_1.clear();
+	sift3.matches_1_2.clear();
+	sift3.matches_2_1.clear();
 	siftvec.push_back(sift1);
 	siftvec.push_back(sift2);
 	siftvec.push_back(sift3);
+
+	unsigned int siftmatchcounter = 0;
 
 	for (unsigned int i = 0; i < sift_regs.size(); i++) {
 		for (unsigned int k = 0; k < other.sift_regs.size(); k++) {
@@ -371,7 +380,10 @@ FeatureSet::match (FeatureSet const& other, Matching::Result* result) const
 			sfm::Matching::twoway_match(this->opts.sift_matching_opts,
             			this->sift_descr.begin()+(this->opts.sift_matching_opts.descriptor_length * off), num,		//
             			other.sift_descr.begin()+(other.opts.sift_matching_opts.descriptor_length * off2), num2,		//
-            			&siftvec[i]);
+            			&siftvec[siftmatchcounter]);
+
+			siftmatchcounter++;
+
 			}
 		}
 	}
@@ -407,21 +419,25 @@ FeatureSet::match (FeatureSet const& other, Matching::Result* result) const
 
 	//int res12 = sift_result.matches_1_2.size();
 	//int res21 = sift_result.matches_2_1.size();
-	if (sift_regs.size() > 0) {
+
+	sift_result.matches_1_2.clear();
+	sift_result.matches_2_1.clear();
+
+	if (siftmatchcounter > 0) {
 	for (unsigned int i = 0; i < siftvec[0].matches_1_2.size(); i++) {
 		sift_result.matches_1_2.push_back(siftvec[0].matches_1_2[i]);
 	}
 	for (unsigned int i = 0; i < siftvec[0].matches_2_1.size(); i++) {
 		sift_result.matches_2_1.push_back(siftvec[0].matches_2_1[i]);
 	}}
-	if (sift_regs.size() > 1) {
+	if (siftmatchcounter > 1) {
 	for (unsigned int i = 0; i < siftvec[1].matches_1_2.size(); i++) {
 		sift_result.matches_1_2.push_back(siftvec[1].matches_1_2[i] + siftvec[0].matches_2_1.size());
 	}
 	for (unsigned int i = 0; i < siftvec[1].matches_2_1.size(); i++) {
 		sift_result.matches_2_1.push_back(siftvec[1].matches_2_1[i] + siftvec[0].matches_1_2.size());
 	}}
-	if (sift_regs.size() > 2) {
+	if (siftmatchcounter > 2) {
 	for (unsigned int i = 0; i < siftvec[2].matches_1_2.size(); i++) {
 		sift_result.matches_1_2.push_back(siftvec[2].matches_1_2[i] + siftvec[0].matches_2_1.size() + siftvec[1].matches_2_1.size());
 	}
@@ -451,12 +467,21 @@ FeatureSet::match (FeatureSet const& other, Matching::Result* result) const
         sfm::Matching::remove_inconsistent_matches(&surf_result);*/
 
 	std::vector<sfm::Matching::Result> surfvec;
+	surfvec.clear();
 	sfm::Matching::Result surf1;
 	sfm::Matching::Result surf2;
 	sfm::Matching::Result surf3;
+	surf1.matches_1_2.clear();
+	surf1.matches_2_1.clear();
+	surf2.matches_1_2.clear();
+	surf2.matches_2_1.clear();
+	surf3.matches_1_2.clear();
+	surf3.matches_2_1.clear();
 	surfvec.push_back(surf1);
 	surfvec.push_back(surf2);
 	surfvec.push_back(surf3);
+
+	unsigned int surfmatchcounter = 0;
 
 
 	for (unsigned int i = 0; i < surf_regs.size(); i++) {
@@ -486,7 +511,10 @@ FeatureSet::match (FeatureSet const& other, Matching::Result* result) const
 			sfm::Matching::twoway_match(this->opts.surf_matching_opts,
             			this->surf_descr.begin()+(this->opts.surf_matching_opts.descriptor_length * off), num,		//
             			other.surf_descr.begin()+(other.opts.surf_matching_opts.descriptor_length * off2), num2,		//
-            			&surfvec[i]);
+            			&surfvec[surfmatchcounter]);
+
+			surfmatchcounter++;
+
 			}
 		}
 	}
@@ -519,23 +547,24 @@ FeatureSet::match (FeatureSet const& other, Matching::Result* result) const
 	int res12 = surf_result.matches_1_2.size();
 	int res21 = surf_result.matches_2_1.size();*/
 
+	surf_result.matches_1_2.clear();
+	surf_result.matches_2_1.clear();
 
-
-	if (surf_regs.size() > 0) {
+	if (surfmatchcounter > 0) {
 	for (unsigned int i = 0; i < surfvec[0].matches_1_2.size(); i++) {
 		surf_result.matches_1_2.push_back(surfvec[0].matches_1_2[i]);
 	}
 	for (unsigned int i = 0; i < surfvec[0].matches_2_1.size(); i++) {
 		surf_result.matches_2_1.push_back(surfvec[0].matches_2_1[i]);
 	}}
-	if (surf_regs.size() > 1) {
+	if (surfmatchcounter > 1) {
 	for (unsigned int i = 0; i < surfvec[1].matches_1_2.size(); i++) {
 		surf_result.matches_1_2.push_back(surfvec[1].matches_1_2[i] + surfvec[0].matches_2_1.size());
 	}
 	for (unsigned int i = 0; i < surfvec[1].matches_2_1.size(); i++) {
 		surf_result.matches_2_1.push_back(surfvec[1].matches_2_1[i] + surfvec[0].matches_1_2.size());
 	}}
-	if (surf_regs.size() > 2) {
+	if (surfmatchcounter > 2) {
 	for (unsigned int i = 0; i < surfvec[2].matches_1_2.size(); i++) {
 		surf_result.matches_1_2.push_back(surfvec[2].matches_1_2[i] + surfvec[0].matches_2_1.size() + surfvec[1].matches_2_1.size());
 	}

@@ -18,6 +18,16 @@ void
 Matching::compute (ViewportList const& viewports,
     PairwiseMatching* pairwise_matching)
 {
+	ViewportList vps = const_cast<ViewportList&>(viewports);
+	for (unsigned int i=0; i < vps.size(); i++) {
+		Quadrangle q1 = vps[i].features.getQuad(1);
+		Quadrangle q2 = vps[i].features.getQuad(2);
+		#pragma omp critical
+		std::cout << "View: " << i << " Reg 1: " << q1.getID() << std::endl;
+		#pragma omp critical
+		std::cout << "View: " << i << " Reg 2: " << q2.getID() << std::endl;
+	}
+
     std::size_t num_pairs = viewports.size() * (viewports.size() - 1) / 2;
     std::size_t num_done = 0;
 

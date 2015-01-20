@@ -120,6 +120,9 @@ path = path.substr(0, path.size()-4);
 		}
 	    }
 	}}
+
+	std::cout << "View: " << &viewports->at(i) << " Reg1: " <<  q2.getID() << std::cout;
+
 	}
 
 
