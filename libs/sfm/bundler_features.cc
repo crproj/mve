@@ -87,7 +87,6 @@ path = path.substr(0, path.size()-4);
 	myfile.getline(buf, 50);
 	int id = atoi (buf);
 	Quadrangle q1 = Quadrangle(id);
-#pragma omp critical
 	for (int i=0; i<4; i++) {
 	if (!myfile.eof())
   	{
@@ -107,7 +106,6 @@ path = path.substr(0, path.size()-4);
 	myfile.getline(buf, 50);
 	id = atoi (buf);
 	Quadrangle q2 = Quadrangle(id);
-#pragma omp critical
 	for (int i=0; i<4; i++) {
 	if (!myfile.eof())
   	{

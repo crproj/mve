@@ -87,7 +87,6 @@ FeatureSet::compute_sift (mve::ByteImage::ConstPtr image)
     }
 
  
-#pragma omp critical
     for (int i = descr.size()-1; i >= 0; i--) {
 	descr[i].reg = -1;
 	
@@ -102,20 +101,20 @@ FeatureSet::compute_sift (mve::ByteImage::ConstPtr image)
     /* Sort features by scale for low-res matching. */
     //std::sort(descr.begin(), descr.end(), compare_scale<sfm::Sift::Descriptor>);
     std::sort(descr.begin(), descr.end(), compare_reg<sfm::Sift::Descriptor>);
-#pragma omp critical
+
     for (unsigned int i = 0; i < descr.size()-1; i++) {
 	if (descr[i].reg != descr[i+1].reg)
 	{
-		int myints[] = {i, descr[i].reg};
+		int myints[] = {(int)(i), descr[i].reg};
 		std::vector<int> vec (myints, myints + sizeof(myints));
 		sift_regs.push_back(vec);
 	}
     }
 
-int myints[] = {descr.size() - 1, descr[(descr.size() - 1)].reg};
+int myints[] = {(int)(descr.size() - 1), descr[(descr.size() - 1)].reg};
 std::vector<int> vec (myints, myints + sizeof(myints));
 sift_regs.push_back(vec);
-#pragma omp critical
+/*
 for (unsigned int i = 0; i < sift_regs.size(); i++) {
 int off;
 int off2;
@@ -133,7 +132,7 @@ off2 = sift_regs[i][0] + 1;
 std::sort(descr.begin()+off, descr.begin()+off2, compare_scale<sfm::Sift::Descriptor>);
 //std::sort(descr.begin()+surf_regs[0], descr.begin()+surf_regs[1], compare_scale<sfm::Surf::Descriptor>);
 //std::sort(descr.begin()+surf_regs[1], descr.end(), compare_scale<sfm::Surf::Descriptor>);
-}
+}*/
 
 
  //Output
@@ -179,7 +178,6 @@ FeatureSet::compute_surf (mve::ByteImage::ConstPtr image)
     }
 
 
-#pragma omp critical
     for (int i = descr.size()-1; i >= 0; i--) {
 	descr[i].reg = -1;
 	
@@ -199,22 +197,20 @@ FeatureSet::compute_surf (mve::ByteImage::ConstPtr image)
     std::sort(descr.begin(), descr.end(), compare_reg<sfm::Surf::Descriptor>);
 
 
-#pragma omp critical
     for (unsigned int i = 0; i < descr.size()-1; i++) {
 	if (descr[i].reg != descr[i+1].reg) {
-		int myints[] = {i, descr[i].reg};
+		int myints[] = {(int)(i), descr[i].reg};
 		std::vector<int> vec (myints, myints + sizeof(myints));
 		surf_regs.push_back(vec);
 	}
     }
-int myints[] = {descr.size() - 1, descr[(descr.size() - 1)].reg};
+int myints[] = {(int)(descr.size() - 1), descr[(descr.size() - 1)].reg};
 std::vector<int> vec (myints, myints + sizeof(myints));
 surf_regs.push_back(vec);
 
 //std::cout << "surf_reg_size: " << surf_regs.size() << std::endl;
 
-
-#pragma omp critical
+/*
 for (unsigned int i = 0; i < surf_regs.size(); i++) {
 int off;
 int off2;
@@ -233,7 +229,7 @@ std::sort(descr.begin()+off, descr.begin()+off2, compare_scale<sfm::Surf::Descri
 //std::sort(descr.begin()+surf_regs[0], descr.begin()+surf_regs[1], compare_scale<sfm::Surf::Descriptor>);
 //std::sort(descr.begin()+surf_regs[1], descr.end(), compare_scale<sfm::Surf::Descriptor>);
 }
-
+*/
  //Output
 /*#pragma omp critical
     for (int i = 0; i < descr.size(); i++) {
@@ -322,7 +318,7 @@ void
 FeatureSet::match (FeatureSet const& other, Matching::Result* result) const
 {
 
-const_cast<const FeatureSet*> (&other);
+//const_cast<const FeatureSet*> (&other);
 //XXX
     /* SIFT matching. */
     sfm::Matching::Result sift_result;
@@ -354,23 +350,23 @@ const_cast<const FeatureSet*> (&other);
 			int off2;
 			int num;
 			int num2;
-			if (i == 0) 
+			if (i == 0) {
 				off = 0;
-			else
-				off = sift_regs[i-1][0] + 1;
-			if (k == 0)
-				off2 = 0;
-			else
-				off2 = other.sift_regs[k-1][0] + 1;
-
-			if (i == 0)
 				num = sift_regs[i][0] + 1;
-			else
+				}
+			else	{
+				off = sift_regs[i-1][0] + 1;
 				num = sift_regs[i][0] - sift_regs[i-1][0];
-			if (k == 0)
+				}
+			if (k == 0) {
+				off2 = 0;
 				num2 = other.sift_regs[k][0] + 1;
-			else
+				}
+			else	{
+				off2 = other.sift_regs[k-1][0] + 1;
 				num2 = other.sift_regs[k][0] - other.sift_regs[k-1][0];
+				}
+
 
 			sfm::Matching::twoway_match(this->opts.sift_matching_opts,
             			this->sift_descr.begin()+(this->opts.sift_matching_opts.descriptor_length * off), num,		//
@@ -470,23 +466,22 @@ const_cast<const FeatureSet*> (&other);
 			int off2;
 			int num;
 			int num2;
-			if (i == 0) 
+			if (i == 0) {
 				off = 0;
-			else
-				off = surf_regs[i-1][0] + 1;
-			if (k == 0)
-				off2 = 0;
-			else
-				off2 = other.surf_regs[k-1][0] + 1;
-
-			if (i == 0)
 				num = surf_regs[i][0] + 1;
-			else
+				}
+			else	{
+				off = surf_regs[i-1][0] + 1;
 				num = surf_regs[i][0] - surf_regs[i-1][0];
-			if (k == 0)
+				}
+			if (k == 0) {
+				off2 = 0;
 				num2 = other.surf_regs[k][0] + 1;
-			else
+				}
+			else	{
+				off2 = other.surf_regs[k-1][0] + 1;
 				num2 = other.surf_regs[k][0] - other.surf_regs[k-1][0];
+				}
 
 			sfm::Matching::twoway_match(this->opts.surf_matching_opts,
             			this->surf_descr.begin()+(this->opts.surf_matching_opts.descriptor_length * off), num,		//

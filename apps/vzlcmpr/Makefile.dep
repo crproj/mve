@@ -1,0 +1,15 @@
+vzlcmpr.o: vzlcmpr.cc ../../libs/sfm/bundler_common.h \
+ ../../libs/math/vector.h ../../libs/math/defines.h \
+ ../../libs/math/algo.h ../../libs/util/aligned_memory.h \
+ ../../libs/util/defines.h ../../libs/util/stdint_compat.h \
+ ../../libs/mve/image.h ../../libs/util/ref_ptr.h \
+ ../../libs/util/atomic.h ../../libs/math/functions.h \
+ ../../libs/math/matrix.h ../../libs/mve/defines.h \
+ ../../libs/mve/image_base.h ../../libs/util/string.h \
+ ../../libs/sfm/sift.h ../../libs/sfm/defines.h ../../libs/sfm/surf.h \
+ ../../libs/sfm/defines.h ../../libs/sfm/feature_set.h \
+ ../../libs/sfm/matching.h ../../libs/sfm/nearest_neighbor.h \
+ ../../libs/util/quadrangle.h ../../libs/sfm/correspondence.h \
+ ../../libs/sfm/visualizer.h ../../libs/mve/image_tools.h \
+ ../../libs/util/exception.h ../../libs/math/accum.h \
+ ../../libs/mve/image_io.h

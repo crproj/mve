@@ -78,7 +78,7 @@ for (std::size_t i = 0; i < view_2_backup.positions.size(); ++i) {
 {   //std::cout << "FEATURE AUS 2 GELOESCHT" << std::endl;
     view_2_backup.positions.erase(view_2_backup.positions.begin()+i);}
 }}
-
+*/
 /*std::cout << "DAVOR" << std::endl;
 
 view_1_backup.compute_sift(viewports[view_1_id].image);
@@ -188,7 +188,7 @@ Matching::two_view_matching (FeatureSet const& view_1,
 
 
     /* Low-res matching if number of features is large. */
-    if (this->opts.use_lowres_matching
+    /*if (this->opts.use_lowres_matching
         && view_1.positions.size() * view_2.positions.size() > 1000000)
     {
         int const num_matches = view_1.match_lowres(view_2,
@@ -200,7 +200,7 @@ Matching::two_view_matching (FeatureSet const& view_1,
                 << " low-res matches.";
             return;
         }
-    }
+    }*/
 
 
 

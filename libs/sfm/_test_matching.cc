@@ -209,9 +209,9 @@ feature_set_matching (mve::ByteImage::Ptr image1, mve::ByteImage::Ptr image2)
     sfm::FeatureSet::Options opts;
     opts.feature_types = sfm::FeatureSet::FEATURE_ALL;
     opts.surf_opts.contrast_threshold = 500.0f;
-    opts.sift_matching_opts.lowe_ratio_threshold = 0.9f;
+    opts.sift_matching_opts.lowe_ratio_threshold = 0.8f;
     opts.sift_matching_opts.descriptor_length = 128;
-    opts.surf_matching_opts.lowe_ratio_threshold = 0.9f;
+    opts.surf_matching_opts.lowe_ratio_threshold = 0.8f;
     opts.surf_matching_opts.descriptor_length = 64;
 
     sfm::FeatureSet feat1(opts);
@@ -259,6 +259,11 @@ main (int argc, char** argv)
         image1 = mve::image::load_file(argv[1]);
         std::cout << "Loading " << argv[2] << "..." << std::endl;
         image2 = mve::image::load_file(argv[2]);
+
+	image1 = mve::image::rescale_half_size<uint8_t>(image1);
+	image1 = mve::image::rescale_half_size<uint8_t>(image1);
+	image2 = mve::image::rescale_half_size<uint8_t>(image2);
+	image2 = mve::image::rescale_half_size<uint8_t>(image2);
     }
     catch (std::exception& e)
     {

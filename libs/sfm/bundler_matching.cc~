@@ -38,7 +38,7 @@ Matching::compute (ViewportList const& viewports,
 
             float percent = (num_done * 1000 / num_pairs) / 10.0f;
             std::cout << "\rMatching pair " << num_done << " of "
-                << num_pairs << " (" << percent << "%)..." << std::endl;
+                << num_pairs << " (" << percent << "%)..." << std::flush;
         }
   
 
@@ -188,7 +188,7 @@ Matching::two_view_matching (FeatureSet const& view_1,
 
 
     /* Low-res matching if number of features is large. */
-    if (this->opts.use_lowres_matching
+    /*if (this->opts.use_lowres_matching
         && view_1.positions.size() * view_2.positions.size() > 1000000)
     {
         int const num_matches = view_1.match_lowres(view_2,
@@ -200,7 +200,7 @@ Matching::two_view_matching (FeatureSet const& view_1,
                 << " low-res matches.";
             return;
         }
-    }
+    }*/
 
 
 
