@@ -318,6 +318,14 @@ void
 FeatureSet::match (FeatureSet const& other, Matching::Result* result) const
 {
 
+
+    unsigned int thissiftdescr = 0;
+    unsigned int othersiftdescr = 0;
+
+    unsigned int thissurfdescr = 0;
+    unsigned int othersurfdescr = 0;
+
+
 //const_cast<const FeatureSet*> (&other);
 //XXX
     /* SIFT matching. */
@@ -349,6 +357,9 @@ FeatureSet::match (FeatureSet const& other, Matching::Result* result) const
 	siftvec.push_back(sift1);
 	siftvec.push_back(sift2);
 	siftvec.push_back(sift3);
+
+	thissiftdescr = 0;
+	othersiftdescr = 0;
 
 	unsigned int siftmatchcounter = 0;
 
@@ -383,6 +394,9 @@ FeatureSet::match (FeatureSet const& other, Matching::Result* result) const
             			&siftvec[siftmatchcounter]);
 
 			siftmatchcounter++;
+
+			thissiftdescr = thissiftdescr + num;
+			othersiftdescr = othersiftdescr + num2;
 
 			}
 		}
@@ -456,6 +470,7 @@ FeatureSet::match (FeatureSet const& other, Matching::Result* result) const
 
     }
 
+
     /* SURF matching. */
     sfm::Matching::Result surf_result;
     if (this->num_surf_descriptors > 0)
@@ -482,6 +497,9 @@ FeatureSet::match (FeatureSet const& other, Matching::Result* result) const
 	surfvec.push_back(surf3);
 
 	unsigned int surfmatchcounter = 0;
+
+	thissurfdescr = 0;
+	othersurfdescr = 0;
 
 
 	for (unsigned int i = 0; i < surf_regs.size(); i++) {
@@ -515,6 +533,8 @@ FeatureSet::match (FeatureSet const& other, Matching::Result* result) const
 
 			surfmatchcounter++;
 
+			thissurfdescr = thissurfdescr + num;
+			othersurfdescr = othersurfdescr + num2;
 			}
 		}
 	}
@@ -586,23 +606,25 @@ this->num_surf_descriptors -=2;
 other.num_sift_descriptors -=2;*/
 
     /* Fix offsets in the matching result. */
-    int other_surf_offset = other.num_sift_descriptors;			
+    //other.num_sift_descriptors;	
+    int other_surf_offset = othersiftdescr;			
     if (other_surf_offset > 0)
         for (std::size_t i = 0; i < surf_result.matches_1_2.size(); ++i)
             if (surf_result.matches_1_2[i] >= 0)
                 surf_result.matches_1_2[i] += other_surf_offset;
 
-    int this_surf_offset = this->num_sift_descriptors;			
+    //this->num_sift_descriptors
+    int this_surf_offset = thissiftdescr;			
     if (this_surf_offset > 0)
         for (std::size_t i = 0; i < surf_result.matches_2_1.size(); ++i)
             if (surf_result.matches_2_1[i] >= 0)
                 surf_result.matches_2_1[i] += this_surf_offset;
 
     /* Create a combined matching result. */
-    std::size_t this_num_descriptors = this->num_sift_descriptors
-        + this->num_surf_descriptors;						
-    std::size_t other_num_descriptors = other.num_sift_descriptors
-        + other.num_surf_descriptors;						
+    //this->num_sift_descriptors + surf
+    //other.num_sift_descriptors + surf
+    std::size_t this_num_descriptors = thissiftdescr + thissurfdescr;						
+    std::size_t other_num_descriptors = othersiftdescr + othersurfdescr;						
 
     result->matches_1_2.clear();
     result->matches_1_2.reserve(this_num_descriptors);			
