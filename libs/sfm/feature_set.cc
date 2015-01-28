@@ -90,11 +90,17 @@ FeatureSet::compute_sift (mve::ByteImage::ConstPtr image)
     for (int i = descr.size()-1; i >= 0; i--) {
 	descr[i].reg = -1;
 	
+
+	for (unsigned int k = 0; k < quads.size(); k++) {
+            if (quads[k].isInside(descr[i].x, descr[i].y,this->width, this->height))
+		descr[i].reg = quads[k].getID();	    
+	}
+/*
         if (q1.isInside(descr[i].x, descr[i].y,this->width, this->height))
 	descr[i].reg = q1.getID();
 
 	if (q2.isInside(descr[i].x, descr[i].y,this->width, this->height))
-	descr[i].reg = q2.getID();
+	descr[i].reg = q2.getID();*/
     }
 
 
@@ -181,11 +187,17 @@ FeatureSet::compute_surf (mve::ByteImage::ConstPtr image)
     for (int i = descr.size()-1; i >= 0; i--) {
 	descr[i].reg = -1;
 	
+
+	for (unsigned int k = 0; k < quads.size(); k++) {
+            if (quads[k].isInside(descr[i].x, descr[i].y,this->width, this->height))
+		descr[i].reg = quads[k].getID();	    
+	}
+/*
         if (q1.isInside(descr[i].x, descr[i].y,this->width, this->height))
 	descr[i].reg = q1.getID();
 
 	if (q2.isInside(descr[i].x, descr[i].y,this->width, this->height))
-	descr[i].reg = q2.getID();
+	descr[i].reg = q2.getID();*/
     }
 
 
@@ -295,21 +307,13 @@ FeatureSet::match_lowres (FeatureSet const& other, int num_features) const
 
 
 //QuadrangleMethods
-void FeatureSet::setQuad (int i, Quadrangle q) {
-if (i==1) {
-this->q1 = q;
-}
-if (i==2) {
-this->q2 = q;
-}
+void FeatureSet::addQuad (Quadrangle q) {
+    quads.push_back(q);
 }
 
 
-Quadrangle FeatureSet::getQuad (int i) {
-if (i==1)
-return q1;
-else
-return q2;
+std::vector<Quadrangle> FeatureSet::getQuads () {
+    return quads;
 }
 
 

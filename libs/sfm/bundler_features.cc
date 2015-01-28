@@ -78,13 +78,40 @@ path = path.substr(0, path.size()-4);
 	char *file = (char*)filename.c_str();
 	myfile.open (file, ios::in);
 	 if (access(file, F_OK) != 0) {
-	    std::cout << ".reg file does not exist" <<std::flush;
+	    std::cout << ".reg file does not exist" <<std::endl;
 			Quadrangle q1 = Quadrangle();
-			viewport->features.setQuad(1, q1);
-			viewport->features.setQuad(2, q1);
+			//viewport->features.setQuad(1, q1);
+			//viewport->features.setQuad(2, q1);
 	}else{
 	char buf[50];
+	
+while (!myfile.eof()) {
+
+	Quadrangle q = Quadrangle();
+
 	myfile.getline(buf, 50);
+	int id = atoi (buf);
+	q.setID(id);
+	for (int i=0; i<4; i++) {
+	if (!myfile.eof())
+  	{
+    	    myfile.getline(buf, 50);
+	    float x = atof(buf);
+	    myfile.getline(buf, 50);
+	    float y = atof(buf);
+	    if (!(q.isComplete())) {
+	    q.addPoint(x,y);
+		if (q.isComplete()) {
+			viewport->features.addQuad(q);
+
+		}
+	    }
+	}}
+}}
+
+
+
+/*myfile.getline(buf, 50);
 	int id = atoi (buf);
 	Quadrangle q1 = Quadrangle(id);
 	for (int i=0; i<4; i++) {
@@ -97,7 +124,7 @@ path = path.substr(0, path.size()-4);
 	    if (!(q1.isComplete())) {
 	    q1.addPoint(x,y);
 		if (q1.isComplete()) {
-			viewport->features.setQuad(1, q1);
+			viewport->features.addQuad(q1);
 		}
 	    }
 	}}
@@ -116,11 +143,11 @@ path = path.substr(0, path.size()-4);
 	    if (!(q2.isComplete())) {
 	    q2.addPoint(x,y);
 		if (q2.isComplete()) {
-			viewport->features.setQuad(2, q2);
+			viewport->features.addQuad(q2);
 		}
 	    }
 	}}
-	}
+	}*/
 
 
 //XXX
