@@ -34,18 +34,20 @@ class RegioningPlugin : public MainWindowTab {
 	QToolBar *toolbar;
 	QLabel *spinbox_region_id_label;
 	QAction *save_view;
-	QAction *save_all_views;
+	/*QAction *save_all_views;
 	QAction *button_apply;
 	QAction *button_apply_all;
 	QAction *button_apply_to_depth_map;
-	QAction *button_apply_to_all_depth_maps;
+	QAction *button_apply_to_all_depth_maps;*/
 	QAction *action_zoom_in;
 	QAction *action_zoom_out;
 	QAction *action_zoom_reset;
 	QAction *action_zoom_fit;
-	    QAction* action_show_details;
-	Quadrangle *q1;
-	Quadrangle *q2;
+	QAction* action_show_details;
+	//Quadrangle *q1;
+	//Quadrangle *q2;
+	std::vector<Quadrangle> quads;
+	Quadrangle currentq;
 
 
 	QPixmap transparent;
@@ -63,7 +65,7 @@ class RegioningPlugin : public MainWindowTab {
 	void display_best();
 	void mve2qt(mve::ByteImage::ConstPtr src, QImage *dest);
 	void transform_view_pointer(mve::View::Ptr);
-    void create_actions (QToolBar* toolbar2);
+    //void create_actions (QToolBar* toolbar2);
 	bool create_debug_images;
 	QSpinBox *spinbox_region_id;
 	QColorDialog *color_dialog;
@@ -72,7 +74,7 @@ class RegioningPlugin : public MainWindowTab {
 	mve::FloatImage::Ptr depth_map_pointer;
 
 
-	void drawPoly(Quadrangle* q, QColor qc);
+	void drawPoly(Quadrangle* q);
 
     private slots:
 	void handle_save_view();

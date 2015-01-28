@@ -58,10 +58,12 @@ RegioningPlugin::RegioningPlugin(QWidget *parent) : MainWindowTab(parent), creat
 	this->toolbar = new QToolBar(this);
 	// QAction *colorButton = new QAction(QIcon::fromTheme("", QIcon(":/img/chroma.png")), tr("Select chroma key"), this);
     //QToolBar* toolbar2 = new QToolBar("Mesh tools");
-    this->create_actions(toolbar);
+    //this->create_actions(toolbar);
 	//TODO
-	q1 = new Quadrangle(1);
-	q2 = new Quadrangle(2);
+	//q1 = new Quadrangle(1);
+	//q2 = new Quadrangle(2);
+	RegioningPlugin::quads = std::vector<Quadrangle>();
+	RegioningPlugin::currentq = Quadrangle();
 
 	this->color_dialog = new QColorDialog();
 
@@ -69,12 +71,12 @@ RegioningPlugin::RegioningPlugin(QWidget *parent) : MainWindowTab(parent), creat
 	this->spinbox_region_id = new QSpinBox();
 
 	/* Create actions */
-	this->save_view = new QAction(QIcon(":/img/icon_save.svg"), tr("Test"), this);
-	this->save_all_views = new QAction(QIcon(":/img/icon_save_all.svg"), tr("Save all sky masks as embedding"), this);
+	this->save_view = new QAction(QIcon(":/img/icon_save.svg"), tr("Save Regions for this View"), this);
+	/*this->save_all_views = new QAction(QIcon(":/img/icon_save_all.svg"), tr("Save all sky masks as embedding"), this);
 	this->button_apply = new QAction(QIcon(":/img/folder-drag-accept.png"), tr("Compute mask"), this);
 	this->button_apply_all = new QAction(QIcon(":/img/apply-all.png"), tr("Compute mask for all"), this);
 	this->button_apply_to_depth_map = new QAction(QIcon(":/img/apply_to_depth_map.png"), tr("Apply mask to single depth map and save"), this);
-	this->button_apply_to_all_depth_maps = new QAction(QIcon(":/img/apply_to_all_depth_maps.png"), tr("Apply masks to all depth maps and save"), this);
+	this->button_apply_to_all_depth_maps = new QAction(QIcon(":/img/apply_to_all_depth_maps.png"), tr("Apply masks to all depth maps and save"), this);*/
 	this->action_zoom_in = new QAction(QIcon(":/img/icon_zoom_in.svg"), tr("Zoom in"), this);
 	this->action_zoom_out = new QAction(QIcon(":/img/icon_zoom_out.svg"), tr("Zoom out"), this);
 	this->action_zoom_reset = new QAction(QIcon(":/img/icon_zoom_reset.svg"), tr("Reset zoom"), this);
@@ -105,7 +107,7 @@ RegioningPlugin::RegioningPlugin(QWidget *parent) : MainWindowTab(parent), creat
 	/* Maximum euclidean distance in RGB is approximately 442 */
 
 	this->spinbox_region_id->setMinimum(0);
-	this->spinbox_region_id->setMaximum(INT_MAX);
+	this->spinbox_region_id->setMaximum(7);
 	this->spinbox_region_id->setToolTip(tr("Region ID"));
 	this->spinbox_region_id->setValue(0);
 
@@ -120,12 +122,12 @@ RegioningPlugin::RegioningPlugin(QWidget *parent) : MainWindowTab(parent), creat
 	this->toolbar->addAction(this->action_zoom_reset);
 	this->toolbar->addAction(this->action_zoom_fit);
 
-	this->toolbar->addAction(this->button_apply);
-	this->toolbar->addAction(this->button_apply_all);
+	//this->toolbar->addAction(this->button_apply);
+	//this->toolbar->addAction(this->button_apply_all);
 	this->toolbar->addAction(this->save_view);
-	this->toolbar->addAction(this->save_all_views);
-	this->toolbar->addAction(this->button_apply_to_depth_map);
-	this->toolbar->addAction(this->button_apply_to_all_depth_maps);
+	//this->toolbar->addAction(this->save_all_views);
+	//this->toolbar->addAction(this->button_apply_to_depth_map);
+	//this->toolbar->addAction(this->button_apply_to_all_depth_maps);
 
 	this->toolbar->addWidget(this->spinbox_region_id);
 	this->toolbar->addWidget(this->spinbox_region_id_label);
@@ -142,11 +144,11 @@ RegioningPlugin::RegioningPlugin(QWidget *parent) : MainWindowTab(parent), creat
 
 	//connect(colorButton, SIGNAL(triggered()), color_dialog, SLOT(show()));
 	connect(this->save_view, SIGNAL(triggered()), this, SLOT(handle_save_view()));
-	connect(this->save_all_views, SIGNAL(triggered()), this, SLOT(handle_save_all_views()));
+	/*connect(this->save_all_views, SIGNAL(triggered()), this, SLOT(handle_save_all_views()));
 	connect(this->button_apply, SIGNAL(triggered()), this, SLOT(handle_apply()));
 	connect(this->button_apply_all, SIGNAL(triggered()), this, SLOT(handle_apply_all()));
 	connect(this->button_apply_to_depth_map, SIGNAL(triggered()), this, SLOT(handle_apply_to_depth_map()));
-	connect(this->button_apply_to_all_depth_maps, SIGNAL(triggered()), this, SLOT(handle_apply_to_all_depth_maps()));
+	connect(this->button_apply_to_all_depth_maps, SIGNAL(triggered()), this, SLOT(handle_apply_to_all_depth_maps()));*/
 	connect(&SceneManager::get(), SIGNAL(view_selected(mve::View::Ptr)), this, SLOT(receive_view_pointer(mve::View::Ptr)));
 	connect(this->scroll_image->get_image(), SIGNAL(mouse_clicked(int, int, QMouseEvent *)), this, SLOT(on_image_clicked(int, int, QMouseEvent *)));
 	connect(this->scroll_image->get_image(), SIGNAL(mouse_moved(int, int, QMouseEvent *)), this, SLOT(on_image_moved(int, int, QMouseEvent *)));
@@ -179,12 +181,24 @@ void RegioningPlugin::handle_save_view() {
 		console.log("Could not save view because no view has been selected.", "red");
 		console.reset_sender();
 		return;
-	}
+	}*/
 
 	/* Save results */
 
 	std::string filename = view->get_filename().substr(0,view->get_filename().size()-3)+"rgn";
 	ofstream out(filename);
+
+	for (unsigned int i = 0; i < quads.size(); i++) {
+	    if (quads[i].isComplete()) {
+		out << quads[i].getID() << "\r\n";
+		out << quads[i].xCoords[0] << "\r\n" << quads[i].yCoords[0] << "\r\n";
+		out << quads[i].xCoords[1] << "\r\n" << quads[i].yCoords[1] << "\r\n";
+		out << quads[i].xCoords[2] << "\r\n" << quads[i].yCoords[2] << "\r\n";
+		out << quads[i].xCoords[3] << "\r\n" << quads[i].yCoords[3] << "\r\n";
+	    }
+	}
+
+/*
 if (this->q1->isComplete()) {
 	out << this->q1->getID() << "\r\n";
 	out << this->q1->xCoords[0] << "\r\n" << this->q1->yCoords[0] << "\r\n";
@@ -198,7 +212,7 @@ if (this->q2->isComplete()) {
 	out << this->q2->xCoords[1] << "\r\n" << this->q2->yCoords[1] << "\r\n";
 	out << this->q2->xCoords[2] << "\r\n" << this->q2->yCoords[2] << "\r\n";
 	out << this->q2->xCoords[3] << "\r\n" << this->q2->yCoords[3];
-}
+}*/
 	out.close();
 }
 
@@ -213,28 +227,35 @@ void RegioningPlugin::on_image_clicked(int x, int y, QMouseEvent *event) {
 	yf = ((float) y) / current_view_pointer->get_image("original")->height();
 	std::cout << xf << ", " << yf << std::endl;
 	if (left_click) {
-		if( !q1->isComplete() ){
-			q1->addPoint( xf, yf);
-			q1->setID(this->spinbox_region_id->value());
-			if (q1->isComplete()) {
+		if( !currentq.isComplete() ){
+			currentq.addPoint( xf, yf);
+			currentq.setID(this->spinbox_region_id->value());
+			if (currentq.isComplete()) {
 			mve::ByteImage::Ptr overlay = this->current_view_pointer->get_image("original");
 			QImage *q_img_overlay = new QImage(overlay->width(), overlay->height(), QImage::Format_RGB32);
 			QPixmap pixmap_overlay(QPixmap::fromImage(*q_img_overlay));
 			delete q_img_overlay;
 			transparent = QPixmap(pixmap_overlay.size());
 			transparent.fill(Qt::transparent);
-			if (q1->getID() == 0)
-				drawPoly(q1, QColor(0,204,0,125));
-			if (q1->getID() == 1)
-				drawPoly(q1, QColor(0,0,204,125));
-			if (q1->getID() == 2)
-				drawPoly(q1, QColor(204,0,0,125));
-			if (q1->getID() == 3)
-				drawPoly(q1, QColor(102,0,102,125));
+
+			quads.push_back(currentq);
+
+			for (unsigned int i = 0; i < quads.size(); i++)
+				drawPoly(&quads[i]);
+
+/*
+			if (currentq.getID() == 1)
+				drawPoly(&currentq, QColor(0,0,204,125));
+			if (currentq.getID() == 2)
+				drawPoly(&currentq, QColor(204,0,0,125));
+			if (currentq.getID() == 3)
+				drawPoly(&currentq, QColor(102,0,102,125));*/
 			this->spinbox_region_id->setValue(this->spinbox_region_id->value()+1);
+
+			RegioningPlugin::currentq = Quadrangle();
 			}
 		}
-		else {
+		/*else {
 		     if (!(q2->isComplete())) {
 			q2->addPoint(xf,yf);
 			q2->setID(this->spinbox_region_id->value());
@@ -249,7 +270,7 @@ void RegioningPlugin::on_image_clicked(int x, int y, QMouseEvent *event) {
 				drawPoly(q2, QColor(102,0,102,125));
 			}
 		    }
-		}
+		}*/
 	}
 	if (right_click) {
 		//this->toggle_segment(result, segment_id, false);
@@ -258,13 +279,32 @@ void RegioningPlugin::on_image_clicked(int x, int y, QMouseEvent *event) {
 }
 
 
-void RegioningPlugin::drawPoly (Quadrangle* q, QColor qc) {
+void RegioningPlugin::drawPoly (Quadrangle* q) {
 
 			mve::ByteImage::Ptr base = this->current_view_pointer->get_image("original");
 			mve::ByteImage::Ptr overlay = this->current_view_pointer->get_image("original");
 			QImage *q_img_base = new QImage(base->width(), base->height(), QImage::Format_RGB32);
 			QImage *q_img_overlay = new QImage(overlay->width(), overlay->height(), QImage::Format_RGB32);
+			QColor qc = QColor(204,204,204,125);
 		
+
+			if (q->getID() == 0)
+				qc = QColor(0,204,0,125);
+			if (q->getID() == 1)
+				qc = QColor(0,0,204,125);
+			if (q->getID() == 2)
+				qc = QColor(204,0,0,125);
+			if (q->getID() == 3)
+				qc = QColor(204,204,0,125);
+			if (q->getID() == 4)
+				qc = QColor(0,204,204,125);
+			if (q->getID() == 5)
+				qc = QColor(204,0,204,125);
+			if (q->getID() == 6)
+				qc = QColor(102,102,0,125);
+			if (q->getID() == 7)
+				qc = QColor(204,204,204,125);
+
 			QPointF points[4] = {
  			    QPointF(q->xCoords[0]*overlay->width(), q->yCoords[0]*overlay->height()),
  			    QPointF(q->xCoords[1]*overlay->width(), q->yCoords[1]*overlay->height()),
@@ -298,31 +338,31 @@ void RegioningPlugin::drawPoly (Quadrangle* q, QColor qc) {
 			display_image(&pixmap_base);
 }
 
-
+/*
 void
 RegioningPlugin::create_actions (QToolBar* toolbar2)
 {
-    /*this->action_open_mesh = new QAction(QIcon(":/images/icon_open_file.svg"),
-        tr("Open mesh"), this);
-    this->connect(this->action_open_mesh, SIGNAL(triggered()),
-        this, SLOT(on_open_mesh()));
+//    this->action_open_mesh = new QAction(QIcon(":/images/icon_open_file.svg"),
+//        tr("Open mesh"), this);
+//    this->connect(this->action_open_mesh, SIGNAL(triggered()),
+//        this, SLOT(on_open_mesh()));
 
     this->action_reload_shaders = new QAction(QIcon(":/images/icon_revert.svg"),
         tr("Reload shaders"), this);
     this->connect(this->action_reload_shaders, SIGNAL(triggered()),
-        this, SLOT(on_reload_shaders()));*/
+        this, SLOT(on_reload_shaders()));
 
-    this->action_show_details = new QAction
-        (QIcon(":/images/icon_toolbox.svg"), tr("Show &Details"), this);
-    this->action_show_details->setCheckable(true);
-    this->action_show_details->setChecked(true);
-    this->connect(this->action_show_details, SIGNAL(triggered()),
-        this, SLOT(on_details_toggled()));
+//    this->action_show_details = new QAction
+//        (QIcon(":/images/icon_toolbox.svg"), tr("Show &Details"), this);
+//    this->action_show_details->setCheckable(true);
+//    this->action_show_details->setChecked(true);
+//    this->connect(this->action_show_details, SIGNAL(triggered()),
+//        this, SLOT(on_details_toggled()));
 
-   /* this->action_save_screenshot = new QAction(QIcon(":/images/icon_screenshot.svg"),
-        tr("Save Screenshot"), this);
-    this->connect(this->action_save_screenshot, SIGNAL(triggered()),
-        this, SLOT(on_save_screenshot()));*/
+//    this->action_save_screenshot = new QAction(QIcon(":/images/icon_screenshot.svg"),
+//        tr("Save Screenshot"), this);
+//    this->connect(this->action_save_screenshot, SIGNAL(triggered()),
+//        this, SLOT(on_save_screenshot()));
 
     //toolbar->addAction(this->action_open_mesh);
     //toolbar->addAction(this->action_reload_shaders);
@@ -330,7 +370,7 @@ RegioningPlugin::create_actions (QToolBar* toolbar2)
     //toolbar->addAction(this->action_save_screenshot);
     toolbar2->addWidget(get_expander());
     toolbar2->addAction(this->action_show_details);
-}
+}*/
 
 void
 RegioningPlugin::on_details_toggled (void)
@@ -343,6 +383,7 @@ bool RegioningPlugin::display_result() {
 	//TODO
 return true;
 }
+
 
 
 void RegioningPlugin::update_actions(void) {
@@ -371,8 +412,8 @@ void RegioningPlugin::display_image(mve::ByteImage::ConstPtr img) {
 	this->mve2qt(img, q_img);
 	this->display_image(q_img);
 
-	q1 = new Quadrangle(1);
-	q2 = new Quadrangle(2);
+
+	//q2 = new Quadrangle(2);
 	
 //TODO polygone incomplete
 	ifstream myfile;
@@ -380,9 +421,15 @@ void RegioningPlugin::display_image(mve::ByteImage::ConstPtr img) {
 	myfile.open (filename, ios::in);
 	if (myfile.is_open()) {
 	char buf[50];
+
+
+while (!myfile.eof()) {
+
+	Quadrangle q = Quadrangle();
+
 	myfile.getline(buf, 50);
 	int id = atoi (buf);
-	q1->setID(id);
+	q.setID(id);
 	for (int i=0; i<4; i++) {
 	if (!myfile.eof())
   	{
@@ -390,28 +437,28 @@ void RegioningPlugin::display_image(mve::ByteImage::ConstPtr img) {
 	    float x = atof(buf);
 	    myfile.getline(buf, 50);
 	    float y = atof(buf);
-	    if (!(q1->isComplete())) {
-	    q1->addPoint(x,y);
-		if (q1->isComplete()) {
+	    if (!(q.isComplete())) {
+	    q.addPoint(x,y);
+		if (q.isComplete()) {
 			mve::ByteImage::Ptr overlay = this->current_view_pointer->get_image("original");
 			QImage *q_img_overlay = new QImage(overlay->width(), overlay->height(), QImage::Format_RGB32);
 			QPixmap pixmap_overlay(QPixmap::fromImage(*q_img_overlay));
 			delete q_img_overlay;
 			transparent = QPixmap(pixmap_overlay.size());
 			transparent.fill(Qt::transparent);
-			if (q1->getID() == 0)
-				drawPoly(q1, QColor(0,204,0,125));
-			if (q1->getID() == 1)
-				drawPoly(q1, QColor(0,0,204,125));
-			if (q1->getID() == 2)
-				drawPoly(q1, QColor(204,0,0,125));
-			if (q1->getID() == 3)
-				drawPoly(q1, QColor(102,102,0,125));
+
+			quads.push_back(q);
+
 		}
 	    }
 	}}
+}}
 
 
+for (unsigned int i = 0; i < quads.size(); i++)
+	drawPoly(&quads[i]);
+
+/*
 	myfile.getline(buf, 50);
 	id = atoi (buf);
 	q2->setID(id);
@@ -432,16 +479,20 @@ void RegioningPlugin::display_image(mve::ByteImage::ConstPtr img) {
 			if (q2->getID() == 2)
 				drawPoly(q2, QColor(204,0,0,125));
 			if (q2->getID() == 3)
-				drawPoly(q2, QColor(102,102,0,125));
+				drawPoly(q2, QColor(102,0,102,125));
 		}
 	    }
 	}}
-	}
+	}*/
 	delete q_img;
 }
 
 /* Both receives and handles the view pointer that SceneManager emits */
 void RegioningPlugin::receive_view_pointer(mve::View::Ptr view_pointer) {
+
+	RegioningPlugin::quads = std::vector<Quadrangle>();
+	RegioningPlugin::currentq = Quadrangle();
+
 	if (view_pointer != NULL) {
 		this->current_view_pointer = view_pointer;
 		this->current_image_pointer = view_pointer->get_byte_image("original");

@@ -7,7 +7,7 @@ class Quadrangle {
 private:
   unsigned int maxNumberVerts;
   unsigned int numberVerts;
-  unsigned int id;
+  int id;
 
   
 public:
