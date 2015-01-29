@@ -300,6 +300,10 @@ void RegioningPlugin::on_image_clicked(int x, int y, QMouseEvent *event) {
 	    } else {
 
 	//TODO Logic for editing
+	//
+	//if (in der naehe von 10 px, suche naechsten punkt yum verschieben
+	//
+	//Draggen
 
 	    }
 	}
