@@ -34,9 +34,9 @@ class RegioningPlugin : public MainWindowTab {
 	QToolBar *toolbar;
 	QLabel *spinbox_region_id_label;
 	QAction *save_view;
-	/*QAction *save_all_views;
-	QAction *button_apply;
-	QAction *button_apply_all;
+	QAction *edit_area;
+	QAction *polycompl;
+	/*QAction *button_apply_all;
 	QAction *button_apply_to_depth_map;
 	QAction *button_apply_to_all_depth_maps;*/
 	QAction *action_zoom_in;
@@ -52,7 +52,7 @@ class RegioningPlugin : public MainWindowTab {
 
 	QPixmap transparent;
 
-	bool odd;
+	bool editmode;
 	
 	ScrollImage *scroll_image;
 	ScrollImage *scroll_image2;
@@ -77,7 +77,9 @@ class RegioningPlugin : public MainWindowTab {
 	void drawPoly(Quadrangle* q);
 
     private slots:
+	void handle_polycompl();
 	void handle_save_view();
+	void handle_edit_area();
 	void receive_view_pointer(mve::View::Ptr);
 	void on_zoom_in(void);
 	void on_zoom_out(void);

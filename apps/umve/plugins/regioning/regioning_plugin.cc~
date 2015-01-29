@@ -51,9 +51,6 @@
 RegioningPlugin::RegioningPlugin(QWidget *parent) : MainWindowTab(parent), create_debug_images(true) {
 	QVBoxLayout *vbox = new QVBoxLayout(this);
 
-
-	odd = false;
-
 	/* Create new toolbar with icons (and fallbacks) */
 	this->toolbar = new QToolBar(this);
 	// QAction *colorButton = new QAction(QIcon::fromTheme("", QIcon(":/img/chroma.png")), tr("Select chroma key"), this);
@@ -64,6 +61,7 @@ RegioningPlugin::RegioningPlugin(QWidget *parent) : MainWindowTab(parent), creat
 	//q2 = new Quadrangle(2);
 	RegioningPlugin::quads = std::vector<Quadrangle>();
 	RegioningPlugin::currentq = Quadrangle();
+	RegioningPlugin::editmode = false;
 
 	this->color_dialog = new QColorDialog();
 
@@ -71,10 +69,10 @@ RegioningPlugin::RegioningPlugin(QWidget *parent) : MainWindowTab(parent), creat
 	this->spinbox_region_id = new QSpinBox();
 
 	/* Create actions */
-	this->save_view = new QAction(QIcon(":/img/icon_save.svg"), tr("Save Regions for this View"), this);
-	/*this->save_all_views = new QAction(QIcon(":/img/icon_save_all.svg"), tr("Save all sky masks as embedding"), this);
-	this->button_apply = new QAction(QIcon(":/img/folder-drag-accept.png"), tr("Compute mask"), this);
-	this->button_apply_all = new QAction(QIcon(":/img/apply-all.png"), tr("Compute mask for all"), this);
+	this->save_view = new QAction(QIcon(":/img/icon_save.png"), tr("Save regions for this view"), this);
+	this->edit_area = new QAction(QIcon(":/img/edit.png"), tr("Move area points"), this);
+	this->polycompl = new QAction(QIcon(":/img/polycompl.png"), tr("Complete this polygon"), this);
+	/*this->button_apply_all = new QAction(QIcon(":/img/apply-all.png"), tr("Compute mask for all"), this);
 	this->button_apply_to_depth_map = new QAction(QIcon(":/img/apply_to_depth_map.png"), tr("Apply mask to single depth map and save"), this);
 	this->button_apply_to_all_depth_maps = new QAction(QIcon(":/img/apply_to_all_depth_maps.png"), tr("Apply masks to all depth maps and save"), this);*/
 	this->action_zoom_in = new QAction(QIcon(":/img/icon_zoom_in.svg"), tr("Zoom in"), this);
@@ -82,6 +80,7 @@ RegioningPlugin::RegioningPlugin(QWidget *parent) : MainWindowTab(parent), creat
 	this->action_zoom_reset = new QAction(QIcon(":/img/icon_zoom_reset.svg"), tr("Reset zoom"), this);
 	this->action_zoom_fit = new QAction(QIcon(":/img/icon_zoom_page.svg"), tr("Fit to window"), this);
 	this->action_zoom_fit->setCheckable(true);
+	this->edit_area->setCheckable(true);
 
 
 
@@ -122,10 +121,10 @@ RegioningPlugin::RegioningPlugin(QWidget *parent) : MainWindowTab(parent), creat
 	this->toolbar->addAction(this->action_zoom_reset);
 	this->toolbar->addAction(this->action_zoom_fit);
 
-	//this->toolbar->addAction(this->button_apply);
+	this->toolbar->addAction(this->polycompl);
 	//this->toolbar->addAction(this->button_apply_all);
 	this->toolbar->addAction(this->save_view);
-	//this->toolbar->addAction(this->save_all_views);
+	this->toolbar->addAction(this->edit_area);
 	//this->toolbar->addAction(this->button_apply_to_depth_map);
 	//this->toolbar->addAction(this->button_apply_to_all_depth_maps);
 
@@ -144,9 +143,9 @@ RegioningPlugin::RegioningPlugin(QWidget *parent) : MainWindowTab(parent), creat
 
 	//connect(colorButton, SIGNAL(triggered()), color_dialog, SLOT(show()));
 	connect(this->save_view, SIGNAL(triggered()), this, SLOT(handle_save_view()));
-	/*connect(this->save_all_views, SIGNAL(triggered()), this, SLOT(handle_save_all_views()));
-	connect(this->button_apply, SIGNAL(triggered()), this, SLOT(handle_apply()));
-	connect(this->button_apply_all, SIGNAL(triggered()), this, SLOT(handle_apply_all()));
+	connect(this->edit_area, SIGNAL(triggered()), this, SLOT(handle_edit_area()));
+	connect(this->polycompl, SIGNAL(triggered()), this, SLOT(handle_polycompl()));
+	/*connect(this->button_apply_all, SIGNAL(triggered()), this, SLOT(handle_apply_all()));
 	connect(this->button_apply_to_depth_map, SIGNAL(triggered()), this, SLOT(handle_apply_to_depth_map()));
 	connect(this->button_apply_to_all_depth_maps, SIGNAL(triggered()), this, SLOT(handle_apply_to_all_depth_maps()));*/
 	connect(&SceneManager::get(), SIGNAL(view_selected(mve::View::Ptr)), this, SLOT(receive_view_pointer(mve::View::Ptr)));
@@ -170,6 +169,24 @@ RegioningPlugin::RegioningPlugin(QWidget *parent) : MainWindowTab(parent), creat
     QHBoxLayout* main_layout = new QHBoxLayout(this);
     main_layout->addLayout(vbox, 1);
     main_layout->addWidget(this->tab_widget);
+}
+
+
+void RegioningPlugin::handle_polycompl() {
+
+//TODO
+
+}
+
+
+
+void RegioningPlugin::handle_edit_area() {
+
+    editmode = this->edit_area->isChecked();
+std::cout << "Editmode: " << editmode << std::endl;
+
+//TODO Logic in clicking
+
 }
 
 
@@ -227,6 +244,7 @@ void RegioningPlugin::on_image_clicked(int x, int y, QMouseEvent *event) {
 	yf = ((float) y) / current_view_pointer->get_image("original")->height();
 	std::cout << xf << ", " << yf << std::endl;
 	if (left_click) {
+	    if (!editmode) {
 		if( !currentq.isComplete() ){
 			currentq.addPoint( xf, yf);
 			currentq.setID(this->spinbox_region_id->value());
@@ -238,7 +256,15 @@ void RegioningPlugin::on_image_clicked(int x, int y, QMouseEvent *event) {
 			transparent = QPixmap(pixmap_overlay.size());
 			transparent.fill(Qt::transparent);
 
-			quads.push_back(currentq);
+			bool exists = false;
+
+			for (unsigned int i = 0; i < quads.size(); i++) {
+			    if (this->spinbox_region_id->value() == quads[i].getID())
+				exists = true;
+			}
+
+			if (!exists)
+			    quads.push_back(currentq);
 
 			for (unsigned int i = 0; i < quads.size(); i++)
 				drawPoly(&quads[i]);
@@ -271,6 +297,7 @@ void RegioningPlugin::on_image_clicked(int x, int y, QMouseEvent *event) {
 			}
 		    }
 		}*/
+	    }
 	}
 	if (right_click) {
 		//this->toggle_segment(result, segment_id, false);
