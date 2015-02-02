@@ -40,8 +40,8 @@ main (int argc, char** argv)
 
 		image1 = mve::image::rescale_half_size<uint8_t>(image1);
 		image2 = mve::image::rescale_half_size<uint8_t>(image2);
-		image1 = mve::image::rescale_half_size<uint8_t>(image1);
-		image2 = mve::image::rescale_half_size<uint8_t>(image2);
+		//image1 = mve::image::rescale_half_size<uint8_t>(image1);
+		//image2 = mve::image::rescale_half_size<uint8_t>(image2);
 		
 		std::cout << "images have been loaded..." << std::endl;
 

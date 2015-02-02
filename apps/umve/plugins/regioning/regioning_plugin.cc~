@@ -53,18 +53,10 @@ RegioningPlugin::RegioningPlugin(QWidget *parent) : MainWindowTab(parent), creat
 
 	/* Create new toolbar with icons (and fallbacks) */
 	this->toolbar = new QToolBar(this);
-	// QAction *colorButton = new QAction(QIcon::fromTheme("", QIcon(":/img/chroma.png")), tr("Select chroma key"), this);
-    //QToolBar* toolbar2 = new QToolBar("Mesh tools");
-    //this->create_actions(toolbar);
-	//TODO
-	//q1 = new Quadrangle(1);
-	//q2 = new Quadrangle(2);
 	RegioningPlugin::quads = std::vector<Quadrangle>();
 	RegioningPlugin::currentq = Quadrangle();
 	RegioningPlugin::editmode = false;
-
 	this->color_dialog = new QColorDialog();
-
 	this->spinbox_region_id_label = new QLabel("Region ID");
 	this->spinbox_region_id = new QSpinBox();
 
@@ -72,32 +64,25 @@ RegioningPlugin::RegioningPlugin(QWidget *parent) : MainWindowTab(parent), creat
 	this->save_view = new QAction(QIcon(":/img/icon_save.png"), tr("Save regions for this view"), this);
 	this->edit_area = new QAction(QIcon(":/img/edit.png"), tr("Move area points"), this);
 	this->polycompl = new QAction(QIcon(":/img/polycompl.png"), tr("Complete this polygon"), this);
-	/*this->button_apply_all = new QAction(QIcon(":/img/apply-all.png"), tr("Compute mask for all"), this);
-	this->button_apply_to_depth_map = new QAction(QIcon(":/img/apply_to_depth_map.png"), tr("Apply mask to single depth map and save"), this);
-	this->button_apply_to_all_depth_maps = new QAction(QIcon(":/img/apply_to_all_depth_maps.png"), tr("Apply masks to all depth maps and save"), this);*/
 	this->action_zoom_in = new QAction(QIcon(":/img/icon_zoom_in.svg"), tr("Zoom in"), this);
 	this->action_zoom_out = new QAction(QIcon(":/img/icon_zoom_out.svg"), tr("Zoom out"), this);
 	this->action_zoom_reset = new QAction(QIcon(":/img/icon_zoom_reset.svg"), tr("Reset zoom"), this);
 	this->action_zoom_fit = new QAction(QIcon(":/img/icon_zoom_page.svg"), tr("Fit to window"), this);
 	this->action_zoom_fit->setCheckable(true);
 	this->edit_area->setCheckable(true);
-
-
-
 	this->scroll_image = new ScrollImage();
-
 	this->update_actions();
 
 
-  	  /* Create details notebook. */
-  	  this->tab_widget = new QTabWidget();
+  	/* Create details notebook. */
+  	this->tab_widget = new QTabWidget();
     	this->tab_widget->setTabPosition(QTabWidget::East);
-   	 /* Create GL context. */
-   	 this->gl_widget = new GLWidget();
-   	 this->addin_manager = new AddinManager(this->gl_widget, this->tab_widget);
-   	 //this->gl_widget->set_context(this->addin_manager);
-    //QVBoxLayout* vbox2 = new QVBoxLayout();
-    vbox->addWidget(toolbar);
+   	/* Create GL context. */
+   	this->gl_widget = new GLWidget();
+   	this->addin_manager = new AddinManager(this->gl_widget, this->tab_widget);
+   	this->gl_widget->set_context(this->addin_manager);
+    	//QVBoxLayout* vbox2 = new QVBoxLayout();
+    	vbox->addWidget(toolbar);
 
 
 	/*==============
@@ -109,29 +94,18 @@ RegioningPlugin::RegioningPlugin(QWidget *parent) : MainWindowTab(parent), creat
 	this->spinbox_region_id->setMaximum(7);
 	this->spinbox_region_id->setToolTip(tr("Region ID"));
 	this->spinbox_region_id->setValue(0);
-
-	/* TODO: */
-	//color_dialog->setCurrentColor(getSkyColor());
 	this->color_dialog->setModal(1);
 
 	/* Add icons, tooltips, parent information to toolbar */
-	//toolbar->addAction(colorButton);
 	this->toolbar->addAction(this->action_zoom_in);
 	this->toolbar->addAction(this->action_zoom_out);
 	this->toolbar->addAction(this->action_zoom_reset);
 	this->toolbar->addAction(this->action_zoom_fit);
-
 	this->toolbar->addAction(this->polycompl);
-	//this->toolbar->addAction(this->button_apply_all);
 	this->toolbar->addAction(this->save_view);
 	this->toolbar->addAction(this->edit_area);
-	//this->toolbar->addAction(this->button_apply_to_depth_map);
-	//this->toolbar->addAction(this->button_apply_to_all_depth_maps);
-
 	this->toolbar->addWidget(this->spinbox_region_id);
 	this->toolbar->addWidget(this->spinbox_region_id_label);
-
-	/* Create new image and set zoom actions */
 
 
 	/*=======================
@@ -141,34 +115,27 @@ RegioningPlugin::RegioningPlugin(QWidget *parent) : MainWindowTab(parent), creat
 	vbox->addWidget(toolbar);
 	vbox->addWidget(this->scroll_image);
 
-	//connect(colorButton, SIGNAL(triggered()), color_dialog, SLOT(show()));
 	connect(this->save_view, SIGNAL(triggered()), this, SLOT(handle_save_view()));
 	connect(this->edit_area, SIGNAL(triggered()), this, SLOT(handle_edit_area()));
 	connect(this->polycompl, SIGNAL(triggered()), this, SLOT(handle_polycompl()));
-	/*connect(this->button_apply_all, SIGNAL(triggered()), this, SLOT(handle_apply_all()));
-	connect(this->button_apply_to_depth_map, SIGNAL(triggered()), this, SLOT(handle_apply_to_depth_map()));
-	connect(this->button_apply_to_all_depth_maps, SIGNAL(triggered()), this, SLOT(handle_apply_to_all_depth_maps()));*/
 	connect(&SceneManager::get(), SIGNAL(view_selected(mve::View::Ptr)), this, SLOT(receive_view_pointer(mve::View::Ptr)));
 	connect(this->scroll_image->get_image(), SIGNAL(mouse_clicked(int, int, QMouseEvent *)), this, SLOT(on_image_clicked(int, int, QMouseEvent *)));
 	connect(this->scroll_image->get_image(), SIGNAL(mouse_moved(int, int, QMouseEvent *)), this, SLOT(on_image_moved(int, int, QMouseEvent *)));
 	connect(this->scroll_image->get_image(), SIGNAL(mouse_released(int, int, QMouseEvent *)), this, SLOT(on_image_released(int, int, QMouseEvent *)));
-
-
 	connect(this->action_zoom_in, SIGNAL(triggered()), this, SLOT(on_zoom_in()));
 	connect(this->action_zoom_out, SIGNAL(triggered()), this, SLOT(on_zoom_out()));
 	connect(this->action_zoom_reset, SIGNAL(triggered()), this, SLOT(on_normal_size()));
 	connect(this->action_zoom_fit, SIGNAL(triggered()), this, SLOT(on_fit_to_window()));
 	connect(&SceneManager::get(), SIGNAL(scene_selected(mve::Scene::Ptr)), this, SLOT(on_scene_selected()));
 
-    this->connect(this, SIGNAL(tab_activated()), SLOT(on_tab_activated()));
-
+    	this->connect(this, SIGNAL(tab_activated()), SLOT(on_tab_activated()));
 
 	/* TODO: Make this configurable */
 	this->create_debug_images = CREATE_DEBUG_IMAGES;
 
-    QHBoxLayout* main_layout = new QHBoxLayout(this);
-    main_layout->addLayout(vbox, 1);
-    main_layout->addWidget(this->tab_widget);
+    	QHBoxLayout* main_layout = new QHBoxLayout(this);
+    	main_layout->addLayout(vbox, 1);
+    	main_layout->addWidget(this->tab_widget);
 }
 
 
@@ -181,27 +148,15 @@ void RegioningPlugin::handle_polycompl() {
 
 
 void RegioningPlugin::handle_edit_area() {
-
     editmode = this->edit_area->isChecked();
-std::cout << "Editmode: " << editmode << std::endl;
-
-//TODO Logic in clicking
-
+    std::cout << "Editmode: " << editmode << std::endl;
 }
 
 
 void RegioningPlugin::handle_save_view() {
-	//console.set_sender("hdlsave1");
 	mve::View::Ptr view = this->current_view_pointer;
 
-	/*if (view == NULL) {
-		console.log("Could not save view because no view has been selected.", "red");
-		console.reset_sender();
-		return;
-	}*/
-
 	/* Save results */
-
 	std::string filename = view->get_filename().substr(0,view->get_filename().size()-3)+"rgn";
 	ofstream out(filename);
 
@@ -214,22 +169,6 @@ void RegioningPlugin::handle_save_view() {
 		out << quads[i].xCoords[3] << "\r\n" << quads[i].yCoords[3] << "\r\n";
 	    }
 	}
-
-/*
-if (this->q1->isComplete()) {
-	out << this->q1->getID() << "\r\n";
-	out << this->q1->xCoords[0] << "\r\n" << this->q1->yCoords[0] << "\r\n";
-	out << this->q1->xCoords[1] << "\r\n" << this->q1->yCoords[1] << "\r\n";
-	out << this->q1->xCoords[2] << "\r\n" << this->q1->yCoords[2] << "\r\n";
-	out << this->q1->xCoords[3] << "\r\n" << this->q1->yCoords[3] << "\r\n";
-}
-if (this->q2->isComplete()) {
-	out << this->q2->getID() << "\r\n";
-	out << this->q2->xCoords[0] << "\r\n" << this->q2->yCoords[0] << "\r\n";
-	out << this->q2->xCoords[1] << "\r\n" << this->q2->yCoords[1] << "\r\n";
-	out << this->q2->xCoords[2] << "\r\n" << this->q2->yCoords[2] << "\r\n";
-	out << this->q2->xCoords[3] << "\r\n" << this->q2->yCoords[3];
-}*/
 	out.close();
 }
 
@@ -269,43 +208,25 @@ void RegioningPlugin::on_image_clicked(int x, int y, QMouseEvent *event) {
 			for (unsigned int i = 0; i < quads.size(); i++)
 				drawPoly(&quads[i]);
 
-/*
-			if (currentq.getID() == 1)
-				drawPoly(&currentq, QColor(0,0,204,125));
-			if (currentq.getID() == 2)
-				drawPoly(&currentq, QColor(204,0,0,125));
-			if (currentq.getID() == 3)
-				drawPoly(&currentq, QColor(102,0,102,125));*/
 			this->spinbox_region_id->setValue(this->spinbox_region_id->value()+1);
 
 			RegioningPlugin::currentq = Quadrangle();
 			}
 		}
-		/*else {
-		     if (!(q2->isComplete())) {
-			q2->addPoint(xf,yf);
-			q2->setID(this->spinbox_region_id->value());
-			if (q2->isComplete()) {
-			if (q2->getID() == 0)
-				drawPoly(q2, QColor(0,204,0,125));
-			if (q2->getID() == 1)
-				drawPoly(q2, QColor(0,0,204,125));
-			if (q2->getID() == 2)
-				drawPoly(q2, QColor(204,0,0,125));
-			if (q2->getID() == 3)
-				drawPoly(q2, QColor(102,0,102,125));
-			}
-		    }
-		}*/
 	    } else {
 
 	//TODO Logic for editing
+	//
+	//if (in der naehe von 10 px, suche naechsten punkt yum verschieben
+	//
+	//Draggen
 
 	    }
 	}
 	if (right_click) {
-		//this->toggle_segment(result, segment_id, false);
-		//display_result();
+
+	//TODO Evtl Punkte entfernen??
+
 	}
 }
 
@@ -318,7 +239,6 @@ void RegioningPlugin::drawPoly (Quadrangle* q) {
 			QImage *q_img_overlay = new QImage(overlay->width(), overlay->height(), QImage::Format_RGB32);
 			QColor qc = QColor(204,204,204,125);
 		
-
 			if (q->getID() == 0)
 				qc = QColor(0,204,0,125);
 			if (q->getID() == 1)
@@ -351,11 +271,7 @@ void RegioningPlugin::drawPoly (Quadrangle* q) {
 			delete q_img_base;
 			delete q_img_overlay;
 
-
-
 			/* Apply transparency */
-			//QPixmap transparent(pixmap_overlay.size());
-			//transparent.fill(Qt::transparent);
 			QPainter p(&transparent);
 			p.setCompositionMode(QPainter::CompositionMode_SourceOver);
 			p.setBrush(QBrush(qc));
@@ -369,40 +285,6 @@ void RegioningPlugin::drawPoly (Quadrangle* q) {
 			display_image(&pixmap_base);
 }
 
-/*
-void
-RegioningPlugin::create_actions (QToolBar* toolbar2)
-{
-//    this->action_open_mesh = new QAction(QIcon(":/images/icon_open_file.svg"),
-//        tr("Open mesh"), this);
-//    this->connect(this->action_open_mesh, SIGNAL(triggered()),
-//        this, SLOT(on_open_mesh()));
-
-    this->action_reload_shaders = new QAction(QIcon(":/images/icon_revert.svg"),
-        tr("Reload shaders"), this);
-    this->connect(this->action_reload_shaders, SIGNAL(triggered()),
-        this, SLOT(on_reload_shaders()));
-
-//    this->action_show_details = new QAction
-//        (QIcon(":/images/icon_toolbox.svg"), tr("Show &Details"), this);
-//    this->action_show_details->setCheckable(true);
-//    this->action_show_details->setChecked(true);
-//    this->connect(this->action_show_details, SIGNAL(triggered()),
-//        this, SLOT(on_details_toggled()));
-
-//    this->action_save_screenshot = new QAction(QIcon(":/images/icon_screenshot.svg"),
-//        tr("Save Screenshot"), this);
-//    this->connect(this->action_save_screenshot, SIGNAL(triggered()),
-//        this, SLOT(on_save_screenshot()));
-
-    //toolbar->addAction(this->action_open_mesh);
-    //toolbar->addAction(this->action_reload_shaders);
-    //toolbar->addSeparator();
-    //toolbar->addAction(this->action_save_screenshot);
-    toolbar2->addWidget(get_expander());
-    toolbar2->addAction(this->action_show_details);
-}*/
-
 void
 RegioningPlugin::on_details_toggled (void)
 {
@@ -411,11 +293,9 @@ RegioningPlugin::on_details_toggled (void)
 }
 
 bool RegioningPlugin::display_result() {
-	//TODO
-return true;
+	//TODO brauchen wir die Funktion?
+    return true;
 }
-
-
 
 void RegioningPlugin::update_actions(void) {
 	bool active = this->scroll_image->get_pixmap() != NULL;
@@ -437,84 +317,50 @@ void RegioningPlugin::display_image(QImage *q_img) {
 	this->display_image(&pixmap);
 }
 
-/* Displays an image */
+/* Displays an image with all of its regions*/
 void RegioningPlugin::display_image(mve::ByteImage::ConstPtr img) {
 	QImage *q_img = new QImage(img->width(), img->height(), QImage::Format_RGB32);
 	this->mve2qt(img, q_img);
 	this->display_image(q_img);
-
-
-	//q2 = new Quadrangle(2);
-	
 //TODO polygone incomplete
 	ifstream myfile;
 	std::string filename = current_view_pointer->get_filename().substr(0,current_view_pointer->get_filename().size()-3)+"rgn";
 	myfile.open (filename, ios::in);
 	if (myfile.is_open()) {
-	char buf[50];
+		char buf[50];
+		while (!myfile.eof()) {
+			Quadrangle q = Quadrangle();
+			myfile.getline(buf, 50);
+			int id = atoi (buf);
+			q.setID(id);
+			for (int i=0; i<4; i++) {
+				if (!myfile.eof()) {
+    		    			myfile.getline(buf, 50);
+		   			float x = atof(buf);
+		    			myfile.getline(buf, 50);
+		    			float y = atof(buf);
+		    			if (!(q.isComplete())) {
+	    					q.addPoint(x,y);
+						if (q.isComplete()) {
+							mve::ByteImage::Ptr overlay = this->current_view_pointer->get_image("original");
+							QImage *q_img_overlay = new QImage(overlay->width(), overlay->height(), QImage::Format_RGB32);
+							QPixmap pixmap_overlay(QPixmap::fromImage(*q_img_overlay));
+							delete q_img_overlay;
+							transparent = QPixmap(pixmap_overlay.size());
+							transparent.fill(Qt::transparent);
 
-
-while (!myfile.eof()) {
-
-	Quadrangle q = Quadrangle();
-
-	myfile.getline(buf, 50);
-	int id = atoi (buf);
-	q.setID(id);
-	for (int i=0; i<4; i++) {
-	if (!myfile.eof())
-  	{
-    	    myfile.getline(buf, 50);
-	    float x = atof(buf);
-	    myfile.getline(buf, 50);
-	    float y = atof(buf);
-	    if (!(q.isComplete())) {
-	    q.addPoint(x,y);
-		if (q.isComplete()) {
-			mve::ByteImage::Ptr overlay = this->current_view_pointer->get_image("original");
-			QImage *q_img_overlay = new QImage(overlay->width(), overlay->height(), QImage::Format_RGB32);
-			QPixmap pixmap_overlay(QPixmap::fromImage(*q_img_overlay));
-			delete q_img_overlay;
-			transparent = QPixmap(pixmap_overlay.size());
-			transparent.fill(Qt::transparent);
-
-			quads.push_back(q);
-
+							quads.push_back(q);
+						}
+	    				}
+				}				
+			}
 		}
-	    }
-	}}
-}}
+	}
 
 
-for (unsigned int i = 0; i < quads.size(); i++)
-	drawPoly(&quads[i]);
+	for (unsigned int i = 0; i < quads.size(); i++)
+		drawPoly(&quads[i]);
 
-/*
-	myfile.getline(buf, 50);
-	id = atoi (buf);
-	q2->setID(id);
-	for (int i=0; i<4; i++) {
-	if (!myfile.eof())
-  	{
-    	    myfile.getline(buf, 50);
-	    float x = atof (buf);
-	    myfile.getline(buf, 50);
-	    float y = atof (buf);
-	    if (!(q2->isComplete())) {
-	    q2->addPoint(x,y);
-		if (q2->isComplete()) {
-			if (q2->getID() == 0)
-				drawPoly(q2, QColor(0,204,0,125));
-			if (q2->getID() == 1)
-				drawPoly(q2, QColor(0,0,204,125));
-			if (q2->getID() == 2)
-				drawPoly(q2, QColor(204,0,0,125));
-			if (q2->getID() == 3)
-				drawPoly(q2, QColor(102,0,102,125));
-		}
-	    }
-	}}
-	}*/
 	delete q_img;
 }
 

@@ -36,26 +36,19 @@ class RegioningPlugin : public MainWindowTab {
 	QAction *save_view;
 	QAction *edit_area;
 	QAction *polycompl;
-	/*QAction *button_apply_all;
-	QAction *button_apply_to_depth_map;
-	QAction *button_apply_to_all_depth_maps;*/
 	QAction *action_zoom_in;
 	QAction *action_zoom_out;
 	QAction *action_zoom_reset;
 	QAction *action_zoom_fit;
 	QAction* action_show_details;
-	//Quadrangle *q1;
-	//Quadrangle *q2;
 	std::vector<Quadrangle> quads;
 	Quadrangle currentq;
-
 
 	QPixmap transparent;
 
 	bool editmode;
 	
 	ScrollImage *scroll_image;
-	ScrollImage *scroll_image2;
 	void update_actions(void);
 	void display_image(QImage *qImg);
 	void display_image(QPixmap *pixmap);
@@ -65,7 +58,6 @@ class RegioningPlugin : public MainWindowTab {
 	void display_best();
 	void mve2qt(mve::ByteImage::ConstPtr src, QImage *dest);
 	void transform_view_pointer(mve::View::Ptr);
-    //void create_actions (QToolBar* toolbar2);
 	bool create_debug_images;
 	QSpinBox *spinbox_region_id;
 	QColorDialog *color_dialog;
@@ -86,7 +78,7 @@ class RegioningPlugin : public MainWindowTab {
 	void on_normal_size(void);
 	void on_fit_to_window(void);
 	void on_image_clicked(int x, int y, QMouseEvent *event);
-    void on_details_toggled (void);
+        void on_details_toggled (void);
 
 };
 #endif /* SKY_KEYING_TAB_HEADER */

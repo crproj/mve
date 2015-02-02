@@ -102,14 +102,7 @@ while (!myfile.eof()) {
 	    if (!(q.isComplete())) {
 	    q.addPoint(x,y);
 		if (q.isComplete()) {
-			mve::ByteImage::Ptr overlay = this->current_view_pointer->get_image("original");
-			QImage *q_img_overlay = new QImage(overlay->width(), overlay->height(), QImage::Format_RGB32);
-			QPixmap pixmap_overlay(QPixmap::fromImage(*q_img_overlay));
-			delete q_img_overlay;
-			transparent = QPixmap(pixmap_overlay.size());
-			transparent.fill(Qt::transparent);
-
-			quads.push_back(q);
+			viewport->features.addQuad(q);
 
 		}
 	    }

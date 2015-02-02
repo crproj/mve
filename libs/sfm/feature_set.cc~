@@ -95,16 +95,11 @@ FeatureSet::compute_sift (mve::ByteImage::ConstPtr image)
             if (quads[k].isInside(descr[i].x, descr[i].y,this->width, this->height))
 		descr[i].reg = quads[k].getID();	    
 	}
-/*
-        if (q1.isInside(descr[i].x, descr[i].y,this->width, this->height))
-	descr[i].reg = q1.getID();
-
-	if (q2.isInside(descr[i].x, descr[i].y,this->width, this->height))
-	descr[i].reg = q2.getID();*/
     }
 
 
     /* Sort features by scale for low-res matching. */
+    //XXX Sort features by region for region based matching
     //std::sort(descr.begin(), descr.end(), compare_scale<sfm::Sift::Descriptor>);
     std::sort(descr.begin(), descr.end(), compare_reg<sfm::Sift::Descriptor>);
 
@@ -117,37 +112,9 @@ FeatureSet::compute_sift (mve::ByteImage::ConstPtr image)
 	}
     }
 
-int myints[] = {(int)(descr.size() - 1), descr[(descr.size() - 1)].reg};
-std::vector<int> vec (myints, myints + sizeof(myints));
-sift_regs.push_back(vec);
-/*
-for (unsigned int i = 0; i < sift_regs.size(); i++) {
-int off;
-int off2;
-if (i == 0)
-off = 0;
-else
-off = sift_regs[i-1][0] + 1;
-
-//if (i == sift_regs.size() - 1)
-//off2 = descr.size();
-//else 
-off2 = sift_regs[i][0] + 1;
-
-//std::cout << "off " << off << "off2 " << off2 << std::endl;
-std::sort(descr.begin()+off, descr.begin()+off2, compare_scale<sfm::Sift::Descriptor>);
-//std::sort(descr.begin()+surf_regs[0], descr.begin()+surf_regs[1], compare_scale<sfm::Surf::Descriptor>);
-//std::sort(descr.begin()+surf_regs[1], descr.end(), compare_scale<sfm::Surf::Descriptor>);
-}*/
-
-
- //Output
-/*#pragma omp critical
-    for (int i = 0; i < descr.size()-1; i++) {
-std::cout << i << " " << descr[i].reg << " " << descr[i].scale << std::endl;
-    }
-
-std::cout << "Offsets: " << sift_regs[0] << " " << sift_regs[1] << std::endl; */
+    int myints[] = {(int)(descr.size() - 1), descr[(descr.size() - 1)].reg};
+    std::vector<int> vec (myints, myints + sizeof(myints));
+    sift_regs.push_back(vec);
 
     /* Prepare and copy to data structures. */
     std::size_t offset = this->positions.size();
@@ -188,23 +155,14 @@ FeatureSet::compute_surf (mve::ByteImage::ConstPtr image)
 	descr[i].reg = -1;
 	
 
-	for (int k = 0; k < quads.size(); k++) {
+	for (unsigned int k = 0; k < quads.size(); k++) {
             if (quads[k].isInside(descr[i].x, descr[i].y,this->width, this->height))
 		descr[i].reg = quads[k].getID();	    
 	}
-/*
-        if (q1.isInside(descr[i].x, descr[i].y,this->width, this->height))
-	descr[i].reg = q1.getID();
-
-	if (q2.isInside(descr[i].x, descr[i].y,this->width, this->height))
-	descr[i].reg = q2.getID();*/
     }
 
-
-//std::cout << "Vorher " << s << " Nachher " << descr.size() << " " << this->width << "x" << this->height << std::endl;
-
-
     /* Sort features by scale for low-res matching. */
+    //XXX Sort features by region for region based matching
     //std::sort(descr.begin(), descr.end(), compare_scale<sfm::Surf::Descriptor>);
     std::sort(descr.begin(), descr.end(), compare_reg<sfm::Surf::Descriptor>);
 
@@ -393,72 +351,6 @@ std::cout << "siftother21 " << other.num_sift_descriptors << " " << sift_result.
 			}
 		}
 	}
-/*
-	if ((sift_regs.empty())&&(other.sift_regs.empty()))
-	sfm::Matching::twoway_match(this->opts.sift_matching_opts,
-            this->sift_descr.begin(), this->num_sift_descriptors,													//
-            other.sift_descr.begin(), other.num_sift_descriptors,													//
-            &sift_result);
-	if ((sift_regs.size() > 0)&&(other.sift_regs.size() > 0))
-	sfm::Matching::twoway_match(this->opts.sift_matching_opts,
-            this->sift_descr.begin(), this->sift_regs[0],													//
-            other.sift_descr.begin(), other.sift_regs[0],													//
-            &sift_result);
-
-	if ((sift_regs.size() > 1)&&(other.sift_regs.size() > 1))
-	sfm::Matching::twoway_match(this->opts.sift_matching_opts,
-            this->sift_descr.begin()+(this->opts.sift_matching_opts.descriptor_length * this->sift_regs[0]), this->sift_regs[1] - this->sift_regs[0],		//
-            other.sift_descr.begin()+(other.opts.sift_matching_opts.descriptor_length * other.sift_regs[0]), other.sift_regs[1] - other.sift_regs[0],		//
-            &sift2);
-
-	if ((sift_regs.size() > 2)&&(other.sift_regs.size() > 2))
-	sfm::Matching::twoway_match(this->opts.sift_matching_opts,
-            this->sift_descr.begin()+(this->opts.sift_matching_opts.descriptor_length * this->sift_regs[1]), this->num_sift_descriptors - this->sift_regs[1],
-            other.sift_descr.begin()+(other.opts.sift_matching_opts.descriptor_length * other.sift_regs[1]), other.num_sift_descriptors - other.sift_regs[1],
-            &sift3);*/
-
-//std::cout << "sift res12: " << sift_result.matches_1_2.size() << " sift212 " << sift2.matches_1_2.size() << " sift312 " << sift3.matches_1_2.size() << std::endl;
-//std::cout << "sift res21: " << sift_result.matches_2_1.size() << " sift221 " << sift2.matches_2_1.size() << " sift321 " << sift3.matches_2_1.size() << std::endl;
-
-//std::cout << "Siftres: " << sfm::Matching::count_consistent_matches(sift_result) << std::endl;
-
-
-	//int res12 = sift_result.matches_1_2.size();
-	//int res21 = sift_result.matches_2_1.size();
-
-/*	sift_result.matches_1_2.clear();
-	sift_result.matches_2_1.clear();
-
-	if (siftmatchcounter > 0) {
-	for (unsigned int i = 0; i < siftvec[0].matches_1_2.size(); i++) {
-		sift_result.matches_1_2.push_back(siftvec[0].matches_1_2[i]);
-	}
-	for (unsigned int i = 0; i < siftvec[0].matches_2_1.size(); i++) {
-		sift_result.matches_2_1.push_back(siftvec[0].matches_2_1[i]);
-	}}
-	if (siftmatchcounter > 1) {
-	for (unsigned int i = 0; i < siftvec[1].matches_1_2.size(); i++) {
-		sift_result.matches_1_2.push_back(siftvec[1].matches_1_2[i] + siftvec[0].matches_2_1.size());
-	}
-	for (unsigned int i = 0; i < siftvec[1].matches_2_1.size(); i++) {
-		sift_result.matches_2_1.push_back(siftvec[1].matches_2_1[i] + siftvec[0].matches_1_2.size());
-	}}
-	if (siftmatchcounter > 2) {
-	for (unsigned int i = 0; i < siftvec[2].matches_1_2.size(); i++) {
-		sift_result.matches_1_2.push_back(siftvec[2].matches_1_2[i] + siftvec[0].matches_2_1.size() + siftvec[1].matches_2_1.size());
-	}
-	for (unsigned int i = 0; i < siftvec[2].matches_2_1.size(); i++) {
-		sift_result.matches_2_1.push_back(siftvec[2].matches_2_1[i] + siftvec[0].matches_1_2.size() + siftvec[1].matches_1_2.size());
-	}}
-*/
-//std::cout << "Sift2: " << sfm::Matching::count_consistent_matches(sift2) << std::endl;
-//std::cout << "Sift3: " << sfm::Matching::count_consistent_matches(sift3) << std::endl;
-//std::cout << "Siftres: " << sfm::Matching::count_consistent_matches(sift_result) << std::endl;
-//std::cout << "sift res12: " << sift_result.matches_1_2.size() << std::endl;
-//std::cout << "sift res21: " << sift_result.matches_2_1.size() << std::endl;
-
-
-
         sfm::Matching::remove_inconsistent_matches(&sift_result);
 
     }
@@ -471,13 +363,6 @@ std::cout << "siftother21 " << other.num_sift_descriptors << " " << sift_result.
 
     if (this->num_surf_descriptors > 0)
     {
-        /*sfm::Matching::twoway_match(this->opts.surf_matching_opts,
-            this->surf_descr.begin(), this->num_surf_descriptors,
-            other.surf_descr.begin(), other.num_surf_descriptors,
-            &surf_result);
-        sfm::Matching::remove_inconsistent_matches(&surf_result);*/
-
-
 	sfm::Matching::Result surf1;
 
 	for (unsigned int i = 0; i < surf_regs.size(); i++) {
@@ -520,64 +405,6 @@ std::cout << "siftother21 " << other.num_sift_descriptors << " " << sift_result.
 			}
 		}
 	}
-
-	/*sfm::Matching::Result surf2;
-	sfm::Matching::Result surf3;
-
-	if ((surf_regs.empty())&&(other.surf_regs.empty()))
-	sfm::Matching::twoway_match(this->opts.surf_matching_opts,
-            this->surf_descr.begin(), this->num_surf_descriptors,
-            other.surf_descr.begin(), other.num_surf_descriptors,
-            &surf_result);
-	if ((surf_regs.size() > 0)&&(other.surf_regs.size() > 0))
-	sfm::Matching::twoway_match(this->opts.surf_matching_opts,
-            this->surf_descr.begin(), this->surf_regs[0],
-            other.surf_descr.begin(), other.surf_regs[0],
-            &surf_result);
-
-	if ((surf_regs.size() > 1) && (other.surf_regs.size() > 1))
-	sfm::Matching::twoway_match(this->opts.surf_matching_opts,
-            this->surf_descr.begin()+(this->opts.surf_matching_opts.descriptor_length * this->surf_regs[0]), this->surf_regs[1] - this->surf_regs[0],
-            other.surf_descr.begin()+(other.opts.surf_matching_opts.descriptor_length * other.surf_regs[0]), other.surf_regs[1] - other.surf_regs[0],
-            &surf2);
-	if ((surf_regs.size() > 2) && (other.surf_regs.size() > 2))
-	sfm::Matching::twoway_match(this->opts.surf_matching_opts,
-            this->surf_descr.begin()+(this->opts.surf_matching_opts.descriptor_length * this->surf_regs[1]), this->num_surf_descriptors - this->surf_regs[1],
-            other.surf_descr.begin()+(other.opts.surf_matching_opts.descriptor_length * other.surf_regs[1]), other.num_surf_descriptors - other.surf_regs[1],
-            &surf3);
-
-	int res12 = surf_result.matches_1_2.size();
-	int res21 = surf_result.matches_2_1.size();*/
-
-/*	surf_result.matches_1_2.clear();
-	surf_result.matches_2_1.clear();
-
-	if (surfmatchcounter > 0) {
-	for (unsigned int i = 0; i < surfvec[0].matches_1_2.size(); i++) {
-		surf_result.matches_1_2.push_back(surfvec[0].matches_1_2[i]);
-	}
-	for (unsigned int i = 0; i < surfvec[0].matches_2_1.size(); i++) {
-		surf_result.matches_2_1.push_back(surfvec[0].matches_2_1[i]);
-	}}
-	if (surfmatchcounter > 1) {
-	for (unsigned int i = 0; i < surfvec[1].matches_1_2.size(); i++) {
-		surf_result.matches_1_2.push_back(surfvec[1].matches_1_2[i] + surfvec[0].matches_2_1.size());
-	}
-	for (unsigned int i = 0; i < surfvec[1].matches_2_1.size(); i++) {
-		surf_result.matches_2_1.push_back(surfvec[1].matches_2_1[i] + surfvec[0].matches_1_2.size());
-	}}
-	if (surfmatchcounter > 2) {
-	for (unsigned int i = 0; i < surfvec[2].matches_1_2.size(); i++) {
-		surf_result.matches_1_2.push_back(surfvec[2].matches_1_2[i] + surfvec[0].matches_2_1.size() + surfvec[1].matches_2_1.size());
-	}
-	for (unsigned int i = 0; i < surfvec[2].matches_2_1.size(); i++) {
-		surf_result.matches_2_1.push_back(surfvec[2].matches_2_1[i] + surfvec[0].matches_1_2.size() + surfvec[1].matches_1_2.size());
-	}}
-*/
-
-
-
-
         sfm::Matching::remove_inconsistent_matches(&surf_result);
     }
 

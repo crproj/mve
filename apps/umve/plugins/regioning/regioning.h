@@ -4,6 +4,4 @@
 #include "mve/image_io.h"
 #include "mve/image_tools.h"
 
-
-
-#endif /* SKY_KEYING_H */
+#endif /* REGIONING_H */

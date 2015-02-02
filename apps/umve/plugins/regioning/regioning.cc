@@ -13,12 +13,3 @@
 #include "ipcstdrgblinkcontrol.h"
 #include "ipctrafficsignlinkcontrol.h"
 #include "ipccsc.h"
-
-// color_console console;
-
-/********************************
- * Sky keying algorithm
- ********************************/
-
-
-
