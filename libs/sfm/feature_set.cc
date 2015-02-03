@@ -86,7 +86,7 @@ FeatureSet::compute_sift (mve::ByteImage::ConstPtr image)
         descr = sift.get_descriptors();
     }
 
- 
+    /*Setting Region-ID for every sift feature. Default: -1*/
     for (int i = descr.size()-1; i >= 0; i--) {
 	descr[i].reg = -1;
 	
@@ -103,6 +103,8 @@ FeatureSet::compute_sift (mve::ByteImage::ConstPtr image)
     //std::sort(descr.begin(), descr.end(), compare_scale<sfm::Sift::Descriptor>);
     std::sort(descr.begin(), descr.end(), compare_reg<sfm::Sift::Descriptor>);
 
+
+    /* Calculating indices where the different regions end*/
     for (unsigned int i = 0; i < descr.size()-1; i++) {
 	if (descr[i].reg != descr[i+1].reg)
 	{
@@ -150,7 +152,7 @@ FeatureSet::compute_surf (mve::ByteImage::ConstPtr image)
         descr = surf.get_descriptors();
     }
 
-
+    /*Setting Region-ID for every sift feature. Default: -1*/
     for (int i = descr.size()-1; i >= 0; i--) {
 	descr[i].reg = -1;
 	
@@ -166,7 +168,7 @@ FeatureSet::compute_surf (mve::ByteImage::ConstPtr image)
     //std::sort(descr.begin(), descr.end(), compare_scale<sfm::Surf::Descriptor>);
     std::sort(descr.begin(), descr.end(), compare_reg<sfm::Surf::Descriptor>);
 
-
+    /* Calculating indices where the different regions end*/
     for (unsigned int i = 0; i < descr.size()-1; i++) {
 	if (descr[i].reg != descr[i+1].reg) {
 		int myints[] = {(int)(i), descr[i].reg};
@@ -266,6 +268,7 @@ FeatureSet::match (FeatureSet const& other, Matching::Result* result) const
 
 	sfm::Matching::Result sift1;
 
+	/*Matching is only performed for features within regions with same ID*/
 	for (unsigned int i = 0; i < sift_regs.size(); i++) {
 		for (unsigned int k = 0; k < other.sift_regs.size(); k++) {
 			if (sift_regs[i][1] == other.sift_regs[k][1]) {
@@ -273,6 +276,7 @@ FeatureSet::match (FeatureSet const& other, Matching::Result* result) const
 			int off2;
 			int num;
 			int num2;
+			/*Calculating offsets and numbers of features for matching function*/
 			if (i == 0) {
 				off = 0;
 				num = sift_regs[i][0] + 1;
@@ -296,6 +300,7 @@ FeatureSet::match (FeatureSet const& other, Matching::Result* result) const
             			other.sift_descr.begin()+(other.opts.sift_matching_opts.descriptor_length * off2), num2,		
             			&sift1);
 
+			/*Filling result with partial results at correct offset*/	
 			for (unsigned int f = 0; f < sift1.matches_1_2.size(); f++) {
 				sift_result.matches_1_2[f + off] = sift1.matches_1_2[f] + off2;
 			}
@@ -321,6 +326,7 @@ FeatureSet::match (FeatureSet const& other, Matching::Result* result) const
     {
 	sfm::Matching::Result surf1;
 
+	/*Matching is only performed for features within Regions with same ID*/
 	for (unsigned int i = 0; i < surf_regs.size(); i++) {
 		for (unsigned int k = 0; k < other.surf_regs.size(); k++) {
 			if (surf_regs[i][1] == other.surf_regs[k][1]) {
@@ -328,6 +334,7 @@ FeatureSet::match (FeatureSet const& other, Matching::Result* result) const
 			int off2;
 			int num;
 			int num2;
+			/*Calculating offsets and numbers of features for matching function*/
 			if (i == 0) {
 				off = 0;
 				num = surf_regs[i][0] + 1;
@@ -350,6 +357,7 @@ FeatureSet::match (FeatureSet const& other, Matching::Result* result) const
             			other.surf_descr.begin()+(other.opts.surf_matching_opts.descriptor_length * off2), num2,		//
             			&surf1);
 
+			/*Filling result with partial results at correct offset*/	
 			for (unsigned int f = 0; f < surf1.matches_1_2.size(); f++) {
 				surf_result.matches_1_2[f + off] = surf1.matches_1_2[f] + off2;
 			}

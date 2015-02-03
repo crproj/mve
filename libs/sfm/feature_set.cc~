@@ -86,7 +86,7 @@ FeatureSet::compute_sift (mve::ByteImage::ConstPtr image)
         descr = sift.get_descriptors();
     }
 
- 
+    /*Setting Region-ID for every sift feature. Default: -1*/
     for (int i = descr.size()-1; i >= 0; i--) {
 	descr[i].reg = -1;
 	
@@ -103,6 +103,8 @@ FeatureSet::compute_sift (mve::ByteImage::ConstPtr image)
     //std::sort(descr.begin(), descr.end(), compare_scale<sfm::Sift::Descriptor>);
     std::sort(descr.begin(), descr.end(), compare_reg<sfm::Sift::Descriptor>);
 
+
+    /* Calculating indices where the different regions end*/
     for (unsigned int i = 0; i < descr.size()-1; i++) {
 	if (descr[i].reg != descr[i+1].reg)
 	{
@@ -150,7 +152,7 @@ FeatureSet::compute_surf (mve::ByteImage::ConstPtr image)
         descr = surf.get_descriptors();
     }
 
-
+    /*Setting Region-ID for every sift feature. Default: -1*/
     for (int i = descr.size()-1; i >= 0; i--) {
 	descr[i].reg = -1;
 	
@@ -166,7 +168,7 @@ FeatureSet::compute_surf (mve::ByteImage::ConstPtr image)
     //std::sort(descr.begin(), descr.end(), compare_scale<sfm::Surf::Descriptor>);
     std::sort(descr.begin(), descr.end(), compare_reg<sfm::Surf::Descriptor>);
 
-
+    /* Calculating indices where the different regions end*/
     for (unsigned int i = 0; i < descr.size()-1; i++) {
 	if (descr[i].reg != descr[i+1].reg) {
 		int myints[] = {(int)(i), descr[i].reg};
@@ -174,40 +176,10 @@ FeatureSet::compute_surf (mve::ByteImage::ConstPtr image)
 		surf_regs.push_back(vec);
 	}
     }
-int myints[] = {(int)(descr.size() - 1), descr[(descr.size() - 1)].reg};
-std::vector<int> vec (myints, myints + sizeof(myints));
-surf_regs.push_back(vec);
 
-//std::cout << "surf_reg_size: " << surf_regs.size() << std::endl;
-
-/*
-for (unsigned int i = 0; i < surf_regs.size(); i++) {
-int off;
-int off2;
-if (i == 0)
-off = 0;
-else
-off = surf_regs[i-1][0] + 1;
-
-//if (i == surf_regs.size() - 1)
-//off2 = descr.size();
-//else 
-off2 = surf_regs[i][0] + 1;
-
-//std::cout << "off " << off << "off2 " << off2 << std::endl;
-std::sort(descr.begin()+off, descr.begin()+off2, compare_scale<sfm::Surf::Descriptor>);
-//std::sort(descr.begin()+surf_regs[0], descr.begin()+surf_regs[1], compare_scale<sfm::Surf::Descriptor>);
-//std::sort(descr.begin()+surf_regs[1], descr.end(), compare_scale<sfm::Surf::Descriptor>);
-}
-*/
- //Output
-/*#pragma omp critical
-    for (int i = 0; i < descr.size(); i++) {
-std::cout << i << " " << descr[i].reg << " " << descr[i].scale << std::endl;
-    }*/
-
-///std::cout << "Offsets: " << sift_regs[0][0] << " " << sift_regs[1][0] << " " << sift_regs[2][0] << std::endl;
-
+    int myints[] = {(int)(descr.size() - 1), descr[(descr.size() - 1)].reg};
+    std::vector<int> vec (myints, myints + sizeof(myints));
+    surf_regs.push_back(vec);
 
     /* Prepare and copy to data structures. */
     std::size_t offset = this->positions.size();
@@ -279,37 +251,24 @@ std::vector<Quadrangle> FeatureSet::getQuads () {
 void
 FeatureSet::match (FeatureSet const& other, Matching::Result* result) const
 {
-
-//const_cast<const FeatureSet*> (&other);
-//XXX
     /* SIFT matching. */
     sfm::Matching::Result sift_result;
     sift_result.matches_1_2.resize(this->num_sift_descriptors);
     sift_result.matches_2_1.resize(other.num_sift_descriptors);
 
 
-/*#pragma omp critical
-{
-std::cout << "siftthis12  " << this->num_sift_descriptors << " " << sift_result.matches_1_2.size() << std::endl;
-std::cout << "siftother21 " << other.num_sift_descriptors << " " << sift_result.matches_2_1.size() << std::endl;
-}*/
-
-
-
     if (this->num_sift_descriptors > 0)
     {
-	/* Original        
+	/* Original without region based matching
 	sfm::Matching::twoway_match(this->opts.sift_matching_opts,
             this->sift_descr.begin(), this->num_sift_descriptors,
             other.sift_descr.begin(), other.num_sift_descriptors,
             &sift_result);
         sfm::Matching::remove_inconsistent_matches(&sift_result);*/
-	
-
-	//sfm::Matching::Result sift3;
 
 	sfm::Matching::Result sift1;
 
+	/*Matching is only performed for features within regions with same ID*/
 	for (unsigned int i = 0; i < sift_regs.size(); i++) {
 		for (unsigned int k = 0; k < other.sift_regs.size(); k++) {
 			if (sift_regs[i][1] == other.sift_regs[k][1]) {
@@ -317,6 +276,7 @@ std::cout << "siftother21 " << other.num_sift_descriptors << " " << sift_result.
 			int off2;
 			int num;
 			int num2;
+			/*Calculating offsets and numbers of features for matching function*/
 			if (i == 0) {
 				off = 0;
 				num = sift_regs[i][0] + 1;
@@ -336,10 +296,11 @@ std::cout << "siftother21 " << other.num_sift_descriptors << " " << sift_result.
 
 
 			sfm::Matching::twoway_match(this->opts.sift_matching_opts,
-            			this->sift_descr.begin()+(this->opts.sift_matching_opts.descriptor_length * off), num,		//
-            			other.sift_descr.begin()+(other.opts.sift_matching_opts.descriptor_length * off2), num2,		//
+            			this->sift_descr.begin()+(this->opts.sift_matching_opts.descriptor_length * off), num,		
+            			other.sift_descr.begin()+(other.opts.sift_matching_opts.descriptor_length * off2), num2,		
             			&sift1);
 
+			/*Filling result with partial results at correct offset*/	
 			for (unsigned int f = 0; f < sift1.matches_1_2.size(); f++) {
 				sift_result.matches_1_2[f + off] = sift1.matches_1_2[f] + off2;
 			}
@@ -365,6 +326,7 @@ std::cout << "siftother21 " << other.num_sift_descriptors << " " << sift_result.
     {
 	sfm::Matching::Result surf1;
 
+	/*Matching is only performed for features within Regions with same ID*/
 	for (unsigned int i = 0; i < surf_regs.size(); i++) {
 		for (unsigned int k = 0; k < other.surf_regs.size(); k++) {
 			if (surf_regs[i][1] == other.surf_regs[k][1]) {
@@ -372,6 +334,7 @@ std::cout << "siftother21 " << other.num_sift_descriptors << " " << sift_result.
 			int off2;
 			int num;
 			int num2;
+			/*Calculating offsets and numbers of features for matching function*/
 			if (i == 0) {
 				off = 0;
 				num = surf_regs[i][0] + 1;
@@ -394,6 +357,7 @@ std::cout << "siftother21 " << other.num_sift_descriptors << " " << sift_result.
             			other.surf_descr.begin()+(other.opts.surf_matching_opts.descriptor_length * off2), num2,		//
             			&surf1);
 
+			/*Filling result with partial results at correct offset*/	
 			for (unsigned int f = 0; f < surf1.matches_1_2.size(); f++) {
 				surf_result.matches_1_2[f + off] = surf1.matches_1_2[f] + off2;
 			}
