@@ -367,6 +367,7 @@ void RegioningPlugin::display_image(mve::ByteImage::ConstPtr img) {
 /* Both receives and handles the view pointer that SceneManager emits */
 void RegioningPlugin::receive_view_pointer(mve::View::Ptr view_pointer) {
 
+if (this->is_tab_active) {
 	RegioningPlugin::quads = std::vector<Quadrangle>();
 	RegioningPlugin::currentq = Quadrangle();
 
@@ -376,6 +377,7 @@ void RegioningPlugin::receive_view_pointer(mve::View::Ptr view_pointer) {
 	}
 
 	this->transform_view_pointer(view_pointer);
+	}
 }
 
 /* This function will handle a view pointer and make it usable for Qt */
