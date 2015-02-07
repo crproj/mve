@@ -275,7 +275,13 @@ void RegioningPlugin::drawPoly (Quadrangle* q) {
 			QPainter p(&transparent);
 			p.setCompositionMode(QPainter::CompositionMode_SourceOver);
 			p.setBrush(QBrush(qc));
-			p.setPen(qc);
+			QPen pen = QPen();
+			pen.setWidth(10);
+			pen.setColor(qc);
+			p.setPen(pen);
+			p.drawPoints(points, 4);
+			pen.setWidth(1);
+			p.setPen(pen);
 			p.drawPolygon(points, 4, Qt::WindingFill);
 			p.end();
 
