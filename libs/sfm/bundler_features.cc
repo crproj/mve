@@ -75,28 +75,28 @@ Features::compute (mve::Scene::Ptr scene, ViewportList* viewports)
 			Quadrangle q1 = Quadrangle();
 		}else{
 			char buf[50];
+			myfile.getline(buf, 50);
 			while (!myfile.eof()) {
 				Quadrangle q = Quadrangle();
-				myfile.getline(buf, 50);
+				bool c = false;
 				int id = atoi (buf);
 				q.setID(id);
-				for (int i=0; i<4; i++) {
-					if (!myfile.eof()){
-		    	   	 	myfile.getline(buf, 50);
-			    		float x = atof(buf);
-			    		myfile.getline(buf, 50);
-			    		float y = atof(buf);
-			    		if (!(q.isComplete())) {
-			    			q.addPoint(x,y);
-						if (q.isComplete()) {
-							viewport->features.addQuad(q);
-
-						}
-			    		}
+				while (!c) {
+    		    			myfile.getline(buf, 50);
+		   			float x = atof(buf);
+					string bufstr(buf);
+					if ((bufstr.find(".") != 1)||(myfile.eof())){
+						c = true;
+						viewport->features.addQuad(q);
+					}
+					else {
+		    			myfile.getline(buf, 50);
+		    			float y = atof(buf);
+	    				q.addPoint(x,y);
+					}				
 				}
 			}
 		}
-	}
 
 	viewport->features.set_options(this->opts.feature_options);
 	viewport->features.compute_features(image);
