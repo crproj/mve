@@ -188,12 +188,12 @@ void RegioningPlugin::on_image_clicked(int x, int y, QMouseEvent *event) {
 			currentq.addPoint( xf, yf);
 			currentq.setID(this->spinbox_region_id->value());
 			if (currentq.isComplete()) {
-			mve::ByteImage::Ptr overlay = this->current_view_pointer->get_image("original");
+			/*mve::ByteImage::Ptr overlay = this->current_view_pointer->get_image("original");
 			QImage *q_img_overlay = new QImage(overlay->width(), overlay->height(), QImage::Format_RGB32);
 			QPixmap pixmap_overlay(QPixmap::fromImage(*q_img_overlay));
 			delete q_img_overlay;
 			transparent = QPixmap(pixmap_overlay.size());
-			transparent.fill(Qt::transparent);
+			transparent.fill(Qt::transparent);*/
 
 			bool exists = false;
 
@@ -202,11 +202,12 @@ void RegioningPlugin::on_image_clicked(int x, int y, QMouseEvent *event) {
 				exists = true;
 			}
 
-			if (!exists)
+			if (!exists) {
 			    quads.push_back(currentq);
 
-			for (unsigned int i = 0; i < quads.size(); i++)
-				drawPoly(&quads[i]);
+			//for (unsigned int i = 0; i < quads.size(); i++)
+			    drawPoly(&currentq);
+			}
 
 			this->spinbox_region_id->setValue(this->spinbox_region_id->value()+1);
 
@@ -233,10 +234,6 @@ void RegioningPlugin::on_image_clicked(int x, int y, QMouseEvent *event) {
 
 void RegioningPlugin::drawPoly (Quadrangle* q) {
 
-			mve::ByteImage::Ptr base = this->current_view_pointer->get_image("original");
-			mve::ByteImage::Ptr overlay = this->current_view_pointer->get_image("original");
-			QImage *q_img_base = new QImage(base->width(), base->height(), QImage::Format_RGB32);
-			QImage *q_img_overlay = new QImage(overlay->width(), overlay->height(), QImage::Format_RGB32);
 			QColor qc = QColor(204,204,204,125);
 		
 			if (q->getID() == 0)
@@ -257,19 +254,14 @@ void RegioningPlugin::drawPoly (Quadrangle* q) {
 				qc = QColor(204,204,204,125);
 
 			QPointF points[4] = {
- 			    QPointF(q->xCoords[0]*overlay->width(), q->yCoords[0]*overlay->height()),
- 			    QPointF(q->xCoords[1]*overlay->width(), q->yCoords[1]*overlay->height()),
-  			    QPointF(q->xCoords[2]*overlay->width(), q->yCoords[2]*overlay->height()),
-  			    QPointF(q->xCoords[3]*overlay->width(), q->yCoords[3]*overlay->height())
+ 			    QPointF(q->xCoords[0]*this->overlay->width(), q->yCoords[0]*this->overlay->height()),
+ 			    QPointF(q->xCoords[1]*this->overlay->width(), q->yCoords[1]*this->overlay->height()),
+  			    QPointF(q->xCoords[2]*this->overlay->width(), q->yCoords[2]*this->overlay->height()),
+  			    QPointF(q->xCoords[3]*this->overlay->width(), q->yCoords[3]*this->overlay->height())
  			};
 
-
-			this->mve2qt(base, q_img_base);
-			this->mve2qt(overlay, q_img_overlay);
-			QPixmap pixmap_base(QPixmap::fromImage(*q_img_base));
-			QPixmap pixmap_overlay(QPixmap::fromImage(*q_img_overlay));
-			delete q_img_base;
-			delete q_img_overlay;
+			QPixmap transparent = QPixmap(pixmap_overlay.size());
+			transparent.fill(Qt::transparent);
 
 			/* Apply transparency */
 			QPainter p(&transparent);
@@ -348,13 +340,6 @@ void RegioningPlugin::display_image(mve::ByteImage::ConstPtr img) {
 		    			if (!(q.isComplete())) {
 	    					q.addPoint(x,y);
 						if (q.isComplete()) {
-							mve::ByteImage::Ptr overlay = this->current_view_pointer->get_image("original");
-							QImage *q_img_overlay = new QImage(overlay->width(), overlay->height(), QImage::Format_RGB32);
-							QPixmap pixmap_overlay(QPixmap::fromImage(*q_img_overlay));
-							delete q_img_overlay;
-							transparent = QPixmap(pixmap_overlay.size());
-							transparent.fill(Qt::transparent);
-
 							quads.push_back(q);
 						}
 	    				}
@@ -378,6 +363,16 @@ if (this->is_tab_active) {
 	RegioningPlugin::currentq = Quadrangle();
 
 	if (view_pointer != NULL) {
+		this->base = view_pointer->get_image("original");
+		this->overlay = view_pointer->get_image("original");
+		QImage *q_img_base = new QImage(this->base->width(), this->base->height(), QImage::Format_RGB32);
+		QImage *q_img_overlay = new QImage(this->overlay->width(), this->overlay->height(), QImage::Format_RGB32);
+		this->mve2qt(base, q_img_base);
+		this->mve2qt(overlay, q_img_overlay);
+		this->pixmap_base = QPixmap::fromImage(*q_img_base);
+		this->pixmap_overlay = QPixmap::fromImage(*q_img_overlay);
+		delete q_img_base;
+		delete q_img_overlay;
 		this->current_view_pointer = view_pointer;
 		this->current_image_pointer = view_pointer->get_byte_image("original");
 	}

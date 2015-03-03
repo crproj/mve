@@ -44,7 +44,11 @@ class RegioningPlugin : public MainWindowTab {
 	std::vector<Quadrangle> quads;
 	Quadrangle currentq;
 
-	QPixmap transparent;
+	//QPixmap transparent;
+	mve::ByteImage::Ptr base;
+	mve::ByteImage::Ptr overlay;
+	QPixmap pixmap_base;
+	QPixmap pixmap_overlay;
 
 	bool editmode;
 	
