@@ -70,7 +70,8 @@ class RegioningPlugin : public MainWindowTab {
 	mve::FloatImage::Ptr depth_map_pointer;
 
 
-	void drawPoly(Quadrangle* q);
+	void drawPoly(Quadrangle* q, bool drawPoints);
+	void drawPolyPoint(int x, int y, int id);
 
     private slots:
 	void handle_polycompl();

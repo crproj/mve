@@ -163,10 +163,9 @@ void RegioningPlugin::handle_save_view() {
 	for (unsigned int i = 0; i < quads.size(); i++) {
 	    if (quads[i].isComplete()) {
 		out << quads[i].getID() << "\r\n";
-		out << quads[i].xCoords[0] << "\r\n" << quads[i].yCoords[0] << "\r\n";
-		out << quads[i].xCoords[1] << "\r\n" << quads[i].yCoords[1] << "\r\n";
-		out << quads[i].xCoords[2] << "\r\n" << quads[i].yCoords[2] << "\r\n";
-		out << quads[i].xCoords[3] << "\r\n" << quads[i].yCoords[3] << "\r\n";
+		for (unsigned int k = 0; k < quads[i].getSize(); k++) {
+		out << quads[i].xCoords[k] << "\r\n" << quads[i].yCoords[k] << "\r\n";
+		}
 	    }
 	}
 	out.close();
@@ -184,36 +183,9 @@ void RegioningPlugin::on_image_clicked(int x, int y, QMouseEvent *event) {
 	std::cout << xf << ", " << yf << std::endl;
 	if (left_click) {
 	    if (!editmode) {
-		if( !currentq.isComplete() ){
-			currentq.addPoint( xf, yf);
-			currentq.setID(this->spinbox_region_id->value());
-			if (currentq.isComplete()) {
-			/*mve::ByteImage::Ptr overlay = this->current_view_pointer->get_image("original");
-			QImage *q_img_overlay = new QImage(overlay->width(), overlay->height(), QImage::Format_RGB32);
-			QPixmap pixmap_overlay(QPixmap::fromImage(*q_img_overlay));
-			delete q_img_overlay;
-			transparent = QPixmap(pixmap_overlay.size());
-			transparent.fill(Qt::transparent);*/
-
-			bool exists = false;
-
-			for (unsigned int i = 0; i < quads.size(); i++) {
-			    if (this->spinbox_region_id->value() == quads[i].getID())
-				exists = true;
-			}
-
-			if (!exists) {
-			    quads.push_back(currentq);
-
-			//for (unsigned int i = 0; i < quads.size(); i++)
-			    drawPoly(currentq*);
-			}
-
-			this->spinbox_region_id->setValue(this->spinbox_region_id->value()+1);
-
-			RegioningPlugin::currentq = Quadrangle();
-			}
-		}
+		drawPolyPoint(x, y, this->spinbox_region_id->value());
+		currentq.addPoint( xf, yf);
+		currentq.setID(this->spinbox_region_id->value());
 	    } else {
 
 	//TODO Logic for editing
@@ -228,11 +200,39 @@ void RegioningPlugin::on_image_clicked(int x, int y, QMouseEvent *event) {
 
 	//TODO Evtl Punkte entfernen??
 
+		bool exists = false;
+		unsigned int existingnr = 0;
+		for (unsigned int i = 0; i < quads.size(); i++) {
+		    if (this->spinbox_region_id->value() == quads[i].getID()) {
+			exists = true;
+			existingnr = i;
+		    }
+		}
+		if (exists) {
+		    quads.erase(quads.begin()+existingnr);
+		    this->base = this->current_view_pointer->get_image("original");
+		    this->overlay = this->current_view_pointer->get_image("original");
+		    QImage *q_img_base = new QImage(this->base->width(), this->base->height(), QImage::Format_RGB32);
+		    QImage *q_img_overlay = new QImage(this->overlay->width(), this->overlay->height(), QImage::Format_RGB32);
+		    this->mve2qt(base, q_img_base);
+		    this->mve2qt(overlay, q_img_overlay);
+		    this->pixmap_base = QPixmap::fromImage(*q_img_base);
+		    this->pixmap_overlay = QPixmap::fromImage(*q_img_overlay);
+		    delete q_img_base;
+		    delete q_img_overlay;
+		    for (unsigned int i = 0; i < quads.size(); i++)
+			drawPoly(&quads[i], true);
+  		}
+
+		quads.push_back(currentq);
+		drawPoly(&currentq, true);
+		this->spinbox_region_id->setValue(this->spinbox_region_id->value()+1);
+		RegioningPlugin::currentq = Quadrangle();
 	}
 }
 
 
-void RegioningPlugin::drawPoly (Quadrangle* q) {
+void RegioningPlugin::drawPoly (Quadrangle* q, bool drawPoints) {
 
 			QColor qc = QColor(204,204,204,125);
 		
@@ -253,12 +253,17 @@ void RegioningPlugin::drawPoly (Quadrangle* q) {
 			if (q->getID() == 7)
 				qc = QColor(204,204,204,125);
 
-			QPointF points[4] = {
+			/*QPointF points[4] = {
  			    QPointF(q->xCoords[0]*this->overlay->width(), q->yCoords[0]*this->overlay->height()),
  			    QPointF(q->xCoords[1]*this->overlay->width(), q->yCoords[1]*this->overlay->height()),
   			    QPointF(q->xCoords[2]*this->overlay->width(), q->yCoords[2]*this->overlay->height()),
   			    QPointF(q->xCoords[3]*this->overlay->width(), q->yCoords[3]*this->overlay->height())
- 			};
+ 			};*/
+
+			unsigned int corners = q->getSize();
+			QPointF points[corners];
+			for (unsigned int i = 0; i < corners; i++)
+			    points[i] = QPointF(q->xCoords[i]*this->overlay->width(), q->yCoords[i]*this->overlay->height());
 
 			QPixmap transparent = QPixmap(pixmap_overlay.size());
 			transparent.fill(Qt::transparent);
@@ -268,19 +273,61 @@ void RegioningPlugin::drawPoly (Quadrangle* q) {
 			p.setCompositionMode(QPainter::CompositionMode_SourceOver);
 			p.setBrush(QBrush(qc));
 			QPen pen = QPen();
-			pen.setWidth(10);
 			pen.setColor(qc);
-			p.setPen(pen);
-			p.drawPoints(points, 4);
+			if (drawPoints) {
+			    pen.setWidth(10);
+			    p.setPen(pen);
+			    p.drawPoints(points, corners);
+			}
 			pen.setWidth(1);
 			p.setPen(pen);
-			p.drawPolygon(points, 4, Qt::WindingFill);
+			p.drawPolygon(points, corners, Qt::WindingFill);
 			p.end();
 
 			/* Draw overlay on top of base image */
 			QPainter painter(&pixmap_base);
 			painter.drawPixmap(0, 0, transparent);
 			display_image(&pixmap_base);
+}
+
+void RegioningPlugin::drawPolyPoint(int x, int y, int id) {
+	QColor qc = QColor(204,204,204,125);
+		
+	if (id == 0)
+		qc = QColor(0,204,0,125);
+	if (id == 1)
+		qc = QColor(0,0,204,125);
+	if (id == 2)
+		qc = QColor(204,0,0,125);
+	if (id == 3)
+		qc = QColor(204,204,0,125);
+	if (id == 4)
+		qc = QColor(0,204,204,125);
+	if (id == 5)
+		qc = QColor(204,0,204,125);
+	if (id == 6)
+		qc = QColor(102,102,0,125);
+	if (id == 7)
+		qc = QColor(204,204,204,125);
+
+	QPixmap transparent = QPixmap(pixmap_overlay.size());
+	transparent.fill(Qt::transparent);
+
+	/* Apply transparency */
+	QPainter p(&transparent);
+	p.setCompositionMode(QPainter::CompositionMode_SourceOver);
+	p.setBrush(QBrush(qc));
+	QPen pen = QPen();
+	pen.setWidth(10);
+	pen.setColor(qc);
+	p.setPen(pen);
+	p.drawPoint(x, y);
+	p.end();
+
+	/* Draw overlay on top of base image */
+	QPainter painter(&pixmap_base);
+	painter.drawPixmap(0, 0, transparent);
+	display_image(&pixmap_base);
 }
 
 void
@@ -326,23 +373,24 @@ void RegioningPlugin::display_image(mve::ByteImage::ConstPtr img) {
 	myfile.open (filename, ios::in);
 	if (myfile.is_open()) {
 		char buf[50];
+			myfile.getline(buf, 50);
 		while (!myfile.eof()) {
 			Quadrangle q = Quadrangle();
-			myfile.getline(buf, 50);
+			bool c = false;
 			int id = atoi (buf);
 			q.setID(id);
-			for (int i=0; i<4; i++) {
-				if (!myfile.eof()) {
-    		    			myfile.getline(buf, 50);
-		   			float x = atof(buf);
-		    			myfile.getline(buf, 50);
-		    			float y = atof(buf);
-		    			if (!(q.isComplete())) {
-	    					q.addPoint(x,y);
-						if (q.isComplete()) {
-							quads.push_back(q);
-						}
-	    				}
+			while (!c) {
+    		    		myfile.getline(buf, 50);
+		   		float x = atof(buf);
+				string bufstr(buf);
+				if ((bufstr.find(".") != 1)||(myfile.eof())){
+					c = true;
+					quads.push_back(q);
+				}
+				else {
+		    		myfile.getline(buf, 50);
+		    		float y = atof(buf);
+	    			q.addPoint(x,y);
 				}				
 			}
 		}
@@ -350,7 +398,7 @@ void RegioningPlugin::display_image(mve::ByteImage::ConstPtr img) {
 
 
 	for (unsigned int i = 0; i < quads.size(); i++)
-		drawPoly(&quads[i]);
+		drawPoly(&quads[i], true);
 
 	delete q_img;
 }
