@@ -33,9 +33,11 @@ class RegioningPlugin : public MainWindowTab {
         GLWidget* gl_widget;
 	QToolBar *toolbar;
 	QLabel *spinbox_region_id_label;
+	QAction *delete_one_quad;
+	QAction *delete_all_quads;
 	QAction *save_view;
 	QAction *edit_area;
-	QAction *polycompl;
+	//QAction *polycompl;
 	QAction *action_zoom_in;
 	QAction *action_zoom_out;
 	QAction *action_zoom_reset;
@@ -74,7 +76,9 @@ class RegioningPlugin : public MainWindowTab {
 	void drawPolyPoint(int x, int y, int id);
 
     private slots:
-	void handle_polycompl();
+	void handle_delete_one_quad();
+	void handle_delete_all_quads();
+	//void handle_polycompl();
 	void handle_save_view();
 	void handle_edit_area();
 	void receive_view_pointer(mve::View::Ptr);
