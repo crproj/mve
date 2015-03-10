@@ -107,7 +107,7 @@ RegioningPlugin::RegioningPlugin(QWidget *parent) : MainWindowTab(parent), creat
 	this->toolbar->addAction(this->action_zoom_fit);
 	this->toolbar->addAction(this->delete_one_quad);
 	this->toolbar->addAction(this->delete_all_quads);
-	this->toolbar->addAction(this->polycompl);
+	//this->toolbar->addAction(this->polycompl);
 	this->toolbar->addAction(this->save_view);
 	this->toolbar->addAction(this->edit_area);
 	this->toolbar->addWidget(this->spinbox_region_id);
@@ -148,6 +148,7 @@ RegioningPlugin::RegioningPlugin(QWidget *parent) : MainWindowTab(parent), creat
 
 
 void RegioningPlugin::handle_delete_one_quad() {
+	if (quads.size() > 1) {
 	quads.erase(quads.begin()+this->spinbox_region_id->value());
 	this->base = this->current_view_pointer->get_image("original");
 	this->overlay = this->current_view_pointer->get_image("original");
@@ -161,7 +162,11 @@ void RegioningPlugin::handle_delete_one_quad() {
 	delete q_img_overlay;
 	for (unsigned int i = 0; i < quads.size(); i++)
 	    drawPoly(&quads[i], true);
-
+	}
+	else {
+		if ((quads.size() == 1)&&(quads[0].getID() ==this->spinbox_region_id->value()))
+			handle_delete_all_quads();
+	}
 	this->handle_save_view();
 }
 
@@ -246,6 +251,12 @@ void RegioningPlugin::on_image_clicked(int x, int y, QMouseEvent *event) {
 
 
 		unsigned int currentid = this->spinbox_region_id->value();
+		bool contains = false;
+		for (unsigned int i = 0; i < quads.size(); i++) {
+			if (quads[i].getID() == currentid)
+				contains = true;
+		}
+		if (contains) {
 		float shortest = -1;
 		unsigned int shortestindex = -1;
 		for (unsigned int i = 0; i < quads.size(); i++) {
@@ -287,10 +298,11 @@ void RegioningPlugin::on_image_clicked(int x, int y, QMouseEvent *event) {
 			drawPoly(&quads[i], true);
 
 		this->handle_save_view();
+		}
 	    }
 	}
 	if (right_click) {
-
+	if (!editmode) {
 	//XXX Polygon completed
 
 		bool exists = false;
@@ -323,6 +335,7 @@ void RegioningPlugin::on_image_clicked(int x, int y, QMouseEvent *event) {
 		RegioningPlugin::currentq = Quadrangle();
 
 		this->handle_save_view();
+	}
 	}
 }
 
