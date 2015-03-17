@@ -149,7 +149,7 @@ RegioningPlugin::RegioningPlugin(QWidget *parent) : MainWindowTab(parent), creat
 
 void RegioningPlugin::handle_delete_one_quad() {
 	if (quads.size() > 1) {
-	unsigned int currentid = -1;
+	int currentid = -1;
 	for (unsigned int i=0; i < quads.size(); i++) {
 		if (quads[i].getID() == this->spinbox_region_id->value())
 			currentid = i;
@@ -169,12 +169,12 @@ void RegioningPlugin::handle_delete_one_quad() {
 	for (unsigned int i = 0; i < quads.size(); i++)
 	    drawPoly(&quads[i], true);
 	}
+	}
 	else {
 		if ((quads.size() == 1)&&(quads[0].getID() ==this->spinbox_region_id->value()))
 			handle_delete_all_quads();
 	}
 	this->handle_save_view();
-	}
 }
 
 void RegioningPlugin::handle_delete_all_quads() {
