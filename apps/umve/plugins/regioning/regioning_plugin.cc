@@ -265,7 +265,7 @@ void RegioningPlugin::on_image_clicked(int x, int y, QMouseEvent *event) {
 		}
 		if (contains) {
 		float shortest = -1;
-		unsigned int shortestindex = -1;
+		int shortestindex = -1;
 		for (unsigned int i = 0; i < quads.size(); i++) {
 			if (quads[i].getID() == currentid)
 				currentid = i;
@@ -310,6 +310,7 @@ void RegioningPlugin::on_image_clicked(int x, int y, QMouseEvent *event) {
 	}
 	if (right_click) {
 	if (!editmode) {
+	if (currentq.xCoords.size() > 2) {
 	//XXX Polygon completed
 
 		bool exists = false;
@@ -342,6 +343,7 @@ void RegioningPlugin::on_image_clicked(int x, int y, QMouseEvent *event) {
 		RegioningPlugin::currentq = Quadrangle();
 
 		this->handle_save_view();
+	}
 	}
 	}
 }
