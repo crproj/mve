@@ -149,7 +149,13 @@ RegioningPlugin::RegioningPlugin(QWidget *parent) : MainWindowTab(parent), creat
 
 void RegioningPlugin::handle_delete_one_quad() {
 	if (quads.size() > 1) {
-	quads.erase(quads.begin()+this->spinbox_region_id->value());
+	unsigned int currentid = -1;
+	for (unsigned int i=0; i < quads.size(); i++) {
+		if (i == this->spinbox_region_id->value())
+			currentid = i;
+	}
+	if (currentid >=0) {
+	quads.erase(quads.begin()+currentid);
 	this->base = this->current_view_pointer->get_image("original");
 	this->overlay = this->current_view_pointer->get_image("original");
 	QImage *q_img_base = new QImage(this->base->width(), this->base->height(), QImage::Format_RGB32);
@@ -168,6 +174,7 @@ void RegioningPlugin::handle_delete_one_quad() {
 			handle_delete_all_quads();
 	}
 	this->handle_save_view();
+	}
 }
 
 void RegioningPlugin::handle_delete_all_quads() {
