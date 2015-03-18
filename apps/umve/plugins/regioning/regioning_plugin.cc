@@ -266,11 +266,12 @@ void RegioningPlugin::on_image_clicked(int x, int y, QMouseEvent *event) {
 		if (contains) {
 		float shortest = -1;
 		int shortestindex = -1;
+		int currentqid = -1;
 		for (unsigned int i = 0; i < quads.size(); i++) {
 			if (quads[i].getID() == currentid)
-				currentid = i;
+				currentqid = i;
 		}
-		Quadrangle currentq = quads[currentid];
+		Quadrangle currentq = quads[currentqid];
 		for (unsigned int i = 0; i < currentq.xCoords.size(); i++) {
 			float quadx = currentq.xCoords[i];
 			float quady = currentq.yCoords[i];
@@ -289,7 +290,7 @@ void RegioningPlugin::on_image_clicked(int x, int y, QMouseEvent *event) {
 		currentq.xCoords[shortestindex] = xf;
 		currentq.yCoords[shortestindex] = yf;
 
-		quads.erase(quads.begin()+currentid);
+		quads.erase(quads.begin()+currentqid);
 		this->base = this->current_view_pointer->get_image("original");
 		this->overlay = this->current_view_pointer->get_image("original");
 		QImage *q_img_base = new QImage(this->base->width(), this->base->height(), QImage::Format_RGB32);
