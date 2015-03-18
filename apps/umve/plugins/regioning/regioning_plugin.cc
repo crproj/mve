@@ -59,7 +59,7 @@ RegioningPlugin::RegioningPlugin(QWidget *parent) : MainWindowTab(parent), creat
 	RegioningPlugin::quads = std::vector<Quadrangle>();
 	RegioningPlugin::currentq = Quadrangle();
 	RegioningPlugin::editmode = false;
-	RegioningPlugin::win;
+	RegioningPlugin::win = NULL;
 	this->color_dialog = new QColorDialog();
 	this->spinbox_region_id_label = new QLabel("Region ID");
 	this->spinbox_region_id = new QSpinBox();
