@@ -8,6 +8,7 @@
 #include <util/file_system.h>
 #include <stdio.h>
 #include <math.h>
+#include <stddef.h>
 
 #include <QtGui>
 #include <QtCore>
@@ -58,6 +59,7 @@ RegioningPlugin::RegioningPlugin(QWidget *parent) : MainWindowTab(parent), creat
 	RegioningPlugin::quads = std::vector<Quadrangle>();
 	RegioningPlugin::currentq = Quadrangle();
 	RegioningPlugin::editmode = false;
+	RegioningPlugin::win;
 	this->color_dialog = new QColorDialog();
 	this->spinbox_region_id_label = new QLabel("Region ID");
 	this->spinbox_region_id = new QSpinBox();
@@ -67,6 +69,7 @@ RegioningPlugin::RegioningPlugin(QWidget *parent) : MainWindowTab(parent), creat
 	this->delete_all_quads = new QAction(QIcon(":/img/delete_all.png"), tr("Delete all polygons for this view"), this);
 	this->save_view = new QAction(QIcon(":/img/icon_save.png"), tr("Save regions for this view"), this);
 	this->edit_area = new QAction(QIcon(":/img/edit.png"), tr("Move area points"), this);
+	this->chroma = new QAction(QIcon(":/img/chroma.png"), tr("Show Color-Region-Assignment"), this);
 	//this->polycompl = new QAction(QIcon(":/img/polycompl.png"), tr("Complete this polygon"), this);
 	this->action_zoom_in = new QAction(QIcon(":/img/icon_zoom_in.svg"), tr("Zoom in"), this);
 	this->action_zoom_out = new QAction(QIcon(":/img/icon_zoom_out.svg"), tr("Zoom out"), this);
@@ -74,6 +77,7 @@ RegioningPlugin::RegioningPlugin(QWidget *parent) : MainWindowTab(parent), creat
 	this->action_zoom_fit = new QAction(QIcon(":/img/icon_zoom_page.svg"), tr("Fit to window"), this);
 	this->action_zoom_fit->setCheckable(true);
 	this->edit_area->setCheckable(true);
+	this->chroma->setCheckable(true);
 	this->scroll_image = new ScrollImage();
 	this->update_actions();
 
@@ -112,6 +116,7 @@ RegioningPlugin::RegioningPlugin(QWidget *parent) : MainWindowTab(parent), creat
 	this->toolbar->addAction(this->edit_area);
 	this->toolbar->addWidget(this->spinbox_region_id);
 	this->toolbar->addWidget(this->spinbox_region_id_label);
+	this->toolbar->addAction(this->chroma);
 
 
 	/*=======================
@@ -135,6 +140,7 @@ RegioningPlugin::RegioningPlugin(QWidget *parent) : MainWindowTab(parent), creat
 	connect(this->action_zoom_reset, SIGNAL(triggered()), this, SLOT(on_normal_size()));
 	connect(this->action_zoom_fit, SIGNAL(triggered()), this, SLOT(on_fit_to_window()));
 	//connect(&SceneManager::get(), SIGNAL(scene_selected(mve::Scene::Ptr)), this, SLOT(on_scene_selected()));
+	connect(this->chroma, SIGNAL(triggered()), this, SLOT(handle_chroma()));
 
     	//this->connect(this, SIGNAL(tab_activated()), SLOT(on_tab_activated()));
 
@@ -146,6 +152,62 @@ RegioningPlugin::RegioningPlugin(QWidget *parent) : MainWindowTab(parent), creat
     	main_layout->addWidget(this->tab_widget);
 }
 
+
+void RegioningPlugin::handle_chroma() 
+{
+/* Tests fuer konkav
+	Quadrangle testq = Quadrangle();
+	testq.xCoords.push_back(3.0/10.0);
+	testq.xCoords.push_back(2.0/10.0);
+	testq.xCoords.push_back(4.0/10.0);
+	testq.xCoords.push_back(1.0/10.0);
+	testq.xCoords.push_back(9.0/10.0);
+	testq.xCoords.push_back(8.0/10.0);
+
+	testq.yCoords.push_back(1.0/10.0);
+	testq.yCoords.push_back(3.0/10.0);
+	testq.yCoords.push_back(4.0/10.0);
+	testq.yCoords.push_back(6.0/10.0);
+	testq.yCoords.push_back(7.0/10.0);
+	testq.yCoords.push_back(2.0/10.0);
+
+	bool inside1 = testq.isInside(3, 4, 10, 10);
+	bool inside2 = testq.isInside(3, 6, 10, 10);
+	bool inside3 = testq.isInside(6, 8, 10, 10);
+	bool inside4 = testq.isInside(9, 4, 10, 10);
+	bool inside5 = testq.isInside(6, 4, 10, 10);
+	bool inside6 = testq.isInside(6, 1, 10, 10);
+
+
+	std::cout << "false: " << inside1 << std::endl;
+	std::cout << "true: " << inside2 << std::endl;
+	std::cout << "false: " << inside3 << std::endl;
+	std::cout << "false: " << inside4 << std::endl;
+	std::cout << "true: " << inside5 << std::endl;
+	std::cout << "false: " << inside6 << std::endl;
+*/
+
+
+	if(win == NULL)
+	{
+		QTextEdit* doc = new QTextEdit();
+		doc->setHtml("<p>Region-ID 0 <span style='background:#00CC00'>&nbsp; &nbsp; &nbsp;</span></p> <p>Region-ID 1 <span style='background:#0000CC'>&nbsp; &nbsp; &nbsp;</span></p> <p>Region-ID 2 <span style='background:#CC0000'>&nbsp; &nbsp; &nbsp;</span></p> <p>Region-ID 3 <span style='background:#CCCC00'>&nbsp; &nbsp; &nbsp;</span></p> <p>Region-ID 4 <span style='background:#00CCCC'>&nbsp; &nbsp; &nbsp;</span></p> <p>Region-ID 5 <span style='background:#CC00CC'>&nbsp; &nbsp; &nbsp;</span></p> <p>Region-ID 6 <span style='background:#666600'>&nbsp; &nbsp; &nbsp;</span></p> <p>Region-ID 7 <span style='background:#CCCCCC'>&nbsp; &nbsp; &nbsp;</span></p>");
+		doc->setReadOnly(true);
+		QHBoxLayout* htmllayout = new QHBoxLayout();
+		htmllayout->setMargin(10);
+		htmllayout->addWidget(doc);
+		win = new QDialog();
+		win->setWindowTitle("Color-Region-Assignment");
+		win->setLayout(htmllayout);
+		win->setWindowModality(Qt::WindowModal);
+		win->resize(200,250);
+		win->show();
+	}
+    else {
+	win->hide();
+	win = NULL;
+	}
+}
 
 void RegioningPlugin::handle_delete_one_quad() {
 	if (quads.size() > 1) {

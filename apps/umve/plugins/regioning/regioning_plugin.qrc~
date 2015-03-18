@@ -7,5 +7,7 @@
 	<file>img/edit.png</file>	
 	<file>img/polycompl.png</file>	
 	<file>img/icon_save.png</file>	
+	<file>img/delete_one.png</file>	
+	<file>img/delete_all.png</file>	
     </qresource>
 </RCC>

@@ -5,7 +5,6 @@ using namespace std;
 class Quadrangle {
 
 private:
-  unsigned int maxNumberVerts;
   unsigned int numberVerts;
   int id;
   bool complete;

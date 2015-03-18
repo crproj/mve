@@ -2,6 +2,7 @@
 #define REGIONING_TAB_HEADER
 
 #include <QWidget>
+#include <QDialog>
 #include <QPushButton>
 #include <QSpinBox>
 #include <QColorDialog>
@@ -37,6 +38,8 @@ class RegioningPlugin : public MainWindowTab {
 	QAction *delete_all_quads;
 	QAction *save_view;
 	QAction *edit_area;
+	QAction *chroma;
+	QDialog *win;
 	//QAction *polycompl;
 	QAction *action_zoom_in;
 	QAction *action_zoom_out;
@@ -79,6 +82,7 @@ class RegioningPlugin : public MainWindowTab {
 	void handle_delete_one_quad();
 	void handle_delete_all_quads();
 	//void handle_polycompl();
+	void handle_chroma();
 	void handle_save_view();
 	void handle_edit_area();
 	void receive_view_pointer(mve::View::Ptr);

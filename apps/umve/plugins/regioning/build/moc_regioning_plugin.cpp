@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'regioning_plugin.h'
 **
-** Created: Wed Mar 18 11:49:50 2015
+** Created: Wed Mar 18 15:12:51 2015
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.1)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_RegioningPlugin[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-      11,   14, // methods
+      12,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -34,22 +34,23 @@ static const uint qt_meta_data_RegioningPlugin[] = {
       17,   16,   16,   16, 0x08,
       42,   16,   16,   16, 0x08,
       68,   16,   16,   16, 0x08,
-      87,   16,   16,   16, 0x08,
-     106,   16,   16,   16, 0x08,
-     143,   16,   16,   16, 0x08,
-     156,   16,   16,   16, 0x08,
-     170,   16,   16,   16, 0x08,
-     187,   16,   16,   16, 0x08,
-     216,  206,   16,   16, 0x08,
-     255,   16,   16,   16, 0x08,
+      84,   16,   16,   16, 0x08,
+     103,   16,   16,   16, 0x08,
+     122,   16,   16,   16, 0x08,
+     159,   16,   16,   16, 0x08,
+     172,   16,   16,   16, 0x08,
+     186,   16,   16,   16, 0x08,
+     203,   16,   16,   16, 0x08,
+     232,  222,   16,   16, 0x08,
+     271,   16,   16,   16, 0x08,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_RegioningPlugin[] = {
     "RegioningPlugin\0\0handle_delete_one_quad()\0"
-    "handle_delete_all_quads()\0handle_save_view()\0"
-    "handle_edit_area()\0"
+    "handle_delete_all_quads()\0handle_chroma()\0"
+    "handle_save_view()\0handle_edit_area()\0"
     "receive_view_pointer(mve::View::Ptr)\0"
     "on_zoom_in()\0on_zoom_out()\0on_normal_size()\0"
     "on_fit_to_window()\0x,y,event\0"
@@ -65,15 +66,16 @@ void RegioningPlugin::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int 
         switch (_id) {
         case 0: _t->handle_delete_one_quad(); break;
         case 1: _t->handle_delete_all_quads(); break;
-        case 2: _t->handle_save_view(); break;
-        case 3: _t->handle_edit_area(); break;
-        case 4: _t->receive_view_pointer((*reinterpret_cast< mve::View::Ptr(*)>(_a[1]))); break;
-        case 5: _t->on_zoom_in(); break;
-        case 6: _t->on_zoom_out(); break;
-        case 7: _t->on_normal_size(); break;
-        case 8: _t->on_fit_to_window(); break;
-        case 9: _t->on_image_clicked((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< QMouseEvent*(*)>(_a[3]))); break;
-        case 10: _t->on_details_toggled(); break;
+        case 2: _t->handle_chroma(); break;
+        case 3: _t->handle_save_view(); break;
+        case 4: _t->handle_edit_area(); break;
+        case 5: _t->receive_view_pointer((*reinterpret_cast< mve::View::Ptr(*)>(_a[1]))); break;
+        case 6: _t->on_zoom_in(); break;
+        case 7: _t->on_zoom_out(); break;
+        case 8: _t->on_normal_size(); break;
+        case 9: _t->on_fit_to_window(); break;
+        case 10: _t->on_image_clicked((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< QMouseEvent*(*)>(_a[3]))); break;
+        case 11: _t->on_details_toggled(); break;
         default: ;
         }
     }
@@ -113,9 +115,9 @@ int RegioningPlugin::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 11)
+        if (_id < 12)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 11;
+        _id -= 12;
     }
     return _id;
 }
