@@ -59,7 +59,7 @@ RegioningPlugin::RegioningPlugin(QWidget *parent) : MainWindowTab(parent), creat
 	RegioningPlugin::quads = std::vector<Quadrangle>();
 	RegioningPlugin::currentq = Quadrangle();
 	RegioningPlugin::editmode = false;
-	RegioningPlugin::win;
+	RegioningPlugin::win = NULL;
 	this->color_dialog = new QColorDialog();
 	this->spinbox_region_id_label = new QLabel("Region ID");
 	this->spinbox_region_id = new QSpinBox();
@@ -155,39 +155,6 @@ RegioningPlugin::RegioningPlugin(QWidget *parent) : MainWindowTab(parent), creat
 
 void RegioningPlugin::handle_chroma() 
 {
-/* Tests fuer konkav
-	Quadrangle testq = Quadrangle();
-	testq.xCoords.push_back(3.0/10.0);
-	testq.xCoords.push_back(2.0/10.0);
-	testq.xCoords.push_back(4.0/10.0);
-	testq.xCoords.push_back(1.0/10.0);
-	testq.xCoords.push_back(9.0/10.0);
-	testq.xCoords.push_back(8.0/10.0);
-
-	testq.yCoords.push_back(1.0/10.0);
-	testq.yCoords.push_back(3.0/10.0);
-	testq.yCoords.push_back(4.0/10.0);
-	testq.yCoords.push_back(6.0/10.0);
-	testq.yCoords.push_back(7.0/10.0);
-	testq.yCoords.push_back(2.0/10.0);
-
-	bool inside1 = testq.isInside(3, 4, 10, 10);
-	bool inside2 = testq.isInside(3, 6, 10, 10);
-	bool inside3 = testq.isInside(6, 8, 10, 10);
-	bool inside4 = testq.isInside(9, 4, 10, 10);
-	bool inside5 = testq.isInside(6, 4, 10, 10);
-	bool inside6 = testq.isInside(6, 1, 10, 10);
-
-
-	std::cout << "false: " << inside1 << std::endl;
-	std::cout << "true: " << inside2 << std::endl;
-	std::cout << "false: " << inside3 << std::endl;
-	std::cout << "false: " << inside4 << std::endl;
-	std::cout << "true: " << inside5 << std::endl;
-	std::cout << "false: " << inside6 << std::endl;
-*/
-
-
 	if(win == NULL)
 	{
 		QTextEdit* doc = new QTextEdit();
@@ -286,10 +253,26 @@ void RegioningPlugin::handle_save_view() {
 
 	for (unsigned int i = 0; i < quads.size(); i++) {
 	    if (quads[i].isComplete()) {
-		out << quads[i].getID() << "\r\n";
-		for (unsigned int k = 0; k < quads[i].getSize(); k++) {
-		out << quads[i].xCoords[k] << "\r\n" << quads[i].yCoords[k] << "\r\n";
-		}
+			out << quads[i].getID() << "\r\n";
+			for (unsigned int k = 0; k < quads[i].getSize(); k++) {
+				std::string xCos, yCos;
+				stringstream xCo, yCo;
+				xCo << quads[i].xCoords[k];
+				xCos = xCo.str();
+				yCo << quads[i].yCoords[k];
+				yCos = yCo.str();
+				//Appending .0 for Parsing
+				if (quads[i].xCoords[k]==0)
+					xCos = "0.0";
+				if (quads[i].xCoords[k]==1)
+					xCos = "1.0";
+				if (quads[i].yCoords[k]==0)
+					yCos = "0.0";
+				if (quads[i].yCoords[k]==1)
+					xCos = "1.0";
+				std::cout << "xCos: " << xCos << "yCos: " << yCos << std::endl;
+				out << xCos << "\r\n" << yCos << "\r\n";
+			}
 	    }
 	}
 	out.close();
@@ -311,13 +294,6 @@ void RegioningPlugin::on_image_clicked(int x, int y, QMouseEvent *event) {
 		currentq.addPoint( xf, yf);
 		currentq.setID(this->spinbox_region_id->value());
 	    } else {
-
-	//TODO Logic for editing
-	//
-	//if (in der naehe von 10 px, suche naechsten punkt zum verschieben
-	//
-	//Draggen
-
 
 		unsigned int currentid = this->spinbox_region_id->value();
 		bool contains = false;
@@ -352,6 +328,8 @@ void RegioningPlugin::on_image_clicked(int x, int y, QMouseEvent *event) {
 		currentq.xCoords[shortestindex] = xf;
 		currentq.yCoords[shortestindex] = yf;
 
+		currentq.setComplete();
+
 		quads.erase(quads.begin()+currentqid);
 		this->base = this->current_view_pointer->get_image("original");
 		this->overlay = this->current_view_pointer->get_image("original");
@@ -375,7 +353,7 @@ void RegioningPlugin::on_image_clicked(int x, int y, QMouseEvent *event) {
 	if (!editmode) {
 	if (currentq.xCoords.size() > 2) {
 	//XXX Polygon completed
-
+		currentq.setComplete();
 		bool exists = false;
 		unsigned int existingnr = 0;
 		for (unsigned int i = 0; i < quads.size(); i++) {
@@ -432,13 +410,6 @@ void RegioningPlugin::drawPoly (Quadrangle* q, bool drawPoints) {
 				qc = QColor(102,102,0,125);
 			if (q->getID() == 7)
 				qc = QColor(204,204,204,125);
-
-			/*QPointF points[4] = {
- 			    QPointF(q->xCoords[0]*this->overlay->width(), q->yCoords[0]*this->overlay->height()),
- 			    QPointF(q->xCoords[1]*this->overlay->width(), q->yCoords[1]*this->overlay->height()),
-  			    QPointF(q->xCoords[2]*this->overlay->width(), q->yCoords[2]*this->overlay->height()),
-  			    QPointF(q->xCoords[3]*this->overlay->width(), q->yCoords[3]*this->overlay->height())
- 			};*/
 
 			unsigned int corners = q->getSize();
 			QPointF points[corners];
