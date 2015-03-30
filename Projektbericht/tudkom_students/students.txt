@@ -1,0 +1,1423 @@
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+I found no \citation commands---while reading file tudkom_students__200910_v1.0.aux
+Database file #1: bibliography.bib
+(There was 1 error message)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--entry type for "obj" isn't style-file defined
+--line 3 of file bibliography.bib
+(There was 1 warning)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--empty year in obj
+(There was 1 warning)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--empty year in obj
+(There was 1 warning)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--empty year in obj
+(There was 1 warning)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--empty year in obj
+(There was 1 warning)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--empty year in obj
+(There was 1 warning)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--empty year in obj
+(There was 1 warning)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--empty year in obj
+(There was 1 warning)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--empty year in obj
+(There was 1 warning)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--empty year in obj
+(There was 1 warning)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--empty year in obj
+(There was 1 warning)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--empty year in obj
+(There was 1 warning)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--empty year in obj
+(There was 1 warning)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--empty year in obj
+(There was 1 warning)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--empty year in obj
+(There was 1 warning)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--empty year in obj
+(There was 1 warning)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--empty year in obj
+(There was 1 warning)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+I was expecting a `,' or a `}'---line 19 of file bibliography.bib
+ :  
+ :  author = {Google},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--string name "steven" is undefined
+--line 43 of file bibliography.bib
+I was expecting a `,' or a `}'---line 43 of file bibliography.bib
+ :  author = steven 
+ :                  Dutch,
+I'm skipping whatever remains of this entry
+Warning--to sort, need author or key in google:jsreference
+Warning--to sort, need author or key in utmtools
+Warning--empty year in google:jsreference
+Warning--empty year in utmtools
+Warning--empty year in google:elevation
+Warning--empty year in obj
+(There were 2 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--entry type for "google:jsreference" isn't style-file defined
+--line 15 of file bibliography.bib
+I was expecting a `,' or a `}'---line 19 of file bibliography.bib
+ :  
+ :  author = {Google},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--entry type for "google:elevation" isn't style-file defined
+--line 27 of file bibliography.bib
+Warning--string name "steven" is undefined
+--line 43 of file bibliography.bib
+I was expecting a `,' or a `}'---line 43 of file bibliography.bib
+ :  author = steven 
+ :                  Dutch,
+I'm skipping whatever remains of this entry
+Warning--to sort, need author or key in google:jsreference
+Warning--to sort, need author or key in utmtools
+Warning--empty year in google:jsreference
+Warning--empty year in utmtools
+Warning--empty year in google:elevation
+Warning--empty year in obj
+(There were 2 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--entry type for "google:jsreference" isn't style-file defined
+--line 15 of file bibliography.bib
+Warning--entry type for "google:elevation" isn't style-file defined
+--line 27 of file bibliography.bib
+Warning--string name "steven" is undefined
+--line 43 of file bibliography.bib
+I was expecting a `,' or a `}'---line 43 of file bibliography.bib
+ :  author = steven 
+ :                  Dutch,
+I'm skipping whatever remains of this entry
+Warning--to sort, need author or key in utmtools
+Warning--empty year in utmtools
+Warning--empty year in google:elevation
+Warning--empty year in google:jsreference
+Warning--empty year in obj
+(There was 1 error message)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--entry type for "google:jsreference" isn't style-file defined
+--line 15 of file bibliography.bib
+Warning--entry type for "google:elevation" isn't style-file defined
+--line 27 of file bibliography.bib
+Warning--empty year in utmtools
+Warning--empty year in google:elevation
+Warning--empty year in google:jsreference
+Warning--empty year in obj
+(There were 6 warnings)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--empty year in utmtools
+Warning--empty year in google:elevation
+Warning--empty year in google:jsreference
+Warning--empty year in obj
+(There were 4 warnings)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--empty year in utmtools
+Warning--empty year in google:elevation
+Warning--empty year in obj
+(There were 3 warnings)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--entry type for "google:jsreference" isn't style-file defined
+--line 15 of file bibliography.bib
+Warning--empty year in utmtools
+Warning--empty year in google:elevation
+Warning--empty year in obj
+(There were 4 warnings)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--entry type for "google:jsreference" isn't style-file defined
+--line 15 of file bibliography.bib
+Warning--entry type for "google:elevation" isn't style-file defined
+--line 33 of file bibliography.bib
+I was expecting a `,' or a `}'---line 41 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--entry type for "utmtools" isn't style-file defined
+--line 51 of file bibliography.bib
+I was expecting a `,' or a `}'---line 59 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--empty year in utmtools
+Warning--empty year in google:elevation
+Warning--empty year in obj
+(There were 2 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--entry type for "google:jsreference" isn't style-file defined
+--line 15 of file bibliography.bib
+Warning--entry type for "google:elevation" isn't style-file defined
+--line 33 of file bibliography.bib
+I was expecting a `,' or a `}'---line 41 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--entry type for "utmtools" isn't style-file defined
+--line 51 of file bibliography.bib
+I was expecting a `,' or a `}'---line 59 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--empty year in utmtools
+Warning--empty year in google:elevation
+Warning--empty year in obj
+(There were 2 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--entry type for "google:jsreference" isn't style-file defined
+--line 15 of file bibliography.bib
+Warning--entry type for "google:elevation" isn't style-file defined
+--line 33 of file bibliography.bib
+I was expecting a `,' or a `}'---line 41 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--entry type for "utmtools" isn't style-file defined
+--line 51 of file bibliography.bib
+I was expecting a `,' or a `}'---line 59 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--empty year in utmtools
+Warning--empty year in google:elevation
+Warning--empty year in obj
+(There were 2 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--entry type for "google:jsreference" isn't style-file defined
+--line 15 of file bibliography.bib
+Warning--entry type for "google:elevation" isn't style-file defined
+--line 33 of file bibliography.bib
+I was expecting a `,' or a `}'---line 41 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--entry type for "utmtools" isn't style-file defined
+--line 51 of file bibliography.bib
+I was expecting a `,' or a `}'---line 59 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--empty year in utmtools
+Warning--empty year in google:elevation
+Warning--empty year in obj
+(There were 2 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--entry type for "google:jsreference" isn't style-file defined
+--line 15 of file bibliography.bib
+Warning--entry type for "google:elevation" isn't style-file defined
+--line 33 of file bibliography.bib
+I was expecting a `,' or a `}'---line 41 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--entry type for "utmtools" isn't style-file defined
+--line 51 of file bibliography.bib
+I was expecting a `,' or a `}'---line 59 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--empty year in utmtools
+Warning--empty year in google:elevation
+Warning--empty year in obj
+(There were 2 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--entry type for "google:jsreference" isn't style-file defined
+--line 15 of file bibliography.bib
+Warning--entry type for "google:elevation" isn't style-file defined
+--line 33 of file bibliography.bib
+I was expecting a `,' or a `}'---line 41 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--entry type for "utmtools" isn't style-file defined
+--line 51 of file bibliography.bib
+I was expecting a `,' or a `}'---line 59 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--empty year in utmtools
+Warning--empty year in google:elevation
+Warning--empty year in obj
+(There were 2 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--entry type for "google:jsreference" isn't style-file defined
+--line 15 of file bibliography.bib
+Warning--entry type for "google:elevation" isn't style-file defined
+--line 33 of file bibliography.bib
+I was expecting a `,' or a `}'---line 41 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--entry type for "utmtools" isn't style-file defined
+--line 51 of file bibliography.bib
+I was expecting a `,' or a `}'---line 59 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--empty year in utmtools
+Warning--empty year in google:elevation
+Warning--empty year in obj
+(There were 2 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--entry type for "google:jsreference" isn't style-file defined
+--line 15 of file bibliography.bib
+Warning--entry type for "google:elevation" isn't style-file defined
+--line 33 of file bibliography.bib
+I was expecting a `,' or a `}'---line 41 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--entry type for "utmtools" isn't style-file defined
+--line 51 of file bibliography.bib
+I was expecting a `,' or a `}'---line 59 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--empty year in utmtools
+Warning--empty year in google:elevation
+Warning--empty year in obj
+(There were 2 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--entry type for "google:jsreference" isn't style-file defined
+--line 15 of file bibliography.bib
+Warning--entry type for "google:elevation" isn't style-file defined
+--line 33 of file bibliography.bib
+I was expecting a `,' or a `}'---line 41 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--entry type for "utmtools" isn't style-file defined
+--line 51 of file bibliography.bib
+I was expecting a `,' or a `}'---line 59 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--empty year in utmtools
+Warning--empty year in google:elevation
+Warning--empty year in obj
+(There were 2 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--entry type for "google:jsreference" isn't style-file defined
+--line 15 of file bibliography.bib
+Warning--entry type for "google:elevation" isn't style-file defined
+--line 33 of file bibliography.bib
+I was expecting a `,' or a `}'---line 41 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--entry type for "utmtools" isn't style-file defined
+--line 51 of file bibliography.bib
+I was expecting a `,' or a `}'---line 59 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--empty year in utmtools
+Warning--empty year in google:elevation
+Warning--empty year in obj
+(There were 2 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--entry type for "google:jsreference" isn't style-file defined
+--line 15 of file bibliography.bib
+Warning--entry type for "google:elevation" isn't style-file defined
+--line 33 of file bibliography.bib
+I was expecting a `,' or a `}'---line 41 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--entry type for "utmtools" isn't style-file defined
+--line 51 of file bibliography.bib
+I was expecting a `,' or a `}'---line 59 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--empty year in utmtools
+Warning--empty year in google:elevation
+Warning--empty year in obj
+(There were 2 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--entry type for "google:jsreference" isn't style-file defined
+--line 15 of file bibliography.bib
+Warning--entry type for "google:elevation" isn't style-file defined
+--line 33 of file bibliography.bib
+I was expecting a `,' or a `}'---line 41 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--entry type for "utmtools" isn't style-file defined
+--line 51 of file bibliography.bib
+I was expecting a `,' or a `}'---line 59 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--empty year in utmtools
+Warning--empty year in google:elevation
+Warning--empty year in obj
+(There were 2 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--entry type for "google:jsreference" isn't style-file defined
+--line 15 of file bibliography.bib
+Warning--entry type for "google:elevation" isn't style-file defined
+--line 33 of file bibliography.bib
+I was expecting a `,' or a `}'---line 41 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--entry type for "utmtools" isn't style-file defined
+--line 51 of file bibliography.bib
+I was expecting a `,' or a `}'---line 59 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--empty year in utmtools
+Warning--empty year in google:elevation
+Warning--empty year in obj
+(There were 2 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--entry type for "google:jsreference" isn't style-file defined
+--line 15 of file bibliography.bib
+Warning--entry type for "google:elevation" isn't style-file defined
+--line 33 of file bibliography.bib
+I was expecting a `,' or a `}'---line 41 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--entry type for "utmtools" isn't style-file defined
+--line 51 of file bibliography.bib
+I was expecting a `,' or a `}'---line 59 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--empty year in utmtools
+Warning--empty year in google:elevation
+Warning--empty year in obj
+(There were 2 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--entry type for "google:jsreference" isn't style-file defined
+--line 15 of file bibliography.bib
+Warning--entry type for "google:elevation" isn't style-file defined
+--line 33 of file bibliography.bib
+I was expecting a `,' or a `}'---line 41 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--entry type for "utmtools" isn't style-file defined
+--line 51 of file bibliography.bib
+I was expecting a `,' or a `}'---line 59 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--empty year in utmtools
+Warning--empty year in google:elevation
+Warning--empty year in obj
+(There were 2 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--entry type for "google:jsreference" isn't style-file defined
+--line 15 of file bibliography.bib
+Warning--entry type for "google:elevation" isn't style-file defined
+--line 33 of file bibliography.bib
+I was expecting a `,' or a `}'---line 41 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--entry type for "utmtools" isn't style-file defined
+--line 51 of file bibliography.bib
+I was expecting a `,' or a `}'---line 59 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--empty year in utmtools
+Warning--empty year in google:elevation
+Warning--empty year in obj
+(There were 2 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--entry type for "google:jsreference" isn't style-file defined
+--line 15 of file bibliography.bib
+Warning--entry type for "google:elevation" isn't style-file defined
+--line 33 of file bibliography.bib
+I was expecting a `,' or a `}'---line 41 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--entry type for "utmtools" isn't style-file defined
+--line 51 of file bibliography.bib
+I was expecting a `,' or a `}'---line 59 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--empty year in utmtools
+Warning--empty year in google:elevation
+Warning--empty year in obj
+(There were 2 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--entry type for "google:jsreference" isn't style-file defined
+--line 15 of file bibliography.bib
+Warning--entry type for "google:elevation" isn't style-file defined
+--line 33 of file bibliography.bib
+I was expecting a `,' or a `}'---line 41 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--entry type for "utmtools" isn't style-file defined
+--line 51 of file bibliography.bib
+I was expecting a `,' or a `}'---line 59 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--empty year in utmtools
+Warning--empty year in google:elevation
+Warning--empty year in obj
+(There were 2 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--entry type for "google:jsreference" isn't style-file defined
+--line 15 of file bibliography.bib
+Warning--entry type for "google:elevation" isn't style-file defined
+--line 33 of file bibliography.bib
+I was expecting a `,' or a `}'---line 41 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--entry type for "utmtools" isn't style-file defined
+--line 51 of file bibliography.bib
+I was expecting a `,' or a `}'---line 59 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--empty year in utmtools
+Warning--empty year in google:elevation
+Warning--empty year in obj
+(There were 2 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--entry type for "google:jsreference" isn't style-file defined
+--line 15 of file bibliography.bib
+Warning--entry type for "google:elevation" isn't style-file defined
+--line 33 of file bibliography.bib
+I was expecting a `,' or a `}'---line 41 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--entry type for "utmtools" isn't style-file defined
+--line 51 of file bibliography.bib
+I was expecting a `,' or a `}'---line 59 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--empty year in utmtools
+Warning--empty year in google:elevation
+Warning--empty year in obj
+(There were 2 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--entry type for "google:jsreference" isn't style-file defined
+--line 15 of file bibliography.bib
+Warning--entry type for "google:elevation" isn't style-file defined
+--line 33 of file bibliography.bib
+I was expecting a `,' or a `}'---line 41 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--entry type for "utmtools" isn't style-file defined
+--line 51 of file bibliography.bib
+I was expecting a `,' or a `}'---line 59 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--empty year in utmtools
+Warning--empty year in google:elevation
+Warning--empty year in obj
+(There were 2 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--entry type for "google:jsreference" isn't style-file defined
+--line 15 of file bibliography.bib
+Warning--entry type for "google:elevation" isn't style-file defined
+--line 33 of file bibliography.bib
+I was expecting a `,' or a `}'---line 41 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--entry type for "utmtools" isn't style-file defined
+--line 51 of file bibliography.bib
+I was expecting a `,' or a `}'---line 59 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--empty year in utmtools
+Warning--empty year in google:elevation
+Warning--empty year in obj
+(There were 2 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--entry type for "google:jsreference" isn't style-file defined
+--line 15 of file bibliography.bib
+Warning--entry type for "google:elevation" isn't style-file defined
+--line 33 of file bibliography.bib
+I was expecting a `,' or a `}'---line 41 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--entry type for "utmtools" isn't style-file defined
+--line 51 of file bibliography.bib
+I was expecting a `,' or a `}'---line 59 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--empty year in utmtools
+Warning--empty year in google:elevation
+Warning--empty year in obj
+(There were 2 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--entry type for "google:jsreference" isn't style-file defined
+--line 15 of file bibliography.bib
+Warning--entry type for "google:elevation" isn't style-file defined
+--line 33 of file bibliography.bib
+I was expecting a `,' or a `}'---line 41 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--entry type for "utmtools" isn't style-file defined
+--line 51 of file bibliography.bib
+I was expecting a `,' or a `}'---line 59 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--empty year in utmtools
+Warning--empty year in google:elevation
+Warning--empty year in obj
+(There were 2 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--entry type for "google:jsreference" isn't style-file defined
+--line 15 of file bibliography.bib
+Warning--entry type for "google:elevation" isn't style-file defined
+--line 33 of file bibliography.bib
+I was expecting a `,' or a `}'---line 41 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--entry type for "utmtools" isn't style-file defined
+--line 51 of file bibliography.bib
+I was expecting a `,' or a `}'---line 59 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--empty year in utmtools
+Warning--empty year in google:elevation
+Warning--empty year in obj
+(There were 2 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--entry type for "google:jsreference" isn't style-file defined
+--line 15 of file bibliography.bib
+Warning--entry type for "google:elevation" isn't style-file defined
+--line 33 of file bibliography.bib
+I was expecting a `,' or a `}'---line 41 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--entry type for "utmtools" isn't style-file defined
+--line 51 of file bibliography.bib
+I was expecting a `,' or a `}'---line 59 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--empty year in utmtools
+Warning--empty year in google:elevation
+Warning--empty year in obj
+(There were 2 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--entry type for "google:jsreference" isn't style-file defined
+--line 15 of file bibliography.bib
+Warning--entry type for "google:elevation" isn't style-file defined
+--line 33 of file bibliography.bib
+I was expecting a `,' or a `}'---line 41 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--entry type for "utmtools" isn't style-file defined
+--line 51 of file bibliography.bib
+I was expecting a `,' or a `}'---line 59 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--empty year in utmtools
+Warning--empty year in google:elevation
+Warning--empty year in obj
+(There were 2 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--entry type for "google:jsreference" isn't style-file defined
+--line 15 of file bibliography.bib
+Warning--entry type for "google:elevation" isn't style-file defined
+--line 33 of file bibliography.bib
+I was expecting a `,' or a `}'---line 41 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--entry type for "utmtools" isn't style-file defined
+--line 51 of file bibliography.bib
+I was expecting a `,' or a `}'---line 59 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--empty year in utmtools
+Warning--empty year in google:elevation
+Warning--empty year in obj
+(There were 2 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--entry type for "google:jsreference" isn't style-file defined
+--line 15 of file bibliography.bib
+Warning--entry type for "google:elevation" isn't style-file defined
+--line 33 of file bibliography.bib
+I was expecting a `,' or a `}'---line 41 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--entry type for "utmtools" isn't style-file defined
+--line 51 of file bibliography.bib
+I was expecting a `,' or a `}'---line 59 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--empty year in utmtools
+Warning--empty year in google:elevation
+Warning--empty year in obj
+(There were 2 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--entry type for "google:jsreference" isn't style-file defined
+--line 15 of file bibliography.bib
+Warning--entry type for "google:elevation" isn't style-file defined
+--line 33 of file bibliography.bib
+I was expecting a `,' or a `}'---line 41 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--entry type for "utmtools" isn't style-file defined
+--line 51 of file bibliography.bib
+I was expecting a `,' or a `}'---line 59 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--empty year in utmtools
+Warning--empty year in google:elevation
+Warning--empty year in obj
+(There were 2 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--entry type for "google:jsreference" isn't style-file defined
+--line 15 of file bibliography.bib
+Warning--entry type for "google:elevation" isn't style-file defined
+--line 33 of file bibliography.bib
+I was expecting a `,' or a `}'---line 41 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--entry type for "utmtools" isn't style-file defined
+--line 51 of file bibliography.bib
+I was expecting a `,' or a `}'---line 59 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--empty year in utmtools
+Warning--empty year in google:elevation
+Warning--empty year in obj
+(There were 2 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--entry type for "google:jsreference" isn't style-file defined
+--line 15 of file bibliography.bib
+Warning--entry type for "google:elevation" isn't style-file defined
+--line 33 of file bibliography.bib
+I was expecting a `,' or a `}'---line 41 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--entry type for "utmtools" isn't style-file defined
+--line 51 of file bibliography.bib
+I was expecting a `,' or a `}'---line 59 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--empty year in utmtools
+Warning--empty year in google:elevation
+Warning--empty year in obj
+(There were 2 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--entry type for "google:jsreference" isn't style-file defined
+--line 15 of file bibliography.bib
+Warning--entry type for "google:elevation" isn't style-file defined
+--line 33 of file bibliography.bib
+I was expecting a `,' or a `}'---line 41 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--entry type for "utmtools" isn't style-file defined
+--line 51 of file bibliography.bib
+I was expecting a `,' or a `}'---line 59 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--empty year in utmtools
+Warning--empty year in google:elevation
+Warning--empty year in obj
+(There were 2 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--entry type for "google:jsreference" isn't style-file defined
+--line 15 of file bibliography.bib
+Warning--entry type for "google:elevation" isn't style-file defined
+--line 33 of file bibliography.bib
+I was expecting a `,' or a `}'---line 41 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--entry type for "utmtools" isn't style-file defined
+--line 51 of file bibliography.bib
+I was expecting a `,' or a `}'---line 59 of file bibliography.bib
+ :  
+ :  urldate = {27.08.2012},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--empty year in utmtools
+Warning--empty year in google:elevation
+Warning--empty year in obj
+(There were 2 error messages)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--entry type for "google:jsreference" isn't style-file defined
+--line 15 of file bibliography.bib
+Warning--entry type for "google:elevation" isn't style-file defined
+--line 33 of file bibliography.bib
+Warning--entry type for "utmtools" isn't style-file defined
+--line 51 of file bibliography.bib
+Warning--entry type for "utmtools1" isn't style-file defined
+--line 67 of file bibliography.bib
+Warning--empty year in obj
+(There were 5 warnings)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--entry type for "google:jsreference" isn't style-file defined
+--line 15 of file bibliography.bib
+Warning--entry type for "google:elevation" isn't style-file defined
+--line 33 of file bibliography.bib
+Warning--entry type for "utmtools" isn't style-file defined
+--line 51 of file bibliography.bib
+Warning--entry type for "utmtools1" isn't style-file defined
+--line 67 of file bibliography.bib
+Warning--empty year in obj
+(There were 5 warnings)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--entry type for "google:jsreference" isn't style-file defined
+--line 15 of file bibliography.bib
+Warning--entry type for "google:elevation" isn't style-file defined
+--line 33 of file bibliography.bib
+Warning--entry type for "utmtools" isn't style-file defined
+--line 51 of file bibliography.bib
+Warning--entry type for "utmtools1" isn't style-file defined
+--line 67 of file bibliography.bib
+Warning--empty year in obj
+(There were 5 warnings)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--entry type for "google:jsreference" isn't style-file defined
+--line 15 of file bibliography.bib
+Warning--entry type for "google:elevation" isn't style-file defined
+--line 33 of file bibliography.bib
+Warning--entry type for "utmtools" isn't style-file defined
+--line 51 of file bibliography.bib
+Warning--entry type for "utmtools1" isn't style-file defined
+--line 67 of file bibliography.bib
+Warning--empty year in obj
+(There were 5 warnings)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--entry type for "google:jsreference" isn't style-file defined
+--line 15 of file bibliography.bib
+Warning--entry type for "google:elevation" isn't style-file defined
+--line 33 of file bibliography.bib
+Warning--entry type for "utmtools" isn't style-file defined
+--line 51 of file bibliography.bib
+Warning--entry type for "utmtools1" isn't style-file defined
+--line 67 of file bibliography.bib
+Warning--empty year in obj
+(There were 5 warnings)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--entry type for "obj" isn't style-file defined
+--line 3 of file bibliography.bib
+Warning--entry type for "google:jsreference" isn't style-file defined
+--line 21 of file bibliography.bib
+Warning--entry type for "google:elevation" isn't style-file defined
+--line 39 of file bibliography.bib
+Warning--entry type for "utmtools" isn't style-file defined
+--line 57 of file bibliography.bib
+Warning--entry type for "utmtools1" isn't style-file defined
+--line 73 of file bibliography.bib
+(There were 5 warnings)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--entry type for "obj" isn't style-file defined
+--line 3 of file bibliography.bib
+Warning--entry type for "google:jsreference" isn't style-file defined
+--line 21 of file bibliography.bib
+Warning--entry type for "google:elevation" isn't style-file defined
+--line 39 of file bibliography.bib
+Warning--entry type for "utmtools" isn't style-file defined
+--line 57 of file bibliography.bib
+Warning--entry type for "utmtools1" isn't style-file defined
+--line 73 of file bibliography.bib
+Warning--entry type for "openstreetmap" isn't style-file defined
+--line 91 of file bibliography.bib
+(There were 6 warnings)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--entry type for "obj" isn't style-file defined
+--line 3 of file bibliography.bib
+Warning--entry type for "google:jsreference" isn't style-file defined
+--line 21 of file bibliography.bib
+Warning--entry type for "google:elevation" isn't style-file defined
+--line 39 of file bibliography.bib
+Warning--entry type for "utmtools" isn't style-file defined
+--line 57 of file bibliography.bib
+Warning--entry type for "utmtools1" isn't style-file defined
+--line 73 of file bibliography.bib
+Warning--entry type for "openstreetmap" isn't style-file defined
+--line 91 of file bibliography.bib
+Warning--entry type for "github" isn't style-file defined
+--line 109 of file bibliography.bib
+Warning--entry type for "bootstrap" isn't style-file defined
+--line 127 of file bibliography.bib
+(There were 8 warnings)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--entry type for "obj" isn't style-file defined
+--line 3 of file bibliography.bib
+Warning--entry type for "google:jsreference" isn't style-file defined
+--line 21 of file bibliography.bib
+Warning--entry type for "google:elevation" isn't style-file defined
+--line 39 of file bibliography.bib
+Warning--entry type for "utmtools" isn't style-file defined
+--line 57 of file bibliography.bib
+Warning--entry type for "utmtools1" isn't style-file defined
+--line 73 of file bibliography.bib
+Warning--entry type for "openstreetmap" isn't style-file defined
+--line 91 of file bibliography.bib
+Warning--entry type for "github" isn't style-file defined
+--line 109 of file bibliography.bib
+Warning--entry type for "bootstrap" isn't style-file defined
+--line 127 of file bibliography.bib
+(There were 8 warnings)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--entry type for "obj" isn't style-file defined
+--line 3 of file bibliography.bib
+Warning--entry type for "google:jsreference" isn't style-file defined
+--line 21 of file bibliography.bib
+Warning--entry type for "google:elevation" isn't style-file defined
+--line 39 of file bibliography.bib
+Warning--entry type for "utmtools" isn't style-file defined
+--line 57 of file bibliography.bib
+Warning--entry type for "utmtools1" isn't style-file defined
+--line 73 of file bibliography.bib
+Warning--entry type for "openstreetmap" isn't style-file defined
+--line 91 of file bibliography.bib
+Warning--entry type for "github" isn't style-file defined
+--line 109 of file bibliography.bib
+Warning--entry type for "bootstrap" isn't style-file defined
+--line 127 of file bibliography.bib
+(There were 8 warnings)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--entry type for "obj" isn't style-file defined
+--line 3 of file bibliography.bib
+Warning--entry type for "google:jsreference" isn't style-file defined
+--line 21 of file bibliography.bib
+Warning--entry type for "google:elevation" isn't style-file defined
+--line 39 of file bibliography.bib
+Warning--entry type for "utmtools" isn't style-file defined
+--line 57 of file bibliography.bib
+Warning--entry type for "utmtools1" isn't style-file defined
+--line 73 of file bibliography.bib
+Warning--entry type for "openstreetmap" isn't style-file defined
+--line 91 of file bibliography.bib
+Warning--entry type for "github" isn't style-file defined
+--line 109 of file bibliography.bib
+Warning--entry type for "bootstrap" isn't style-file defined
+--line 127 of file bibliography.bib
+(There were 8 warnings)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--entry type for "obj" isn't style-file defined
+--line 3 of file bibliography.bib
+Warning--entry type for "google:jsreference" isn't style-file defined
+--line 21 of file bibliography.bib
+Warning--entry type for "google:elevation" isn't style-file defined
+--line 39 of file bibliography.bib
+Warning--entry type for "utmtools" isn't style-file defined
+--line 57 of file bibliography.bib
+Warning--entry type for "utmtools1" isn't style-file defined
+--line 73 of file bibliography.bib
+Warning--entry type for "openstreetmap" isn't style-file defined
+--line 91 of file bibliography.bib
+Warning--entry type for "github" isn't style-file defined
+--line 109 of file bibliography.bib
+Warning--entry type for "bootstrap" isn't style-file defined
+--line 127 of file bibliography.bib
+(There were 8 warnings)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--entry type for "obj" isn't style-file defined
+--line 3 of file bibliography.bib
+Warning--entry type for "google:jsreference" isn't style-file defined
+--line 21 of file bibliography.bib
+Warning--entry type for "google:elevation" isn't style-file defined
+--line 39 of file bibliography.bib
+Warning--entry type for "utmtools" isn't style-file defined
+--line 57 of file bibliography.bib
+Warning--entry type for "utmtools1" isn't style-file defined
+--line 73 of file bibliography.bib
+Warning--entry type for "openstreetmap" isn't style-file defined
+--line 91 of file bibliography.bib
+Warning--entry type for "github" isn't style-file defined
+--line 109 of file bibliography.bib
+Warning--entry type for "bootstrap" isn't style-file defined
+--line 127 of file bibliography.bib
+(There were 8 warnings)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--entry type for "obj" isn't style-file defined
+--line 3 of file bibliography.bib
+Warning--entry type for "google:jsreference" isn't style-file defined
+--line 21 of file bibliography.bib
+Warning--entry type for "google:elevation" isn't style-file defined
+--line 39 of file bibliography.bib
+Warning--entry type for "utmtools" isn't style-file defined
+--line 57 of file bibliography.bib
+Warning--entry type for "utmtools1" isn't style-file defined
+--line 73 of file bibliography.bib
+Warning--entry type for "openstreetmap" isn't style-file defined
+--line 91 of file bibliography.bib
+Warning--entry type for "github" isn't style-file defined
+--line 109 of file bibliography.bib
+Warning--entry type for "bootstrap" isn't style-file defined
+--line 127 of file bibliography.bib
+(There were 8 warnings)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--entry type for "obj" isn't style-file defined
+--line 3 of file bibliography.bib
+Warning--entry type for "google:jsreference" isn't style-file defined
+--line 21 of file bibliography.bib
+Warning--entry type for "google:elevation" isn't style-file defined
+--line 39 of file bibliography.bib
+Warning--entry type for "utmtools" isn't style-file defined
+--line 57 of file bibliography.bib
+Warning--entry type for "utmtools1" isn't style-file defined
+--line 73 of file bibliography.bib
+Warning--entry type for "openstreetmap" isn't style-file defined
+--line 91 of file bibliography.bib
+Warning--entry type for "github" isn't style-file defined
+--line 109 of file bibliography.bib
+Warning--entry type for "bootstrap" isn't style-file defined
+--line 127 of file bibliography.bib
+(There were 8 warnings)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--entry type for "obj" isn't style-file defined
+--line 3 of file bibliography.bib
+Warning--entry type for "google:jsreference" isn't style-file defined
+--line 21 of file bibliography.bib
+Warning--entry type for "google:elevation" isn't style-file defined
+--line 39 of file bibliography.bib
+Warning--entry type for "utmtools" isn't style-file defined
+--line 57 of file bibliography.bib
+Warning--entry type for "utmtools1" isn't style-file defined
+--line 73 of file bibliography.bib
+Warning--entry type for "openstreetmap" isn't style-file defined
+--line 91 of file bibliography.bib
+Warning--entry type for "github" isn't style-file defined
+--line 109 of file bibliography.bib
+Warning--entry type for "bootstrap" isn't style-file defined
+--line 127 of file bibliography.bib
+(There were 8 warnings)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--entry type for "obj" isn't style-file defined
+--line 3 of file bibliography.bib
+Warning--entry type for "google:jsreference" isn't style-file defined
+--line 21 of file bibliography.bib
+Warning--entry type for "google:elevation" isn't style-file defined
+--line 39 of file bibliography.bib
+Warning--entry type for "utmtools" isn't style-file defined
+--line 57 of file bibliography.bib
+Warning--entry type for "utmtools1" isn't style-file defined
+--line 73 of file bibliography.bib
+Warning--entry type for "openstreetmap" isn't style-file defined
+--line 91 of file bibliography.bib
+Warning--entry type for "github" isn't style-file defined
+--line 109 of file bibliography.bib
+Warning--entry type for "bootstrap" isn't style-file defined
+--line 127 of file bibliography.bib
+(There were 8 warnings)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--entry type for "obj" isn't style-file defined
+--line 3 of file bibliography.bib
+Warning--entry type for "google:jsreference" isn't style-file defined
+--line 21 of file bibliography.bib
+Warning--entry type for "google:elevation" isn't style-file defined
+--line 39 of file bibliography.bib
+Warning--entry type for "utmtools" isn't style-file defined
+--line 57 of file bibliography.bib
+Warning--entry type for "utmtools1" isn't style-file defined
+--line 73 of file bibliography.bib
+Warning--entry type for "openstreetmap" isn't style-file defined
+--line 91 of file bibliography.bib
+Warning--entry type for "github" isn't style-file defined
+--line 109 of file bibliography.bib
+Warning--entry type for "bootstrap" isn't style-file defined
+--line 127 of file bibliography.bib
+(There were 8 warnings)
+This is BibTeX, Version 0.99d (TeX Live 2012/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+Warning--entry type for "obj" isn't style-file defined
+--line 3 of file bibliography.bib
+Warning--entry type for "google:jsreference" isn't style-file defined
+--line 21 of file bibliography.bib
+Warning--entry type for "google:elevation" isn't style-file defined
+--line 39 of file bibliography.bib
+Warning--entry type for "utmtools" isn't style-file defined
+--line 57 of file bibliography.bib
+Warning--entry type for "utmtools1" isn't style-file defined
+--line 73 of file bibliography.bib
+Warning--entry type for "openstreetmap" isn't style-file defined
+--line 91 of file bibliography.bib
+Warning--entry type for "github" isn't style-file defined
+--line 109 of file bibliography.bib
+Warning--entry type for "bootstrap" isn't style-file defined
+--line 127 of file bibliography.bib
+(There were 8 warnings)
+This is BibTeX, Version 0.99d (TeX Live 2014/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+This is BibTeX, Version 0.99d (TeX Live 2014/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+This is BibTeX, Version 0.99d (TeX Live 2014/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+This is BibTeX, Version 0.99d (TeX Live 2014/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+This is BibTeX, Version 0.99d (TeX Live 2014/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+This is BibTeX, Version 0.99d (TeX Live 2014/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+This is BibTeX, Version 0.99d (TeX Live 2014/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+This is BibTeX, Version 0.99d (TeX Live 2014/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib
+This is BibTeX, Version 0.99d (TeX Live 2014/W32TeX)
+The top-level auxiliary file: tudkom_students__200910_v1.0.aux
+The style file: plainnat.bst
+Database file #1: bibliography.bib

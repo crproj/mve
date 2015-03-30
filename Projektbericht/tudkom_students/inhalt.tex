@@ -1,0 +1,35 @@
+\chapter{Einf\"uhrung}
+In Bezug auf die Steigerung der Rechenleistung von Computern werden auch die Anwendungsgebiete und Verfahren der Photogrammetrie\footnote{Auswerteverfahren zur Bestimmung der dreidimensionalen Form eines Objektes mittels Fotografien oder Messbildern.} immer leistungsf\"ahiger. Mittels Auswerteverfahren werden aus Fotografien eines Objektes die jeweils geometrische Beschaffenheit als auch Lage bestimmt. Die M\"oglichkeit reale Objekte zu digitalisieren erm\"oglicht eine interaktive Betrachtung der Modelle. \\
+Eine Reihe an Fotografien des Frankfurter AfE-Turms kurz vor seiner Sprengung am 02.02.2014 soll f\"ur eine fehlerfreie grafische Rekonstruktion analysiert und aufbereitet werden. Die Herausforderung dieses Projektes zeigt sich anhand der gleichm\"a\ss igen Struktur und der sich wiederholenden Textur des zu untersuchenden Objektes. F\"ur eine Zuordnung einzelner Bildpaare werden, in beiden Bildern vorkommende gleiche Merkmale gesucht. Bereiche des einen Fotos werden jedoch, auf Grund der \"ahnlichkeit nichtzugeh\"origen Bildbereichen des anderen Fotos zugeteilt, weshalb eine Registrierung des Datensatzes fehlschl\"agt und letztlich kein verwendbares Ergebnis entsteht. 
+Aufgabe ist eine qualitativ bessere Rekonstruktion des Frankfurter AfE-Turms. Um die Problematik mit der unzul\"anglichen Rekonstruktionsqualit\"at zu beheben, wird ein Ansatz zur Regionierung des Datensatzes implementiert um eine Voraussetzung f\"ur eine erfolgreiche Nachbildung zu liefern. Zu diesem Zweck werden die Bilder durch Abgrenzungen inhaltlich unterteilt, sodass  den anschlie\ss end extrahierten Bildmerkmalen zus\"atzliche Informationen zur relativen Lage zur Verf\"ugung stehen. Damit werden nur korrespondierende Bereiche innerhalb der Bilder f\"ur den Registrierungsansatz in Betracht gezogen. Die Fotos des Turms, welche hierf\"ur aus hinreichenden Winkeln akquiriert wurden, werden unter Ber\"ucksichtigung der Regionierung zueinander geometrisch erfasst. Durch diese entstehende Korrektur der Aufnahmepositionen einzelner Fotografien soll schlie\ss lich aus einer, zuvor undefinierbaren Punktwolke eine detailgetreue Nachbildung des Turms entstehen und ein qualitativ hochwertigeres Resultat erzielt werden.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.28\textheight]{gfx/afeturm.jpg}
+\caption[AfE-Turm]{AfE-Turm}
+\label{gr:afeturm}
+\end{figure}
+\FloatBarrier
+
+Zun\"achst beginnt eine \"ubersicht der verwendeten MVE-Software (Multi-View Environment) als auch der aktuellen Verfahren zur Registrierung von Bilddatens\"atzen. Anschlie\ss end erfolgt ein L\"osungsansatz zur interaktiven Aufteilung von Bildinhalten, welcher den sp\"ateren Rekonstruktionsansatz beschleunigen und dessen Qualit\"at maximieren soll. Dazu gliedert sich das Vorgehen wie folgt:
+\newline
+\newline
+Kapitel 2 besch\"aftigt sich einf\"uhrend mit Grundlagen der verwendeten Programme und deren Verfahren um Bilddatens\"atze geometrisch zu registrieren.
+\newline
+\newline
+Kapitel 3 beschreibt das aktuelle Verfahren zum Erstellen einer 3D-Rekonstruktion und dessen Probleme, dessen Einschr\"ankungen und den in diesem Projekt verfolgten L\"osungansatz.
+\newline
+\newline
+Kapitel 4 behandelt die Merkmalsextraktion (engl.: Feature Extraction) der Fotografien mittels Regionsabgrenzungen als auch dessen Einfluss auf die verwendeten Algorithmen der Software. 
+\newline
+\newline
+Kapitel 5 zeigt schlie\ss lich die Auswertung der Arbeit als auch eine Beurteilung der Rekonstruktionsergebnisse unter Ber\"ucksichtigung eines weiteren Datensatzes. Dabei liegt der Fokus auf der Qualit\"at und der Richtigkeit der Rekonstruktion.
+\newline
+\newline
+Im Anschluss der vorgestellten Arbeit folgt ein Benutzerhandbuch in Bezug auf die resultierende Implementierung.
+
+\input{framework}
+\input{problem}
+\input{matching}
+\input{evaluation}
+\input{handbuch}
